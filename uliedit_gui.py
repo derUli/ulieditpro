@@ -23,10 +23,10 @@ class MainFrame ( wx.Frame ):
 		
 		bSizer5 = wx.BoxSizer( wx.VERTICAL )
 		
-		self.m_panel5 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		self.pn_main = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer1 = wx.BoxSizer( wx.VERTICAL )
 		
-		self.ribbons = wx.Notebook( self.m_panel5, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0|wx.FULL_REPAINT_ON_RESIZE )
+		self.ribbons = wx.Notebook( self.pn_main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0|wx.FULL_REPAINT_ON_RESIZE )
 		self.m_panel1 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer2 = wx.BoxSizer( wx.HORIZONTAL )
 		
@@ -69,7 +69,7 @@ class MainFrame ( wx.Frame ):
 		bSizer4 = wx.BoxSizer( wx.VERTICAL )
 		
 		cbOpenFilesChoices = [ u"test", u"test 2" ]
-		self.cbOpenFiles = wx.ComboBox( self.m_panel3, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, cbOpenFilesChoices, wx.CB_SIMPLE|wx.CB_SORT|wx.TE_PROCESS_ENTER )
+		self.cbOpenFiles = wx.ComboBox( self.m_panel3, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, cbOpenFilesChoices, wx.CB_READONLY|wx.CB_SIMPLE|wx.CB_SORT|wx.TE_PROCESS_ENTER )
 		bSizer4.Add( self.cbOpenFiles, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_panel3.SetSizer( bSizer4 )
@@ -79,13 +79,13 @@ class MainFrame ( wx.Frame ):
 		
 		bSizer1.Add( self.ribbons, 1, wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_richText1 = wx.richtext.RichTextCtrl( self.m_panel5, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0|wx.VSCROLL|wx.HSCROLL|wx.NO_BORDER|wx.WANTS_CHARS )
+		self.m_richText1 = wx.richtext.RichTextCtrl( self.pn_main, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0|wx.VSCROLL|wx.HSCROLL|wx.NO_BORDER|wx.WANTS_CHARS )
 		bSizer1.Add( self.m_richText1, 3, wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_panel5.SetSizer( bSizer1 )
-		self.m_panel5.Layout()
-		bSizer1.Fit( self.m_panel5 )
-		bSizer5.Add( self.m_panel5, 1, wx.EXPAND |wx.ALL, 5 )
+		self.pn_main.SetSizer( bSizer1 )
+		self.pn_main.Layout()
+		bSizer1.Fit( self.pn_main )
+		bSizer5.Add( self.pn_main, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		self.SetSizer( bSizer5 )
 		self.Layout()
