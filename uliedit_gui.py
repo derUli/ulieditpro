@@ -100,6 +100,13 @@ class MainFrame ( wx.Frame ):
 		
 		bSizer7.Add( bSizer8, 1, wx.EXPAND, 5 )
 		
+		bSizer9 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.chbWrapLines = wx.CheckBox( self.m_panel5, wx.ID_ANY, u"Wrap Lines", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.chbWrapLines, 0, wx.ALL, 5 )
+		
+		bSizer7.Add( bSizer9, 1, wx.EXPAND, 5 )
+		
 		self.m_panel5.SetSizer( bSizer7 )
 		self.m_panel5.Layout()
 		bSizer7.Fit( self.m_panel5 )

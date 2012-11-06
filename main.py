@@ -56,6 +56,10 @@ class Main:
         chSyntaxHighlighting.Append("XML")
         chSyntaxHighlighting.SetSelection(20)
 
+        chbWrapLines = self.mainFrame.chbWrapLines
+
+        chbWrapLines.SetValue(True)
+
     def initializeSettings(self):
         self.home_dir = os.path.expanduser("~")
         self.settings_dir = os.path.join(self.home_dir,
