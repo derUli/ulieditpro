@@ -5,6 +5,8 @@ import wx
 import os
 import sys
 import codecs
+import shutil
+import uliedit_charset_helper
 
 class Main:
 
@@ -22,6 +24,8 @@ class Main:
 
     def onOpenFileDialog(self, evt):
         self.openFileDialog()
+
+
 
 
 
@@ -44,6 +48,15 @@ class Main:
             self.last_path = os.path.dirname(self.last_path)
 
             self.saveLastPath(self.last_path)
+            self.openFile(dialog.GetPath())
+
+    def openFile(self, filename):
+        encoding = uliedit_charset_helper.detect_encoding(filename)
+        if encoding:
+            wx.MessageDialog(None,
+                        encoding, "Encoding of " + os.path.basename(filename),
+                        wx.OK | wx.ICON_INFORMATION).ShowModal()
+            
 
 
 
