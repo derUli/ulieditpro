@@ -21,6 +21,7 @@ class Main:
         self.icon = wx.Icon(U"images/icon.ico", wx.BITMAP_TYPE_ICO)
         self.mainFrame.SetIcon(self.icon)
 
+       
         self.file_manager = uliedit_file_manager.UliEditFileManager()
         self.current_file_index = -1
         
@@ -64,6 +65,9 @@ class Main:
             self.saveLastPath(self.last_path)
             self.openFile(dialog.GetPath())
 
+
+
+
     def openFile(self, filename):
         encoding = uliedit_charset_helper.detect_encoding(filename)
         if encoding:
@@ -83,14 +87,20 @@ class Main:
 
                 if tmp:
                     current_file_index = copy.copy(tmp)
+                    self.mainFrame.cbOpenFiles.SetSelection(current_file_index)
                     content = self.file_manager.getContentByIndex(current_file_index)
+                    self.mainFrame.cbOpenFiles.Append(filename)
                     self.mainFrame.txtContent.SetValue(content)
         
                     
 
 
                 
-
+        else:
+             wx.MessageDialog(None,
+                        u"Kann das Encoding nicht erkennen!",
+                                 os.path.basename(filename),
+                        wx.OK | wx.ICON_WARNING).ShowModal()
             
 
 
@@ -144,6 +154,8 @@ class Main:
         chbWrapLines = self.mainFrame.chbWrapLines
 
         chbWrapLines.SetValue(True)
+
+        self.mainFrame.cbOpenFiles.Clear()
 
 
         self.setTitle("untitled")

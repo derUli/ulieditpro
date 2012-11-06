@@ -27,7 +27,7 @@ class UliEditFileManager:
         self.files.append(new_file)
 
         try:
-            handle = open(filename, 'rb')
+            handle = open(filename, 'r')
             content = handle.read()
             handle.close()
             content = content.decode(encoding)
