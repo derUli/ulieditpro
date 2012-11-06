@@ -18,6 +18,37 @@ class Main:
         self.bindEvents()
         self.app.MainLoop()
 
+    def onOpenFileDialog(self, evt):
+        self.openFileDialog()
+
+
+
+
+    def saveLastPath(self , path):
+            # Save Last Path
+            handle = open(self.last_path_file, "wb")
+            handle.write(path)
+            handle.close()
+            self.last_path = path
+
+    def openFileDialog(self):
+        dialog = wx.FileDialog(parent = self.mainFrame,
+                               message = "Open File",
+                               defaultDir = self.last_path,
+                               style = wx.OPEN)
+
+        if dialog.ShowModal() == wx.ID_OK:
+            self.last_path = dialog.GetPath()
+            self.last_path = os.path.dirname(self.last_path)
+
+            self.saveLastPath(self.last_path)
+
+
+
+            
+
+
+        
 
 
     def initFields(self):
@@ -106,7 +137,6 @@ class Main:
 
 
     def bindEvents(self):
-
         # Shutdown Events
         self.app.Bind(wx.EVT_QUERY_END_SESSION,
                       self.onQuit)
@@ -117,6 +147,9 @@ class Main:
                  self.onQuit)
 
         self.mainFrame.ribbons.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onRibbonTabChange)
+
+        self.mainFrame.btnOpen.Bind(wx.EVT_BUTTON,
+                                             self.onOpenFileDialog)
 
 
 if __name__ == '__main__':
