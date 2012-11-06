@@ -29,6 +29,10 @@ class Main:
 
 
 
+    def onRibbonTabChange(self, evt):
+        self.mainFrame.ribbons.Refresh()
+
+
     def bindEvents(self):
 
         # Shutdown Events
@@ -39,6 +43,8 @@ class Main:
         
         self.mainFrame.Bind(wx.EVT_CLOSE,
                  self.onQuit)
+
+        self.mainFrame.ribbons.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGING, self.onRibbonTabChange)
 
 
 if __name__ == '__main__':
