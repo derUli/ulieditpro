@@ -47,7 +47,10 @@ class Main:
 
 
 
-            
+
+
+    def setTitle(self, filename):
+        self.mainFrame.SetTitle("UliEdit Pro - " + filename)
 
 
         
@@ -89,9 +92,13 @@ class Main:
         chSyntaxHighlighting.Append("XML")
         chSyntaxHighlighting.SetSelection(20)
 
+
         chbWrapLines = self.mainFrame.chbWrapLines
 
         chbWrapLines.SetValue(True)
+
+
+        self.setTitle("untitled")
 
     def initializeSettings(self):
         self.home_dir = os.path.expanduser("~")
