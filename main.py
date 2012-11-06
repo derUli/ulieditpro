@@ -14,6 +14,8 @@ class Main:
         self.initializeSettings()
         self.mainFrame = uliedit_gui.MainFrame(None)
         self.initFields()
+        self.icon = wx.Icon(U"images/icon.ico", wx.BITMAP_TYPE_ICO)
+        self.mainFrame.SetIcon(self.icon)
         self.mainFrame.Show(True)
         self.bindEvents()
         self.app.MainLoop()
