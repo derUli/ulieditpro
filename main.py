@@ -84,10 +84,8 @@ class Main:
             else:
                 tmp = self.file_manager.addFile(filename,
                                                 encoding)
-
-                if tmp:
+                if tmp != None:
                     current_file_index = copy.copy(tmp)
-
                     content = self.file_manager.getContentByIndex(current_file_index)
                     self.mainFrame.cbOpenFiles.Append(filename)
                     self.mainFrame.cbOpenFiles.SetStringSelection(filename)
@@ -196,7 +194,23 @@ class Main:
          sys.exit(0)
         
 
+    def onChangecbOpenFiles(self, evt):
+        self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
 
+
+    def changeCurrentFile(self, filename):
+        if self.file_manager.isOpen(filename):
+            index = self.file_manager.getIndexByFilename(filename)
+            content = self.file_manager.getContentByIndex(index)
+            self.current_file_index = index
+            self.mainFrame.txtContent.SetValue(content)
+
+            
+            
+            
+
+        
+    
 
     def onRibbonTabChange(self, evt):
         self.mainFrame.Refresh()
@@ -212,6 +226,8 @@ class Main:
         
         self.mainFrame.Bind(wx.EVT_CLOSE,
                  self.onQuit)
+
+        self.mainFrame.cbOpenFiles.Bind(wx.EVT_COMBOBOX, self.onChangecbOpenFiles)
 
         self.mainFrame.ribbons.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onRibbonTabChange)
 

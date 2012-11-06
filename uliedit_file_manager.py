@@ -12,6 +12,14 @@ class UliEditFileManager:
         return False
 
 
+    def getIndexByFilename(self, filename):
+            index = 0
+            for file in self.files:
+                if file["filename"] == filename:
+                    return index
+
+            return None
+
     def getContentByIndex(self, index):
      return self.files[index]["content"]
 
@@ -24,7 +32,7 @@ class UliEditFileManager:
         new_file["encoding"] = encoding
         new_file["filename"] = filename
 
-        self.files.append(new_file)
+        
 
         try:
             handle = open(filename, 'r')
@@ -32,6 +40,8 @@ class UliEditFileManager:
             handle.close()
             content = content.decode(encoding)
             new_file["content"] = content
+
+            self.files.append(new_file)
             
         except IOError:
             wx.MessageDialog(None,
