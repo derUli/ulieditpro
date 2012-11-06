@@ -7,6 +7,8 @@ import sys
 import codecs
 import shutil
 import uliedit_charset_helper
+import uliedit_file_manager
+import copy
 
 class Main:
 
@@ -18,6 +20,10 @@ class Main:
         self.initFields()
         self.icon = wx.Icon(U"images/icon.ico", wx.BITMAP_TYPE_ICO)
         self.mainFrame.SetIcon(self.icon)
+
+        self.file_manager = uliedit_file_manager.UliEditFileManager()
+        self.current_file_index = -1
+        
         self.mainFrame.Show(True)
         self.bindEvents()
         self.parseCommandLineArgs(sys.argv)
@@ -64,6 +70,27 @@ class Main:
             wx.MessageDialog(None,
                         encoding, "Encoding of " + os.path.basename(filename),
                         wx.OK | wx.ICON_INFORMATION).ShowModal()
+
+            if self.file_manager.isOpen(filename):
+                wx.MessageDialog(None,
+                        u"This file is already open.",
+                                 os.path.basename(filename),
+                        wx.OK | wx.ICON_WARNING).ShowModal()
+
+            else:
+                tmp = self.file_manager.addFile(filename,
+                                                encoding)
+
+                if tmp:
+                    current_file_index = copy.copy(tmp)
+                    content = self.file_manager.getContentByIndex(current_file_index)
+                    self.mainFrame.txtContent.SetValue(content)
+        
+                    
+
+
+                
+
             
 
 
