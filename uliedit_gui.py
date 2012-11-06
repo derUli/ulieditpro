@@ -45,6 +45,12 @@ class MainFrame ( wx.Frame ):
 		self.btnPaste = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/paste.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
 		bSizer2.Add( self.btnPaste, 1, wx.ALL|wx.EXPAND, 5 )
 		
+		self.m_staticline2 = wx.StaticLine( self.m_panel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_VERTICAL )
+		bSizer2.Add( self.m_staticline2, 0, wx.EXPAND |wx.ALL, 5 )
+		
+		self.btnPrint = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/print.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
+		bSizer2.Add( self.btnPrint, 1, wx.ALL|wx.EXPAND, 5 )
+		
 		self.m_panel1.SetSizer( bSizer2 )
 		self.m_panel1.Layout()
 		bSizer2.Fit( self.m_panel1 )
