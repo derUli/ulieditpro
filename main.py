@@ -32,10 +32,13 @@ class Main:
 
     def saveLastPath(self , path):
             # Save Last Path
-            handle = open(self.last_path_file, "wb")
-            handle.write(unicode(path))
+            
+            self.last_path = unicode(path)
+            handle = codecs.open(self.last_path_file,
+                                 "wb",
+                                 encoding = self.fs_enc)
+            handle.write(path)
             handle.close()
-            self.last_path = path
 
     def openFileDialog(self):
         dialog = wx.FileDialog(parent = self.mainFrame,
@@ -123,15 +126,12 @@ class Main:
             os.makedirs(self.settings_dir, 0777)
 
         if os.path.exists(self.last_path_file):
-            handle = open(self.last_path_file, "rb")
+            handle = codecs.open(self.last_path_file, "rb",
+                                 encoding = self.fs_enc)
             self.last_path = handle.read()
             handle.close()
         else:
-            handle = open(self.last_path_file, "wb")
-            handle.write(self.home_dir)
-            handle.close()
-            self.last_path = self.home_dir
-
+            self.saveLastPath(self.home_dir)
         if not os.path.exists(self.last_path):
             self.last_path = self.home_dir
 
