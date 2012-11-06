@@ -77,6 +77,7 @@ class Main:
             handle = open(self.last_path_file, "wb")
             handle.write(self.home_dir)
             handle.close()
+            self.last_path = self.home_dir
 
         if not os.path.exists(self.last_path):
             self.last_path = self.home_dir
