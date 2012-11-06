@@ -33,7 +33,7 @@ class Main:
     def saveLastPath(self , path):
             # Save Last Path
             handle = open(self.last_path_file, "wb")
-            handle.write(path)
+            handle.write(unicode(path))
             handle.close()
             self.last_path = path
 
