@@ -20,6 +20,7 @@ class Main:
         self.mainFrame.SetIcon(self.icon)
         self.mainFrame.Show(True)
         self.bindEvents()
+        self.parseCommandLineArgs(sys.argv)
         self.app.MainLoop()
 
     def onOpenFileDialog(self, evt):
@@ -28,7 +29,11 @@ class Main:
 
 
 
-
+    def parseCommandLineArgs(self, args):
+        if len(args) > 1:
+            filename = args[1].decode(self.fs_enc)
+            self.openFile(filename)
+        
 
     def saveLastPath(self , path):
             # Save Last Path
