@@ -87,9 +87,10 @@ class Main:
 
                 if tmp:
                     current_file_index = copy.copy(tmp)
-                    self.mainFrame.cbOpenFiles.SetSelection(current_file_index)
+
                     content = self.file_manager.getContentByIndex(current_file_index)
                     self.mainFrame.cbOpenFiles.Append(filename)
+                    self.mainFrame.cbOpenFiles.SetStringSelection(filename)
                     self.mainFrame.txtContent.SetValue(content)
         
                     
