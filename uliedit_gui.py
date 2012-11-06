@@ -8,7 +8,6 @@
 ###########################################################################
 
 import wx
-import wx.richtext
 
 ###########################################################################
 ## Class MainFrame
@@ -51,6 +50,15 @@ class MainFrame ( wx.Frame ):
 		self.m_staticline2 = wx.StaticLine( self.m_panel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_VERTICAL )
 		bSizer2.Add( self.m_staticline2, 0, wx.EXPAND |wx.ALL, 5 )
 		
+		self.btnUndo = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/undo.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
+		bSizer2.Add( self.btnUndo, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_bpButton8 = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/redo.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
+		bSizer2.Add( self.m_bpButton8, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_staticline3 = wx.StaticLine( self.m_panel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_VERTICAL )
+		bSizer2.Add( self.m_staticline3, 0, wx.EXPAND |wx.ALL, 5 )
+		
 		self.btnPrint = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/print.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
 		bSizer2.Add( self.btnPrint, 1, wx.ALL|wx.EXPAND, 5 )
 		
@@ -76,11 +84,31 @@ class MainFrame ( wx.Frame ):
 		self.m_panel3.Layout()
 		bSizer4.Fit( self.m_panel3 )
 		self.ribbons.AddPage( self.m_panel3, u"FILES", False )
+		self.m_panel5 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer7 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		bSizer8 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_staticText1 = wx.StaticText( self.m_panel5, wx.ID_ANY, u"Syntax Highlighting:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText1.Wrap( -1 )
+		bSizer8.Add( self.m_staticText1, 0, wx.ALL, 5 )
+		
+		chSyntaxHighlightingChoices = []
+		self.chSyntaxHighlighting = wx.Choice( self.m_panel5, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chSyntaxHighlightingChoices, 0 )
+		self.chSyntaxHighlighting.SetSelection( 0 )
+		bSizer8.Add( self.chSyntaxHighlighting, 0, wx.ALL, 5 )
+		
+		bSizer7.Add( bSizer8, 1, wx.EXPAND, 5 )
+		
+		self.m_panel5.SetSizer( bSizer7 )
+		self.m_panel5.Layout()
+		bSizer7.Fit( self.m_panel5 )
+		self.ribbons.AddPage( self.m_panel5, u"VIEW", False )
 		
 		bSizer1.Add( self.ribbons, 1, wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_richText1 = wx.richtext.RichTextCtrl( self.pn_main, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0|wx.VSCROLL|wx.HSCROLL|wx.NO_BORDER|wx.WANTS_CHARS )
-		bSizer1.Add( self.m_richText1, 3, wx.EXPAND |wx.ALL, 5 )
+		self.txtContent = wx.TextCtrl( self.pn_main, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
+		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )
 		self.pn_main.Layout()
