@@ -1,3 +1,6 @@
+import os
+import wx
+import wx.stc
 class UliEditFileManager:
 
     def __init__(self):
@@ -23,6 +26,11 @@ class UliEditFileManager:
         new_file["modified"] = False
         new_file["encoding"] = "utf8"
         new_file["filename"] = "untitled " + str(number)
+        if os.name == 'posix':
+            new_file["line_seperator"] = wx.stc.STC_EOL_LF
+        else:
+            new_file["line_seperator"] = wx.stc.STC_EOL_CRLF
+            
         new_file["content"] = ""
         self.files.append(new_file)
         return len(self.files) - 1
@@ -56,6 +64,7 @@ class UliEditFileManager:
         new_file["modified"] = False
         new_file["encoding"] = encoding
         new_file["filename"] = filename
+        
 
         
 
@@ -65,6 +74,17 @@ class UliEditFileManager:
             handle.close()
             content = content.decode(encoding)
             new_file["content"] = content
+            # Windows:
+            if "\r\n" in content:
+                print "Windows"
+                new_file["line_seperator"] = wx.stc.STC_EOL_CRLF
+            elif "\r" in content:
+                print "Mac OS"
+                new_file["line_seperator"] = wx.stc.STC_EOL_CR
+            elif "\n" in content:
+                print "Unix"
+                new_file["line_seperator"] = wx.stc.STC_EOL_LF
+
 
             self.files.append(new_file)
             

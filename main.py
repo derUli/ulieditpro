@@ -114,6 +114,9 @@ class Main:
             self.last_path = os.path.dirname(self.last_path)
             self.saveLastPath(self.last_path)
             self.openFile(dialog.GetPath())
+            
+
+
 
 
 
@@ -137,6 +140,12 @@ class Main:
             
                 tmp = self.file_manager.addFile(filename,
                                                 encoding)
+                line_seperator = self.file_manager.getFileAtIndex(tmp)["line_seperator"]
+                self.mainFrame.txtContent.SetViewEOL(True)
+                self.mainFrame.txtContent.SetEOLMode(line_seperator)
+                self.mainFrame.txtContent.ConvertEOLs(line_seperator)
+                
+
                 self.setTitle(os.path.basename(filename))
                 if tmp != None:
                     self.current_file_index = copy.copy(tmp)
@@ -146,9 +155,11 @@ class Main:
                     try:
                         self.mainFrame.txtContent.SetValue(content)
                     except AttributeError:
-                       self.mainFrame.txtContent.ClearAll()
-                       self.mainFrame.txtContent.SetText(content)
-                       self.mainFrame.txtContent.EmptyUndoBuffer()
+                        self.mainFrame.txtContent.ClearAll()
+                        self.mainFrame.txtContent.SetText(content)
+                        self.mainFrame.txtContent.ConvertEOLs(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
+                        self.mainFrame.txtContent.EmptyUndoBuffer()
+                                                                  
                        
                        
         
