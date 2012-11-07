@@ -144,7 +144,21 @@ class Main:
         self.mainFrame.SetTitle("UliEdit Pro - " + filename)
 
 
-        
+    def onchbWrapLines(self, evt):
+        if self.mainFrame.chbWrapLines.GetValue():
+           self.mainFrame.txtContent.SetWrapMode(wx.stc.STC_WRAP_WORD)
+           if os.path.exists(self.wrap_words_enabled_file):
+  
+              os.unlink(self.wrap_words_enabled_file)
+        else:
+              self.mainFrame.txtContent.SetWrapMode(wx.stc.STC_WRAP_NONE)   
+              open(self.wrap_words_enabled_file, "w").close()      
+              
+              
+
+               
+
+                   
 
 
     def initFields(self):
@@ -186,7 +200,10 @@ class Main:
 
         chbWrapLines = self.mainFrame.chbWrapLines
 
-        chbWrapLines.SetValue(True)
+        if not os.path.exists(self.wrap_words_enabled_file):
+           self.mainFrame.chbWrapLines.SetValue(True)
+        else:
+          self.mainFrame.chbWrapLines.SetValue(False)
 
         self.mainFrame.cbOpenFiles.Clear()
         
@@ -197,7 +214,10 @@ class Main:
             self.mainFrame.txtContent.SetMarginWidth(1, 25)
             
             # Set Wrap mode default to on
-            self.mainFrame.txtContent.SetWrapMode(wx.stc.STC_WRAP_WORD)
+            if not os.path.exists(self.wrap_words_enabled_file):
+               self.mainFrame.txtContent.SetWrapMode(wx.stc.STC_WRAP_WORD)
+            else:
+               self.mainFrame.txtContent.SetWrapMode(wx.stc.STC_WRAP_NONE)
             
         except AttributeError:
             pass
@@ -224,6 +244,8 @@ class Main:
             self.saveLastPath(self.home_dir)
         if not os.path.exists(self.last_path):
             self.last_path = self.home_dir
+            
+        self.wrap_words_enabled_file = os.path.join(self.settings_dir, "wrap_words_disabled")
 
             
 
@@ -298,6 +320,8 @@ class Main:
         
         self.mainFrame.btnUndo.Bind(wx.EVT_BUTTON, self.onUndo)    
         self.mainFrame.btnRedo.Bind(wx.EVT_BUTTON, self.onRedo)
+        
+        self.mainFrame.chbWrapLines.Bind(wx.EVT_CHECKBOX, self.onchbWrapLines)
         
 
 
