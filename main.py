@@ -46,13 +46,15 @@ class Main:
         self.file_manager.setModified(self.current_file_index);
         
     def onUndo(self, evt):
-        self.mainFrame.txtContent.Undo()
-        self.file_manager.setModified(self.current_file_index);
+        if(self.mainFrame.txtContent.CanUndo()):
+           self.mainFrame.txtContent.Undo()
+           self.file_manager.setModified(self.current_file_index);
 
 
     def onRedo(self, evt):
-        self.mainFrame.txtContent.Redo()
-        self.file_manager.setModified(self.current_file_index);
+        if(self.mainFrame.txtContent.CanRedo()):
+           self.mainFrame.txtContent.Redo()
+           self.file_manager.setModified(self.current_file_index);
 
 
     def onChangeText(self ,evt):
