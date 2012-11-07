@@ -110,6 +110,8 @@ class Main:
                         wx.OK | wx.ICON_WARNING).ShowModal()
 
             else:
+                
+            
                 tmp = self.file_manager.addFile(filename,
                                                 encoding)
                 self.setTitle(os.path.basename(filename))
@@ -306,9 +308,11 @@ class Main:
         self.mainFrame.Bind(wx.EVT_CLOSE,
                  self.onQuit)
 
-        self.mainFrame.cbOpenFiles.Bind(wx.EVT_COMBOBOX, self.onChangecbOpenFiles)
+        self.mainFrame.cbOpenFiles.Bind(wx.EVT_COMBOBOX, 
+        self.onChangecbOpenFiles)
 
-        self.mainFrame.ribbons.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onRibbonTabChange)
+        self.mainFrame.ribbons.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, 
+        self.onRibbonTabChange)
 
         self.mainFrame.btnOpen.Bind(wx.EVT_BUTTON,
                                              self.onOpenFileDialog)

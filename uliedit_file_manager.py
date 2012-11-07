@@ -11,6 +11,12 @@ class UliEditFileManager:
 
         return False
 
+    def getUntitledFilesCount(self):
+        count = 0
+        for file in self.files:
+            if file["filename"].startswith():
+               count += 1
+        
 
     def getIndexByFilename(self, filename):
             index = 0
