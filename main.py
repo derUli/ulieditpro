@@ -122,6 +122,7 @@ class Main:
                         self.mainFrame.txtContent.SetValue(content)
                     except AttributeError:
                        self.mainFrame.txtContent.SetText(content)
+                       self.mainFrame.txtContent.EmptyUndoBuffer()
                        
                        
         
@@ -279,6 +280,7 @@ class Main:
                 self.mainFrame.txtContent.SetValue(content)
             except AttributeError:
                 self.mainFrame.txtContent.SetText(content)
+                self.mainFrame.txtContent.EmptyUndoBuffer()
             
         
 
