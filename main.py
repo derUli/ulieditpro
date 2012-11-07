@@ -308,8 +308,9 @@ class Main:
 
     def change_lexer(self, name):
         self.current_lexer = name
-        self.mainFrame.txtContent.SetLexer(highlighting)
-        self.mainFrame.txtContent.SetStyleBits(7)
+        
+        self.mainFrame.txtContent.SetLexer(lexers.getLexer(self.current_lexer))
+        #self.mainFrame.txtContent.SetStyleBits(7)
 
 
 
