@@ -158,6 +158,7 @@ class Main:
                         self.mainFrame.txtContent.ClearAll()
                         self.mainFrame.txtContent.SetText(content)
                         self.mainFrame.txtContent.ConvertEOLs(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
+                        self.mainFrame.txtContent.SetEOLMode(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
                         self.mainFrame.txtContent.EmptyUndoBuffer()
                                                                   
                        
@@ -184,7 +185,7 @@ class Main:
 
 
     def onchbWrapLines(self, evt):
-        if self.mainFrame.chbWrapLines.GetValue():
+        if self.mainFrame.chbDisplayLineEndings.GetValue():
            self.mainFrame.txtContent.SetWrapMode(wx.stc.STC_WRAP_WORD)
            if os.path.exists(self.wrap_words_enabled_file):
   
@@ -195,6 +196,7 @@ class Main:
               
               
 
+              
                
 
                    
@@ -330,6 +332,9 @@ class Main:
         if self.file_manager.isOpen(filename):
             index = self.file_manager.getIndexByFilename(filename)
             content = self.file_manager.getContentByIndex(index)
+            
+            line_sep = self.file_manager.getFileAtIndex(index)["line_seperator"]
+            self.mainFrame.txtContent.SetEOLMode(line_sep)
             self.current_file_index = index
             self.setTitle(os.path.basename(filename))
             try:

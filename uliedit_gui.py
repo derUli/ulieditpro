@@ -7,7 +7,8 @@
 ## PLEASE DO "NOT" EDIT THIS FILE!
 ###########################################################################
 
-import wx, wx.stc
+import wx
+import wx.stc
 
 ###########################################################################
 ## Class MainFrame
@@ -104,6 +105,9 @@ class MainFrame ( wx.Frame ):
 		
 		self.chbWrapLines = wx.CheckBox( self.m_panel5, wx.ID_ANY, u"Wrap Lines", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer9.Add( self.chbWrapLines, 0, wx.ALL, 5 )
+		
+		self.chbDisplayLineEndings = wx.CheckBox( self.m_panel5, wx.ID_ANY, u"Display Line Endings", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.chbDisplayLineEndings, 0, wx.ALL, 5 )
 		
 		bSizer7.Add( bSizer9, 1, wx.EXPAND, 5 )
 		
