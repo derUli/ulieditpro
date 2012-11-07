@@ -3,6 +3,7 @@ import wx.stc
 
 
 def getLexer(name):
+
     lexer_list = {"ADA" : wx.stc.STC_LEX_ADA,
               "ASP" : wx.stc.STC_LEX_HTML,
               "AVE" : wx.stc.STC_LEX_AVE,
@@ -38,3 +39,4 @@ def getLexer(name):
               }
 
     return lexer_list[name]
+
