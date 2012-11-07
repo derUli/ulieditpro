@@ -10,11 +10,20 @@ class UliEditFileManager:
                 return True
 
         return False
+    
+    
+    def newFile(self):
+        number = self.getUntitledFilesCount() + 1
+        new_file["modified"] = False
+        new_file["encoding"] = "utf8"
+        new_file["filename"] = "untitled " + number
+        new_file["content"] = ""
+        return len(self.files) - 1
 
     def getUntitledFilesCount(self):
         count = 0
         for file in self.files:
-            if file["filename"].startswith():
+            if file["filename"].startswith("untitled"):
                count += 1
         
 
