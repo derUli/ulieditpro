@@ -27,7 +27,7 @@ class Main:
        
         self.file_manager = uliedit_file_manager.UliEditFileManager()
         self.current_file_index = -1
-        
+        self.change_lexer(self.current_lexer)        
         self.mainFrame.Show(True)
         self.bindEvents()
         self.parseCommandLineArgs(sys.argv)
@@ -59,14 +59,16 @@ class Main:
 
 
     def onChangeText(self ,evt):
+        evt.Skip()
         if self.current_file_index > -1:
             try:
                 self.file_manager.files[self.current_file_index]["content"] = self.mainFrame.txtContent.GetValue()
             except AttributeError:
                 self.file_manager.files[self.current_file_index]["content"] = self.mainFrame.txtContent.GetText()
+                self.change_lexer(self.current_lexer)
             
             self.file_manager.files[self.current_file_index]["modified"] = True
-            evt.Skip()
+            
 
 
 
@@ -222,8 +224,11 @@ class Main:
         chSyntaxHighlighting.Append("VBSCRIPT")  
         chSyntaxHighlighting.Append("XML")
         chSyntaxHighlighting.SetSelection(20)
-
-
+        # Syntax Highlighting voererst deaktiviert,
+        # da ich es nicht zum laufen bekomme
+        chSyntaxHighlighting.Show(False)
+        self.mainFrame.m_staticText1.Show(False)
+            
         chbWrapLines = self.mainFrame.chbWrapLines
 
         if not os.path.exists(self.wrap_words_enabled_file):
@@ -273,7 +278,8 @@ class Main:
             
         self.wrap_words_enabled_file = os.path.join(self.settings_dir, "wrap_words_disabled")
 
-            
+        self.current_lexer = "PLAIN"
+
 
         
         
@@ -301,9 +307,14 @@ class Main:
 
 
     def change_lexer(self, name):
-        highlighting = lexers.getLexer()
+        self.current_lexer = name
+        highlighting = lexers.getLexer(name)
         self.mainFrame.txtContent.SetLexer(highlighting)
         
+        self.mainFrame.txtContent.SetStyleBits(7)
+
+
+
 
     def changeCurrentFile(self, filename):
         if self.file_manager.isOpen(filename):
@@ -353,7 +364,7 @@ class Main:
                                              self.onOpenFileDialog)
 
     
-        self.mainFrame.txtContent.Bind(wx.EVT_KEY_DOWN, self.onChangeText)
+        self.mainFrame.txtContent.Bind(wx.stc.EVT_STC_MODIFIED, self.onChangeText)
 
         self.mainFrame.btnCopy.Bind(wx.EVT_BUTTON, self.onCopy)    
         self.mainFrame.btnPaste.Bind(wx.EVT_BUTTON, self.onPaste)
