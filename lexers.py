@@ -1,9 +1,10 @@
 import wx
 import wx.stc
 
+
 def getLexer(dummy = None, name = "PLAIN"):
-    lexers = {"ADA" : wx.stc.STC_LEX_ADA,
-              "ASP" : wx.stc.STC_LEX_ADA,
+    lexer_list = {"ADA" : wx.stc.STC_LEX_ADA,
+              "ASP" : wx.stc.STC_LEX_HTML,
               "AVE" : wx.stc.STC_LEX_AVE,
               "BAAN" : wx.stc.STC_LEX_BAAN,
               "BATCH" : wx.stc.STC_LEX_BATCH,
@@ -22,11 +23,10 @@ def getLexer(dummy = None, name = "PLAIN"):
               "MAKEFILE" : wx.stc.STC_LEX_MAKEFILE,
               "MATLABE" : wx.stc.STC_LEX_MATLAB,
               "NNCRONTAB" : wx.stc.STC_LEX_NNCRONTAB,
-              
               "PLAIN" : wx.stc.STC_LEX_NULL,
               "PASCAL" : wx.stc.STC_LEX_PASCAL,
               "PERL" : wx.stc.STC_LEX_PERL,
-              "PHP" : wx.stc.STC_LEX_PHP,
+              "PHP" : wx.stc.STC_LEX_HTML,
               "PROPERTIES" : wx.stc.STC_LEX_PROPERTIES,
               "PYTHON" : wx.stc.STC_LEX_PYTHON,
               "RUBY" : wx.stc.STC_LEX_RUBY,
@@ -38,7 +38,7 @@ def getLexer(dummy = None, name = "PLAIN"):
 
               }
 
-    if name in lexers:
-        return lexers[name]
+    if name in lexer_list:
+        return lexer_list[name]
     else:
         return None

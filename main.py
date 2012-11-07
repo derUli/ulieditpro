@@ -301,7 +301,7 @@ class Main:
 
 
     def change_lexer(self, name):
-        highlighting = lexers.getLexer()
+        highlighting = lexers.getLexer(name)
         self.mainFrame.txtContent.SetLexer(highlighting)
         
 
