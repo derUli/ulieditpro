@@ -3,7 +3,7 @@ import wx
 def detect_encoding(filename):
     # gather the encodings you think that the file may be
     # encoded inside a tuple
-    encodings = ('utf-8', 'iso-8859-15', 'iso-8859-1', 'windows-1252', 'utf-16')
+    encodings = ('utf-8', 'iso-8859-15', 'windows-1252', 'iso-8859-1')
 
     # try to open the file and exit if some IOError occurs
     try:
