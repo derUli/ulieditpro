@@ -756,7 +756,7 @@
                                                         <property name="label">Redo</property>
                                                         <property name="maximum_size"></property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">btnRedo<</property>
+                                                        <property name="name">btnRedo</property>
                                                         <property name="permission">protected</property>
                                                         <property name="pos"></property>
                                                         <property name="selected"></property>
