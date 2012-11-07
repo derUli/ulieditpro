@@ -7,7 +7,7 @@
 ## PLEASE DO "NOT" EDIT THIS FILE!
 ###########################################################################
 
-import wx
+import wx, wx.stc
 
 ###########################################################################
 ## Class MainFrame
@@ -114,7 +114,7 @@ class MainFrame ( wx.Frame ):
 		
 		bSizer1.Add( self.ribbons, 1, wx.EXPAND |wx.ALL, 5 )
 		
-		self.txtContent = wx.TextCtrl( self.pn_main, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
+		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
 		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )

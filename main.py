@@ -54,7 +54,11 @@ class Main:
 
     def onChangeText(self ,evt):
         if self.current_file_index > -1:
-            self.file_manager.files[self.current_file_index]["content"] = self.mainFrame.txtContent.GetValue()
+            try:
+                self.file_manager.files[self.current_file_index]["content"] = self.mainFrame.txtContent.GetValue()
+            except AttributeError:
+                self.file_manager.files[self.current_file_index]["content"] = self.mainFrame.txtContent.GetText()
+            
             self.file_manager.files[self.current_file_index]["modified"] = True
 
 
@@ -114,7 +118,12 @@ class Main:
                     content = self.file_manager.getContentByIndex(self.current_file_index)
                     self.mainFrame.cbOpenFiles.Append(filename)
                     self.mainFrame.cbOpenFiles.SetStringSelection(filename)
-                    self.mainFrame.txtContent.SetValue(content)
+                    try:
+                        self.mainFrame.txtContent.SetValue(content)
+                    except AttributeError:
+                       self.mainFrame.txtContent.SetText(content)
+                       
+                       
         
                     
 
@@ -180,6 +189,14 @@ class Main:
         chbWrapLines.SetValue(True)
 
         self.mainFrame.cbOpenFiles.Clear()
+        
+        try:
+            # Enable line numbers.
+            self.mainFrame.txtContent.SetMarginType(1, wx.stc.STC_MARGIN_NUMBER)
+            self.mainFrame.txtContent.SetMarginMask(1, 0)
+            self.mainFrame.txtContent.SetMarginWidth(1, 25)
+        except AttributeError:
+            pass
 
 
         self.setTitle("untitled")
@@ -231,7 +248,11 @@ class Main:
             content = self.file_manager.getContentByIndex(index)
             self.current_file_index = index
             self.setTitle(os.path.basename(filename))
-            self.mainFrame.txtContent.SetValue(content)
+            try:
+                self.mainFrame.txtContent.SetValue(content)
+            except AttributeError:
+                self.mainFrame.txtContent.SetText(content)
+            
         
 
             
