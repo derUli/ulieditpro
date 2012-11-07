@@ -45,6 +45,7 @@ class Main:
         if len(args) > 1:
             filename = args[1].decode(self.fs_enc)
             self.openFile(filename)
+
         
 
     def saveLastPath(self , path):
@@ -74,6 +75,7 @@ class Main:
 
 
     def openFile(self, filename):
+        filename = os.path.abspath(filename)
         encoding = uliedit_charset_helper.detect_encoding(filename)
         if encoding:
             wx.MessageDialog(None,
@@ -89,6 +91,7 @@ class Main:
             else:
                 tmp = self.file_manager.addFile(filename,
                                                 encoding)
+                self.setTitle(os.path.basename(filename))
                 if tmp != None:
                     self.current_file_index = copy.copy(tmp)
                     content = self.file_manager.getContentByIndex(self.current_file_index)
@@ -209,6 +212,7 @@ class Main:
             index = self.file_manager.getIndexByFilename(filename)
             content = self.file_manager.getContentByIndex(index)
             self.current_file_index = index
+            self.setTitle(os.path.basename(filename))
             self.mainFrame.txtContent.SetValue(content)
         
 
