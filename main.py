@@ -195,8 +195,13 @@ class Main:
             self.mainFrame.txtContent.SetMarginType(1, wx.stc.STC_MARGIN_NUMBER)
             self.mainFrame.txtContent.SetMarginMask(1, 0)
             self.mainFrame.txtContent.SetMarginWidth(1, 25)
+            
+            # Set Wrap mode default to on
+            self.mainFrame.txtContent.SetWrapMode(wx.stc.STC_WRAP_WORD)
+            
         except AttributeError:
             pass
+            
 
 
         self.setTitle("untitled")
