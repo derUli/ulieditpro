@@ -85,8 +85,8 @@ class Main:
                 tmp = self.file_manager.addFile(filename,
                                                 encoding)
                 if tmp != None:
-                    current_file_index = copy.copy(tmp)
-                    content = self.file_manager.getContentByIndex(current_file_index)
+                    self.current_file_index = copy.copy(tmp)
+                    content = self.file_manager.getContentByIndex(self.current_file_index)
                     self.mainFrame.cbOpenFiles.Append(filename)
                     self.mainFrame.cbOpenFiles.SetStringSelection(filename)
                     self.mainFrame.txtContent.SetValue(content)
@@ -196,6 +196,7 @@ class Main:
 
     def onChangecbOpenFiles(self, evt):
         self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
+        evt.Skip()
 
 
     def changeCurrentFile(self, filename):
@@ -204,6 +205,7 @@ class Main:
             content = self.file_manager.getContentByIndex(index)
             self.current_file_index = index
             self.mainFrame.txtContent.SetValue(content)
+        
 
             
             

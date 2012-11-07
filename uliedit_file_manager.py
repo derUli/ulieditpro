@@ -15,8 +15,10 @@ class UliEditFileManager:
     def getIndexByFilename(self, filename):
             index = 0
             for file in self.files:
+                
                 if file["filename"] == filename:
                     return index
+                index += 1
 
             return None
 
