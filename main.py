@@ -62,10 +62,23 @@ class Main:
             self.file_manager.files[self.current_file_index]["modified"] = True
 
 
+
+
+    def openEmptyFile(self):
+        self.current_file_index = self.file_manager.newFile()
+        if(self.current_file_index> -1):
+          title =self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
+          self.setTitle(title)
+          self.mainFrame.cbOpenFiles.Append(title)
+          self.mainFrame.cbOpenFiles.SetStringSelection(title)
+
     def parseCommandLineArgs(self, args):
         if len(args) > 1:
             filename = args[1].decode(self.fs_enc)
             self.openFile(filename)
+        else:
+           self.openEmptyFile()
+            
 
         
 

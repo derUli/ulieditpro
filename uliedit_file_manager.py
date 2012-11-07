@@ -14,10 +14,14 @@ class UliEditFileManager:
     
     def newFile(self):
         number = self.getUntitledFilesCount() + 1
+        
+        new_file = {}
         new_file["modified"] = False
         new_file["encoding"] = "utf8"
-        new_file["filename"] = "untitled " + number
+        new_file["filename"] = "untitled " + str(number)
         new_file["content"] = ""
+        
+        self.files.append(new_file)
         return len(self.files) - 1
 
     def getUntitledFilesCount(self):
@@ -25,6 +29,7 @@ class UliEditFileManager:
         for file in self.files:
             if file["filename"].startswith("untitled"):
                count += 1
+        return count
         
 
     def getIndexByFilename(self, filename):
