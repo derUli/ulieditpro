@@ -60,7 +60,7 @@ class UliEditFileManager:
         
 
         try:
-            handle = open(filename, 'r')
+            handle = open(filename, 'rb')
             content = handle.read()
             handle.close()
             content = content.decode(encoding)

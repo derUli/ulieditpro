@@ -98,6 +98,9 @@ class Main:
             handle.close()
 
     def openFileDialog(self):
+        if not os.path.exists(self.last_path):
+            self.saveLastPath(self.home_dir)
+        
         dialog = wx.FileDialog(parent = self.mainFrame,
                                message = "Open File",
                                defaultDir = self.last_path,
@@ -106,7 +109,6 @@ class Main:
         if dialog.ShowModal() == wx.ID_OK:
             self.last_path = dialog.GetPath()
             self.last_path = os.path.dirname(self.last_path)
-
             self.saveLastPath(self.last_path)
             self.openFile(dialog.GetPath())
 
@@ -141,6 +143,7 @@ class Main:
                     try:
                         self.mainFrame.txtContent.SetValue(content)
                     except AttributeError:
+                       self.mainFrame.txtContent.ClearAll()
                        self.mainFrame.txtContent.SetText(content)
                        self.mainFrame.txtContent.EmptyUndoBuffer()
                        
