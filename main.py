@@ -107,7 +107,7 @@ class Main:
         dialog = wx.FileDialog(parent = self.mainFrame,
                                message = "Open File",
                                defaultDir = self.last_path,
-                               style = wx.OPEN)
+                               style = wx.OPEN | wx.wx.FD_FILE_MUST_EXIST )
 
         if dialog.ShowModal() == wx.ID_OK:
             self.last_path = dialog.GetPath()
@@ -141,7 +141,7 @@ class Main:
                 tmp = self.file_manager.addFile(filename,
                                                 encoding)
                 line_seperator = self.file_manager.getFileAtIndex(tmp)["line_seperator"]
-                self.mainFrame.txtContent.SetViewEOL(True)
+
                 self.mainFrame.txtContent.SetEOLMode(line_seperator)
                 self.mainFrame.txtContent.ConvertEOLs(line_seperator)
                 
@@ -188,14 +188,21 @@ class Main:
         if self.mainFrame.chbDisplayLineEndings.GetValue():
            self.mainFrame.txtContent.SetWrapMode(wx.stc.STC_WRAP_WORD)
            if os.path.exists(self.wrap_words_enabled_file):
-  
               os.unlink(self.wrap_words_enabled_file)
         else:
               self.mainFrame.txtContent.SetWrapMode(wx.stc.STC_WRAP_NONE)   
               open(self.wrap_words_enabled_file, "w").close()      
               
-              
 
+    def onchbDisplayLineEndings(self, evt):
+        if self.mainFrame.chbDisplayLineEndings.GetValue():
+            open(self.display_line_endings_enabled_file , "w").close()
+            self.mainFrame.txtContent.SetViewEOL(True)
+        else:
+            if os.path.exists(self.display_line_endings_enabled_file):
+                os.unlink(self.display_line_endings_enabled_file)
+                self.mainFrame.txtContent.SetViewEOL(False)
+        
               
                
 
@@ -244,10 +251,22 @@ class Main:
             
         chbWrapLines = self.mainFrame.chbWrapLines
 
+        chbDisplayLineEndings = self.mainFrame.chbDisplayLineEndings
+
         if not os.path.exists(self.wrap_words_enabled_file):
            self.mainFrame.chbWrapLines.SetValue(True)
         else:
           self.mainFrame.chbWrapLines.SetValue(False)
+
+        if os.path.exists(self.display_line_endings_enabled_file):
+            self.mainFrame.txtContent.SetViewEOL(True)
+            self.mainFrame.chbDisplayLineEndings.SetValue(True)
+        else:
+            self.mainFrame.txtContent.SetViewEOL(False)
+            self.mainFrame.chbDisplayLineEndings.SetValue(False)
+          
+          
+
 
         self.mainFrame.cbOpenFiles.Clear()
         
@@ -275,9 +294,10 @@ class Main:
         self.settings_dir = os.path.join(self.home_dir,
                                          ".uliedit")
         self.last_path_file = os.path.join(self.settings_dir, "last_path")
-        
+
         if not os.path.exists(self.settings_dir):
             os.makedirs(self.settings_dir, 0777)
+
 
         if os.path.exists(self.last_path_file):
             handle = codecs.open(self.last_path_file, "rb",
@@ -290,7 +310,7 @@ class Main:
             self.last_path = self.home_dir
             
         self.wrap_words_enabled_file = os.path.join(self.settings_dir, "wrap_words_disabled")
-
+        self.display_line_endings_enabled_file = os.path.join(self.settings_dir, "display_line_endings")
         self.current_lexer = "PLAIN"
 
 
@@ -321,7 +341,6 @@ class Main:
 
     def change_lexer(self, name):
         self.current_lexer = name
-        
         self.mainFrame.txtContent.SetLexer(lexers.getLexer(self.current_lexer))
         #self.mainFrame.txtContent.SetStyleBits(7)
 
@@ -370,7 +389,8 @@ class Main:
         self.mainFrame.cbOpenFiles.Bind(wx.EVT_COMBOBOX, 
         self.onChangecbOpenFiles)
 
-        self.mainFrame.chSyntaxHighlighting.Bind(wx.EVT_CHOICE, self.onchSyntaxHighlightingChange)
+        self.mainFrame.chSyntaxHighlighting.Bind(wx.EVT_CHOICE,
+                                                 self.onchSyntaxHighlightingChange)
 
         self.mainFrame.ribbons.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, 
         self.onRibbonTabChange)
@@ -387,7 +407,10 @@ class Main:
         self.mainFrame.btnUndo.Bind(wx.EVT_BUTTON, self.onUndo)    
         self.mainFrame.btnRedo.Bind(wx.EVT_BUTTON, self.onRedo)
         
-        self.mainFrame.chbWrapLines.Bind(wx.EVT_CHECKBOX, self.onchbWrapLines)
+        self.mainFrame.chbWrapLines.Bind(wx.EVT_CHECKBOX,
+                                         self.onchbWrapLines)
+        self.mainFrame.chbDisplayLineEndings.Bind(wx.EVT_CHECKBOX,
+                                                  self.onchbDisplayLineEndings)
 
 
         

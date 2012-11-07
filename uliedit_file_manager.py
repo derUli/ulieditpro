@@ -76,14 +76,17 @@ class UliEditFileManager:
             new_file["content"] = content
             # Windows:
             if "\r\n" in content:
-                print "Windows"
                 new_file["line_seperator"] = wx.stc.STC_EOL_CRLF
             elif "\r" in content:
-                print "Mac OS"
                 new_file["line_seperator"] = wx.stc.STC_EOL_CR
             elif "\n" in content:
-                print "Unix"
                 new_file["line_seperator"] = wx.stc.STC_EOL_LF
+            else:
+                if os.name == 'posix':
+                    new_file["line_seperator"] = wx.stc.STC_EOL_LF
+                else:
+                    new_file["line_seperator"] = wx.stc.STC_EOL_CRLF
+           
 
 
             self.files.append(new_file)
