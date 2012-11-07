@@ -35,6 +35,11 @@ class Main:
 
 
 
+    def onChangeText(self ,evt):
+        if self.current_file_index > -1:
+            self.file_manager.files[self.current_file_index]["content"] = self.mainFrame.txtContent.GetValue()
+            self.file_manager.files[self.current_file_index]["modified"] = True
+
 
     def parseCommandLineArgs(self, args):
         if len(args) > 1:
@@ -236,6 +241,10 @@ class Main:
         self.mainFrame.btnOpen.Bind(wx.EVT_BUTTON,
                                              self.onOpenFileDialog)
 
+    
+        self.mainFrame.txtContent.Bind(wx.EVT_TEXT, self.onChangeText)    
+        self.mainFrame.txtContent.Bind(wx.EVT_TEXT_ENTER, self.onChangeText)
+        
 
 if __name__ == '__main__':
     Main()
