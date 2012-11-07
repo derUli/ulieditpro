@@ -12,6 +12,10 @@ class UliEditFileManager:
         return False
     
     
+    
+    def setModified(self, index, isModified = True):
+        self.files[index]["modified"] = isModified
+    
     def newFile(self):
         number = self.getUntitledFilesCount() + 1
         

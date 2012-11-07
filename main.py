@@ -38,18 +38,21 @@ class Main:
 
     def onCopy(self, evt):
         self.mainFrame.txtContent.Copy()
+        self.file_manager.setModified(self.current_file_index);
 
 
     def onPaste(self, evt):
-        self.mainFrame.txtContent.Paste()
-        
+        self.mainFrame.txtContent.Paste
+        self.file_manager.setModified(self.current_file_index);
         
     def onUndo(self, evt):
         self.mainFrame.txtContent.Undo()
+        self.file_manager.setModified(self.current_file_index);
 
 
     def onRedo(self, evt):
         self.mainFrame.txtContent.Redo()
+        self.file_manager.setModified(self.current_file_index);
 
 
     def onChangeText(self ,evt):
