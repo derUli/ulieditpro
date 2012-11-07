@@ -26,7 +26,7 @@ class MainFrame ( wx.Frame ):
 		bSizer1 = wx.BoxSizer( wx.VERTICAL )
 		
 		self.ribbons = wx.Notebook( self.pn_main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0|wx.FULL_REPAINT_ON_RESIZE )
-		self.m_panel1 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_panel1 = wx.Panel( self.ribbons, wx.EXPAND | wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer2 = wx.BoxSizer( wx.HORIZONTAL )
 		
 		self.btnOpen = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/open.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
