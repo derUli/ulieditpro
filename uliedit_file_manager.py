@@ -20,7 +20,6 @@ class UliEditFileManager:
         new_file["encoding"] = "utf8"
         new_file["filename"] = "untitled " + str(number)
         new_file["content"] = ""
-        
         self.files.append(new_file)
         return len(self.files) - 1
 
