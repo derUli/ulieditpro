@@ -9,6 +9,7 @@ import shutil
 import uliedit_charset_helper
 import uliedit_file_manager
 import copy
+import lexers
 
 class Main:
 
@@ -164,6 +165,7 @@ class Main:
 
 
 
+
     def setTitle(self, filename):
         self.mainFrame.SetTitle("UliEdit Pro - " + filename)
 
@@ -292,6 +294,16 @@ class Main:
         self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
         evt.Skip()
 
+    def onchSyntaxHighlightingChange(self, evt):
+        lexer_name = self.mainFrame.chSyntaxHighlighting.GetStringSelection()
+        self.change_lexer(lexer_name)
+        evt.Skip()
+
+
+    def change_lexer(self, name):
+        highlighting = lexers.getLexer()
+        self.mainFrame.txtContent.SetLexer(highlighting)
+        
 
     def changeCurrentFile(self, filename):
         if self.file_manager.isOpen(filename):
@@ -332,6 +344,8 @@ class Main:
         self.mainFrame.cbOpenFiles.Bind(wx.EVT_COMBOBOX, 
         self.onChangecbOpenFiles)
 
+        self.mainFrame.chSyntaxHighlighting.Bind(wx.EVT_CHOICE, self.onchSyntaxHighlightingChange)
+
         self.mainFrame.ribbons.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, 
         self.onRibbonTabChange)
 
@@ -348,6 +362,8 @@ class Main:
         self.mainFrame.btnRedo.Bind(wx.EVT_BUTTON, self.onRedo)
         
         self.mainFrame.chbWrapLines.Bind(wx.EVT_CHECKBOX, self.onchbWrapLines)
+
+
         
 
 
