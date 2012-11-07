@@ -42,6 +42,14 @@ class Main:
 
     def onPaste(self, evt):
         self.mainFrame.txtContent.Paste()
+        
+        
+    def onUndo(self, evt):
+        self.mainFrame.txtContent.Undo()
+
+
+    def onRedo(self, evt):
+        self.mainFrame.txtContent.Redo()
 
 
     def onChangeText(self ,evt):
@@ -261,6 +269,9 @@ class Main:
 
         self.mainFrame.btnCopy.Bind(wx.EVT_BUTTON, self.onCopy)    
         self.mainFrame.btnPaste.Bind(wx.EVT_BUTTON, self.onPaste)
+        
+        self.mainFrame.btnUndo.Bind(wx.EVT_BUTTON, self.onUndo)    
+        self.mainFrame.btnRedo.Bind(wx.EVT_BUTTON, self.onRedo)
         
 
 

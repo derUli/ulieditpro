@@ -53,8 +53,8 @@ class MainFrame ( wx.Frame ):
 		self.btnUndo = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/undo.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
 		bSizer2.Add( self.btnUndo, 1, wx.ALL|wx.EXPAND, 5 )
 		
-		self.m_bpButton8 = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/redo.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
-		bSizer2.Add( self.m_bpButton8, 1, wx.ALL|wx.EXPAND, 5 )
+		self.btnRedo = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/redo.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
+		bSizer2.Add( self.btnRedo, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_staticline3 = wx.StaticLine( self.m_panel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_VERTICAL )
 		bSizer2.Add( self.m_staticline3, 0, wx.EXPAND |wx.ALL, 5 )
