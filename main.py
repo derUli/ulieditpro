@@ -15,12 +15,14 @@ class Main:
     def __init__(self):
         self.app = wx.App()
         self.fs_enc = sys.getfilesystemencoding()
+        self.pwd = os.getcwd()
+        os.chdir(os.path.dirname(sys.argv[0]))
         self.initializeSettings()
         self.mainFrame = uliedit_gui.MainFrame(None)
         self.initFields()
         self.icon = wx.Icon(U"images/icon.ico", wx.BITMAP_TYPE_ICO)
         self.mainFrame.SetIcon(self.icon)
-
+        
        
         self.file_manager = uliedit_file_manager.UliEditFileManager()
         self.current_file_index = -1
@@ -206,6 +208,7 @@ class Main:
 
 
     def askForSaveOnQuit(self):
+         os.chdir(self.pwd)
          sys.exit(0)
         
 
@@ -259,6 +262,7 @@ class Main:
         self.mainFrame.btnCopy.Bind(wx.EVT_BUTTON, self.onCopy)    
         self.mainFrame.btnPaste.Bind(wx.EVT_BUTTON, self.onPaste)
         
+
 
 if __name__ == '__main__':
     Main()
