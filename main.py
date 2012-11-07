@@ -34,6 +34,13 @@ class Main:
         self.openFileDialog()
 
 
+    def onCopy(self, evt):
+        self.mainFrame.txtContent.Copy()
+
+
+    def onPaste(self, evt):
+        self.mainFrame.txtContent.Paste()
+
 
     def onChangeText(self ,evt):
         if self.current_file_index > -1:
@@ -248,6 +255,9 @@ class Main:
     
         self.mainFrame.txtContent.Bind(wx.EVT_TEXT, self.onChangeText)    
         self.mainFrame.txtContent.Bind(wx.EVT_TEXT_ENTER, self.onChangeText)
+
+        self.mainFrame.btnCopy.Bind(wx.EVT_BUTTON, self.onCopy)    
+        self.mainFrame.btnPaste.Bind(wx.EVT_BUTTON, self.onPaste)
         
 
 if __name__ == '__main__':
