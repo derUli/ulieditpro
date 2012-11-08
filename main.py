@@ -297,6 +297,11 @@ class Main:
             
         chbWrapLines = self.mainFrame.chbWrapLines
 
+        font = wx.Font(11, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL)
+        face = font.GetFaceName()
+        size = font.GetPointSize()
+        self.mainFrame.txtContent.StyleSetSpec(wx.stc.STC_STYLE_DEFAULT,"face:%s,size:%d" % (face, size))
+        
         chbDisplayLineEndings = self.mainFrame.chbDisplayLineEndings
 
         if not os.path.exists(self.wrap_words_enabled_file):
@@ -306,6 +311,7 @@ class Main:
 
         if os.path.exists(self.display_line_endings_enabled_file):
             self.mainFrame.txtContent.SetViewEOL(True)
+            
             self.mainFrame.chbDisplayLineEndings.SetValue(True)
         else:
             self.mainFrame.txtContent.SetViewEOL(False)
