@@ -1,2 +1,2 @@
 * Button + Funktion: Datei an Cursor einfügen
-* Druckfunktion implementieren
+* Druckfunktion implementieren [x]
