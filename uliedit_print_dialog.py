@@ -3,11 +3,13 @@ import uliedit_gui
 import os
 import tempfile
 import sys
+import codecs
 
 class PrintDialog:
         def __init__(self, parent, content, title):
                 self.parent = parent
-                self.content = content.encode("utf8")
+                self.content = content
+		print self.content
                 self.title = os.path.basename(title)
                 """ dialog = wx.MessageDialog(parent, "Printing is not implemented",
                                       "Printing",
@@ -32,8 +34,7 @@ class PrintDialog:
         def onPrint(self, evt):
                 count = self.form.txtNumberOfCopies.GetValue()
                 command = self.form.txtCommand.GetValue()
-                
-                command = command.encode("utf8")
+                command = command
         
                 if command == "":
                         wx.MessageDialog(parent, "Please Enter a printing command",
@@ -41,17 +42,25 @@ class PrintDialog:
                         wx.ICON_ERROR | wx.OK).ShowModal()
                         return
 
-                tmp_file = tempfile.NamedTemporaryFile(suffix='.txt', delete = False)
-                tmp_file.write(self.content)
+
+		tmp_file = tempfile.NamedTemporaryFile(delete = False)
+                filename = tmp_file.name
                 tmp_file.close()
+		
+		handle = codecs.open(filename, "wb", encoding = 'utf8')
+                handle.write(self.content)
+		handle.close()
+		    
+
                 # Per lpr-Befehl $count Kopien drucken
-                real_command = command.replace("%1", tmp_file.name)
+                real_command = command.replace("%1", filename)
+		real_command = real_command.encode("utf8")
                 for i in range(1, count + 1):
                         os.system(real_command)
-                print real_command
+		os.unlink(filename)
                 self.form.Close()
 
-                tmp_file.close()
+         
                         
                         
                 
