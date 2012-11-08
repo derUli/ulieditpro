@@ -76,7 +76,7 @@ class MainFrame ( wx.Frame ):
 		self.m_staticText2.Wrap( -1 )
 		bSizer3.Add( self.m_staticText2, 0, wx.ALL, 5 )
 		
-		self.txtSearch = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.txtSearch = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_PROCESS_ENTER )
 		bSizer3.Add( self.txtSearch, 2, wx.ALL, 5 )
 		
 		
@@ -148,7 +148,7 @@ class MainFrame ( wx.Frame ):
 		self.ribbons.AddPage( self.m_panel5, u"VIEW", False )
 		
 		bSizer1.Add( self.ribbons, 1, wx.EXPAND |wx.ALL, 5 )
-		
+
 		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
 		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		

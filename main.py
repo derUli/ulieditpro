@@ -504,7 +504,6 @@ class Main:
         if ipos == -1:
             ctrl.GotoPos(0)
             ctrl.SearchAnchor()
-            self.continueSearch()
         
         if ipos == oldpos:
             i = ctrl.GetCurrentPos() + len(searchValue)
@@ -541,6 +540,13 @@ class Main:
     def onSearch(self, evt):
         self.continueSearch()
 
+
+    def onTxtSearchKeyDown(self, evt):
+        if evt.GetKeyCode() == wx.WXK_RETURN:
+            self.continueSearch()
+        else:
+            evt.Skip()
+        
       
     def onKeyDown(self, evt):
         if evt.GetKeyCode() == wx.WXK_RETURN:
@@ -581,6 +587,7 @@ class Main:
     
         self.mainFrame.txtContent.Bind(wx.stc.EVT_STC_MODIFIED, self.onChangeText)
         self.mainFrame.txtContent.Bind(wx.EVT_KEY_DOWN, self.onKeyDown)
+        self.mainFrame.txtSearch.Bind(wx.EVT_KEY_DOWN, self.onTxtSearchKeyDown)
 
 
 
