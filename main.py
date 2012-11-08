@@ -86,9 +86,12 @@ class Main:
         self.current_file_index = self.file_manager.newFile()
         title = self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
         self.setTitle(title)
+    
         self.mainFrame.cbOpenFiles.Append(title)
         self.mainFrame.cbOpenFiles.SetStringSelection(title)
         self.mainFrame.txtContent.SetFocus()
+        
+        self.mainFrame.txtContent.ClearAll()
 
     def parseCommandLineArgs(self, args):
         if len(args) > 1:
@@ -265,6 +268,45 @@ class Main:
               
                
 
+
+    def shortcutHandler(self, evt):
+        if evt.CmdDown():
+            # print(evt.GetKeyCode())
+            # ctrl + O
+            if evt.GetKeyCode() == 79:
+                self.openFileDialog()
+            # ctrol + s
+            elif evt.GetKeyCode() == 83:
+                self.save_current_file()
+                return
+            # ctrl + Q
+            elif evt.GetKeyCode() == 81:
+                self.askForSaveOnQuit()
+                return
+            # ctrl + n
+            elif evt.GetKeyCode() == 78:
+                self.openEmptyFile()
+                return
+            # ctrl + f
+            elif evt.GetKeyCode() == 70:
+                self.mainFrame.ribbons.SetSelection(1)
+                self.mainFrame.txtSearch.SetFocus()
+                return
+
+        elif evt.GetKeyCode() == wx.WXK_F3:
+            if self.mainFrame.txtSearch.GetValue() == "":
+                self.mainFrame.ribbons.SetSelection(1)
+                self.mainFrame.txtSearch.SetFocus()
+                return
+            else:
+                self.continueSearch()
+                return
+            
+
+        else:
+            evt.Skip()
+            evt.Skip()
+        
                    
 
 
@@ -551,10 +593,10 @@ class Main:
     def onKeyDown(self, evt):
         if evt.GetKeyCode() == wx.WXK_RETURN:
             self.autoindent()
-            
             #self.mainFrame.txtContent.NewLine()
         else:
-            evt.Skip()
+            self.shortcutHandler(evt)
+            #evt.Skip()
     
 
     def onRibbonTabChange(self, evt):
@@ -609,6 +651,9 @@ class Main:
         self.mainFrame.btnSaveAs.Bind(wx.EVT_BUTTON, self.onBtnSaveAs)
 
         self.mainFrame.btnFindNext.Bind(wx.EVT_BUTTON, self.onSearch)
+
+
+
 
         
 
