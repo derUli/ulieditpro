@@ -480,12 +480,61 @@ class Main:
 
 
     def continueSearch(self):
+        self.mainFrame.txtContent.SetFocus()
+        ctrl = self.mainFrame.txtContent
+        
         searchValue = self.mainFrame.txtSearch.GetValue()
-        print(searchValue)
+        flags = wx.stc.STC_FIND_WORDSTART
         case_sensitive = self.mainFrame.chbSearchCaseSensitiv.GetValue()
         as_word = self.mainFrame.chbSearchAsWord.GetValue()
         self.mainFrame.txtContent.SetFocus()
+
+        if as_word:
+            flags = flags | wx.stc.STC_FIND_WHOLEWORD
+
+        if case_sensitive:
+            flags = flags | wx.stc.STC_FIND_MATCHCASE
+
+
+        oldpos = ctrl.GetCurrentPos()
+        b,e = ctrl.GetSelectionStart(),ctrl.GetSelectionEnd()
+        ctrl.SearchAnchor()
+        self.mainFrame.txtContent.SearchNext(flags, searchValue)
+        ipos = ctrl.SearchNext(flags, searchValue)
+        if ipos == -1:
+            ctrl.GotoPos(0)
+            ctrl.SearchAnchor()
+            self.continueSearch()
         
+        if ipos == oldpos:
+            i = ctrl.GetCurrentPos() + len(searchValue)
+            ctrl.SetSelection(i,i)
+            ctrl.SearchAnchor()
+            ipos = ctrl.SearchNext(flags, searchValue)
+            if ipos == -1:
+                 wx.MessageDialog(self.mainFrame,
+                "You've reached the end of the document",
+                             "Search",
+                             wx.ICON_WARNING | wx.OK).ShowModal()
+
+
+            
+        else:
+            ipos = ctrl.SearchPrev(flags, searchValue)
+            if ipos == oldpos:
+                i = ctrl.GetCurrentPos() - len(searchValue)
+                ctrl.SetSelection(i,i)
+                ctrl.SearchAnchor()
+                ipos = ctrl.SearchPrev(flags, searchValue)
+
+    
+
+                
+
+
+
+ 
+
         
             
 
