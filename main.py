@@ -128,12 +128,14 @@ class Main:
             wx.MessageDialog(None,
                         encoding, "Encoding of " + os.path.basename(filename),
                         wx.OK | wx.ICON_INFORMATION).ShowModal()
+                        
 
             if self.file_manager.isOpen(filename):
                 wx.MessageDialog(None,
                         u"This file is already open.",
                                  os.path.basename(filename),
                         wx.OK | wx.ICON_WARNING).ShowModal()
+                return False
 
             else:
                 
@@ -144,8 +146,6 @@ class Main:
 
                 self.mainFrame.txtContent.SetEOLMode(line_seperator)
                 self.mainFrame.txtContent.ConvertEOLs(line_seperator)
-                
-
                 self.setTitle(os.path.basename(filename))
                 if tmp != None:
                     self.current_file_index = copy.copy(tmp)
@@ -160,7 +160,7 @@ class Main:
                         self.mainFrame.txtContent.ConvertEOLs(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
                         self.mainFrame.txtContent.SetEOLMode(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
                         self.mainFrame.txtContent.EmptyUndoBuffer()
-                                                                  
+                        return True                                          
                        
                        
         
@@ -169,10 +169,11 @@ class Main:
 
                 
         else:
-             wx.MessageDialog(None,
+            wx.MessageDialog(None,
                         u"Kann das Encoding nicht erkennen!",
                                  os.path.basename(filename),
                         wx.OK | wx.ICON_WARNING).ShowModal()
+            return False
             
 
 
