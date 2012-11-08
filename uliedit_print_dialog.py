@@ -39,7 +39,7 @@ class PrintDialog:
                 command = command
         
                 if command == "":
-                        wx.MessageDialog(parent, "Please Enter a printing command",
+                        wx.MessageDialog(self.form, "Please Enter a printing command",
                         "Print Error",
                         wx.ICON_ERROR | wx.OK).ShowModal()
                         return
