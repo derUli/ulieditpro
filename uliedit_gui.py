@@ -68,19 +68,41 @@ class MainFrame ( wx.Frame ):
 		self.m_panel1.SetSizer( bSizer2 )
 		self.m_panel1.Layout()
 		bSizer2.Fit( self.m_panel1 )
-		self.ribbons.AddPage( self.m_panel1, u"START", True )
+		self.ribbons.AddPage( self.m_panel1, u"START", False )
 		self.m_panel2 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer3 = wx.BoxSizer( wx.HORIZONTAL )
 		
+		bSizer11 = wx.BoxSizer( wx.VERTICAL )
+		
+		bSizer12 = wx.BoxSizer( wx.HORIZONTAL )
+		
 		self.m_staticText2 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"Search For:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText2.Wrap( -1 )
-		bSizer3.Add( self.m_staticText2, 0, wx.ALL, 5 )
+		bSizer12.Add( self.m_staticText2, 0, wx.ALL, 5 )
 		
 		self.txtSearch = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_PROCESS_ENTER )
-		bSizer3.Add( self.txtSearch, 2, wx.ALL, 5 )
+		bSizer12.Add( self.txtSearch, 10, wx.ALL, 5 )
 		
 		
-		bSizer3.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+		bSizer12.AddSpacer( ( 0, 0), 1, 0, 5 )
+		
+		bSizer11.Add( bSizer12, 1, wx.EXPAND, 0 )
+		
+		bSizer121 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_staticText21 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"Replace:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText21.Wrap( -1 )
+		bSizer121.Add( self.m_staticText21, 0, wx.ALL, 5 )
+		
+		self.txtReplace = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_PROCESS_ENTER )
+		bSizer121.Add( self.txtReplace, 10, wx.ALL, 5 )
+		
+		
+		bSizer121.AddSpacer( ( 0, 0), 1, 0, 5 )
+		
+		bSizer11.Add( bSizer121, 1, wx.EXPAND, 5 )
+		
+		bSizer3.Add( bSizer11, 3, wx.EXPAND, 5 )
 		
 		bSizer91 = wx.BoxSizer( wx.VERTICAL )
 		
@@ -94,17 +116,22 @@ class MainFrame ( wx.Frame ):
 		
 		bSizer10 = wx.BoxSizer( wx.VERTICAL )
 		
-		bSizer3.Add( bSizer10, 1, wx.EXPAND, 5 )
-		
 		self.btnFindNext = wx.Button( self.m_panel2, wx.ID_ANY, u"Find Next", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.btnFindNext.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
 		
-		bSizer3.Add( self.btnFindNext, 0, wx.ALL, 5 )
+		bSizer10.Add( self.btnFindNext, 0, wx.ALL, 5 )
+		
+		self.btnReplace = wx.Button( self.m_panel2, wx.ID_ANY, u"Replace", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnReplace.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
+		bSizer10.Add( self.btnReplace, 0, wx.ALL, 5 )
+		
+		bSizer3.Add( bSizer10, 1, wx.EXPAND, 5 )
 		
 		self.m_panel2.SetSizer( bSizer3 )
 		self.m_panel2.Layout()
 		bSizer3.Fit( self.m_panel2 )
-		self.ribbons.AddPage( self.m_panel2, u"SEARCH", False )
+		self.ribbons.AddPage( self.m_panel2, u"SEARCH && REPLACE", True )
 		self.m_panel3 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer4 = wx.BoxSizer( wx.VERTICAL )
 		
@@ -148,8 +175,8 @@ class MainFrame ( wx.Frame ):
 		self.ribbons.AddPage( self.m_panel5, u"VIEW", False )
 		
 		bSizer1.Add( self.ribbons, 1, wx.EXPAND |wx.ALL, 5 )
-
-		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
+		
+                self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
 		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )

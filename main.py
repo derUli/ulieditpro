@@ -11,6 +11,7 @@ import uliedit_file_manager
 import copy
 import lexers
 import uliedit_print_dialog
+import re
 
 class Main:
 
@@ -297,6 +298,8 @@ class Main:
             elif evt.GetKeyCode() == 80:
                 self.openPrintDialog()
                 return
+            else:
+                evt.Skip()
 
         elif evt.GetKeyCode() == wx.WXK_F3:
             if self.mainFrame.txtSearch.GetValue() == "":
@@ -528,7 +531,54 @@ class Main:
       #self.mainFrame.txtContent.GotoPos(self.mainFrame.txtContent.GetCurrentPos() + n)    
 
     
-    
+
+
+
+
+
+
+
+
+
+    def SearchAndReplace(self, count):
+        self.mainFrame.txtContent.SetFocus()
+        ctrl = self.mainFrame.txtContent
+        if count == 1:
+            ctrl.GotoPos(0)
+            ctrl.SearchAnchor()
+            
+        searchValue = self.mainFrame.txtSearch.GetValue()
+        if searchValue == "":
+            return
+
+
+        replaceValue = self.mainFrame.txtReplace.GetValue()
+
+        if searchValue == replaceValue:
+            return
+
+
+
+        
+        flags = wx.stc.STC_FIND_WORDSTART
+        case_sensitive = self.mainFrame.chbSearchCaseSensitiv.GetValue()
+        as_word = self.mainFrame.chbSearchAsWord.GetValue()
+        self.mainFrame.txtContent.SetFocus()
+
+        new_text = ctrl.GetText()
+
+        if case_sensitive:
+            new_text = new_text.replace(searchValue, replaceValue)
+        else:
+            pattern = re.compile(re.escape(searchValue), re.IGNORECASE)
+            new_text = pattern.sub(re.escape(replaceValue), new_text)
+        ctrl.SetText(new_text)
+
+
+               
+         
+
+   
            
 
 
@@ -593,6 +643,9 @@ class Main:
     def onSearch(self, evt):
         self.continueSearch()
 
+
+    def onReplace(self, evt):
+        self.SearchAndReplace(1)
 
     def onTxtSearchKeyDown(self, evt):
         if evt.GetKeyCode() == wx.WXK_RETURN:
@@ -663,6 +716,7 @@ class Main:
         self.mainFrame.btnPrint.Bind(wx.EVT_BUTTON, self.onBtnPrint)
 
         self.mainFrame.btnFindNext.Bind(wx.EVT_BUTTON, self.onSearch)
+        self.mainFrame.btnReplace.Bind(wx.EVT_BUTTON, self.onReplace)
 
 
 
