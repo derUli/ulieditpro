@@ -79,6 +79,7 @@ class Main:
         self.setTitle(title)
         self.mainFrame.cbOpenFiles.Append(title)
         self.mainFrame.cbOpenFiles.SetStringSelection(title)
+        self.mainFrame.txtContent.SetFocus()
 
     def parseCommandLineArgs(self, args):
         if len(args) > 1:
@@ -160,6 +161,7 @@ class Main:
                         self.mainFrame.txtContent.ConvertEOLs(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
                         self.mainFrame.txtContent.SetEOLMode(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
                         self.mainFrame.txtContent.EmptyUndoBuffer()
+                        self.mainFrame.txtContent.SetFocusFromKbd()
                         return True                                          
                        
                        
@@ -275,6 +277,7 @@ class Main:
         else:
             self.mainFrame.txtContent.SetViewEOL(False)
             self.mainFrame.chbDisplayLineEndings.SetValue(False)
+            
         
           
         
@@ -376,6 +379,7 @@ class Main:
                 self.mainFrame.txtContent.EmptyUndoBuffer()
                 self.mainFrame.txtContent.SetEOLMode(line_sep)
                 self.mainFrame.txtContent.ConvertEOLs(line_sep)
+                self.mainFrame.txtContent.SetFocusFromKbd()
             
         
 
