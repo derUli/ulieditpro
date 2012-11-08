@@ -366,14 +366,16 @@ class Main:
             content = self.file_manager.getContentByIndex(index)
             
             line_sep = self.file_manager.getFileAtIndex(index)["line_seperator"]
-            self.mainFrame.txtContent.SetEOLMode(line_sep)
             self.current_file_index = index
             self.setTitle(os.path.basename(filename))
             try:
                 self.mainFrame.txtContent.SetValue(content)
+                
             except AttributeError:
                 self.mainFrame.txtContent.SetText(content)
                 self.mainFrame.txtContent.EmptyUndoBuffer()
+                self.mainFrame.txtContent.SetEOLMode(line_sep)
+                self.mainFrame.txtContent.ConvertEOLs(line_sep)
             
         
 
