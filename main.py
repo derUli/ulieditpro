@@ -384,6 +384,7 @@ class Main:
         indent=""
         n=0
         l = self.mainFrame.txtContent.GetLine(self.mainFrame.txtContent.GetCurrentLine())
+
         indent=""
         for char in l:
             
