@@ -131,7 +131,7 @@ class MainFrame ( wx.Frame ):
 		self.m_panel2.SetSizer( bSizer3 )
 		self.m_panel2.Layout()
 		bSizer3.Fit( self.m_panel2 )
-		self.ribbons.AddPage( self.m_panel2, u"SEARCH && REPLACE", True )
+		self.ribbons.AddPage( self.m_panel2, u"SEARCH && REPLACE", False )
 		self.m_panel3 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer4 = wx.BoxSizer( wx.VERTICAL )
 		
@@ -175,7 +175,7 @@ class MainFrame ( wx.Frame ):
 		self.ribbons.AddPage( self.m_panel5, u"VIEW", False )
 		
 		bSizer1.Add( self.ribbons, 1, wx.EXPAND |wx.ALL, 5 )
-
+		
 		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
 		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
@@ -185,6 +185,81 @@ class MainFrame ( wx.Frame ):
 		bSizer5.Add( self.pn_main, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		self.SetSizer( bSizer5 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+	
+	def __del__( self ):
+		pass
+	
+
+###########################################################################
+## Class PrintDialog
+###########################################################################
+
+class PrintDialog ( wx.Dialog ):
+	
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 556,308 ), style = wx.DEFAULT_DIALOG_STYLE )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer14 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_panel6 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer15 = wx.BoxSizer( wx.VERTICAL )
+		
+		bSizer16 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_staticText4 = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Number of copies:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText4.Wrap( -1 )
+		bSizer16.Add( self.m_staticText4, 0, wx.ALL, 5 )
+		
+		self.txtNumberOfCopies = wx.SpinCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 1, 200, 1 )
+		bSizer16.Add( self.txtNumberOfCopies, 0, wx.ALL, 5 )
+		
+		bSizer15.Add( bSizer16, 0, wx.EXPAND, 5 )
+		
+		bSizer17 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_staticText5 = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Command:            ", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText5.Wrap( -1 )
+		bSizer17.Add( self.m_staticText5, 0, wx.ALL, 5 )
+		
+		self.m_textCtrl4 = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer17.Add( self.m_textCtrl4, 1, wx.ALL, 5 )
+		
+		bSizer15.Add( bSizer17, 1, wx.EXPAND, 5 )
+		
+		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		
+		bSizer18.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+		
+		self.btnCancel = wx.Button( self.m_panel6, wx.ID_ANY, u"Cancel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnCancel.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
+		bSizer18.Add( self.btnCancel, 0, wx.ALL, 5 )
+		
+		
+		bSizer18.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+		
+		self.btnPrint = wx.Button( self.m_panel6, wx.ID_ANY, u"Print", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnPrint.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
+		bSizer18.Add( self.btnPrint, 0, wx.ALL, 5 )
+		
+		
+		bSizer18.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+		
+		bSizer15.Add( bSizer18, 1, wx.EXPAND, 5 )
+		
+		self.m_panel6.SetSizer( bSizer15 )
+		self.m_panel6.Layout()
+		bSizer15.Fit( self.m_panel6 )
+		bSizer14.Add( self.m_panel6, 1, wx.EXPAND |wx.ALL, 5 )
+		
+		self.SetSizer( bSizer14 )
 		self.Layout()
 		
 		self.Centre( wx.BOTH )

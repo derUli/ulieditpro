@@ -507,7 +507,8 @@ class Main:
         
     def openPrintDialog(self):
         uliedit_print_dialog.PrintDialog(self.mainFrame,
-        self.file_manager.getContentByIndex(self.current_file_index))
+        self.file_manager.getContentByIndex(self.current_file_index),
+        self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
 
     def onBtnPrint(self, evt):
         self.openPrintDialog()
