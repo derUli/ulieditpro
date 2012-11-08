@@ -34,6 +34,7 @@ class UliEditFileManager:
                 encoding = file["encoding"])
                 handle.write(file["content"])
                 handle.close()
+                self.setModified(index, False)
             except IOError, e:
                 wx.MessageDialog(None,
                         str(e),
