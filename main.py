@@ -66,6 +66,7 @@ class Main:
             except AttributeError:
                 self.file_manager.files[self.current_file_index]["content"] = self.mainFrame.txtContent.GetText()
                 self.change_lexer(self.current_lexer)
+                self.setTitle
             
             self.file_manager.files[self.current_file_index]["modified"] = True
             
@@ -201,28 +202,30 @@ class Main:
         if dialog.ShowModal() == wx.ID_OK:
             self.last_path = dialog.GetPath()
             self.file_manager.getFileAtIndex(self.current_file_index)["filename"] = self.last_path
-            self.save_current_file()
             self.setTitle(dialog.GetPath())
             self.last_path = os.path.dirname(self.last_path)
             self.saveLastPath(self.last_path)
-            
-            
-            return True
+            return self.save_current_file()
         else:
             return False
 
 
             
-
+    def save_file_by_index(self, index):
+        tmp_path = self.file_manager.getFileAtIndex(index)["filename"]
+        if  tmp_path != None and not tmp_path.startswith("untitled "):
+            return self.file_manager.saveFile(index)
+        else:
+            return self.openSaveAsDialog()
 
 
         
     def save_current_file(self):
         tmp_path = self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
         if  tmp_path != None and not tmp_path.startswith("untitled "):
-            self.file_manager.saveFile(self.current_file_index)
+            return self.file_manager.saveFile(self.current_file_index)
         else:
-            self.openSaveAsDialog()
+            return self.openSaveAsDialog()
 
 
 
@@ -380,6 +383,27 @@ class Main:
 
 
     def askForSaveOnQuit(self):
+        files = self.file_manager.files
+        index = 0
+        for file in files:
+            if file["modified"]:
+                dialog = wx.MessageDialog(self.mainFrame,
+                                 "Save this file before quit?",
+                                 os.path.basename(file["filename"]),
+                                 wx.YES_NO | wx.CANCEL | wx.ICON_WARNING)
+                result = dialog.ShowModal()
+                if result == wx.ID_CANCEL:
+                    return
+                elif result == wx.ID_YES:
+                    if self.save_file_by_index(index):
+                        next
+                    else:
+                        return
+                elif result == wx.ID_NO:
+                    next
+            index += 1
+
+                            
         os.chdir(self.pwd)
         wx.TheClipboard.Flush()
         sys.exit(0)

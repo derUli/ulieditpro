@@ -35,17 +35,20 @@ class UliEditFileManager:
                 handle.write(file["content"])
                 handle.close()
                 self.setModified(index, False)
+                return True
             except IOError, e:
                 wx.MessageDialog(None,
                         str(e),
                                  os.path.basename(file["filename"]),
                              wx.OK | wx.ICON_ERROR).ShowModal()
+                return False
                             
             except OSError, e:
                 wx.MessageDialog(None,
                         str(e),
                                  os.path.basename(filename),
                              wx.OK | wx.ICON_ERROR).ShowModal()
+                return False
         # Ansonsten Save-As Dialog öffnen
         else:
             pass
