@@ -275,8 +275,8 @@ class Main:
         else:
             self.mainFrame.txtContent.SetViewEOL(False)
             self.mainFrame.chbDisplayLineEndings.SetValue(False)
+        
           
-       
         
 
 
@@ -377,11 +377,39 @@ class Main:
             
         
 
+     
+    def autoindent(self):
+        indent=""
+        n=0
+        l = self.mainFrame.txtContent.GetLine(self.mainFrame.txtContent.GetCurrentLine())
+        col = self.mainFrame.txtContent.GetColumn(self.mainFrame.txtContent.GetCurrentPos())
+        print
+        indent=""
+        for char in l:
             
+            if char != " " and char != "\t":
+                break
+            indent += char
+    
+        self.mainFrame.txtContent.NewLine()
+        #self.mainFrame.txtContent.InsertText(self.mainFrame.txtContent.GetCurrentPos(), indent)
+        self.mainFrame.txtContent.AddText(indent)
+      #self.mainFrame.txtContent.GotoPos(self.mainFrame.txtContent.GetCurrentPos() + n)    
+
+    
+    
+           
             
             
 
-        
+      
+    def onKeyDown(self, evt):
+        if evt.GetKeyCode() == wx.WXK_RETURN:
+            self.autoindent()
+            
+            #self.mainFrame.txtContent.NewLine()
+        else:
+            evt.Skip()
     
 
     def onRibbonTabChange(self, evt):
@@ -413,6 +441,7 @@ class Main:
 
     
         self.mainFrame.txtContent.Bind(wx.stc.EVT_STC_MODIFIED, self.onChangeText)
+        self.mainFrame.txtContent.Bind(wx.EVT_KEY_DOWN, self.onKeyDown)
 
         self.mainFrame.btnCopy.Bind(wx.EVT_BUTTON, self.onCopy)    
         self.mainFrame.btnPaste.Bind(wx.EVT_BUTTON, self.onPaste)
