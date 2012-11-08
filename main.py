@@ -635,7 +635,7 @@ class Main:
             "You've reached the end of the document",
             "Search",
             wx.ICON_WARNING | wx.OK).ShowModal()
-            #ctrl.GotoPos(0)
+            ctrl.GotoPos(0)
         
         """
         if ipos == -1:
