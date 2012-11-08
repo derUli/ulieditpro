@@ -337,8 +337,9 @@ class Main:
 
 
     def askForSaveOnQuit(self):
-         os.chdir(self.pwd)
-         sys.exit(0)
+        os.chdir(self.pwd)
+        wx.TheClipboard.Flush()
+        sys.exit(0)
         
 
     def onChangecbOpenFiles(self, evt):
