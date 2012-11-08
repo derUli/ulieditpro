@@ -20,7 +20,7 @@ class PrintDialog:
 
 
         def initFields(self):
-                self.form.txtCommand.SetValue("lpr -J \"" + self.title)
+                self.form.txtCommand.SetValue("lpr -J \"" + self.title + "\" %1")
                 self.form.txtNumberOfCopies.SetValue(1)
 
 
@@ -42,7 +42,7 @@ class PrintDialog:
                 tmp_file.write(self.content)
                 # Per lpr-Befehl $count Kopien drucken
                 for i in range(1, count + 1):
-                        real_command = command + " " + tmp_file.name
+                        real_command = command.replace("%1", tmp_file.name)
                         os.system(real_command)
                 self.form.Close()
 
