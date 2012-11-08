@@ -43,7 +43,7 @@ class Main:
 
 
     def onPaste(self, evt):
-        self.mainFrame.txtContent.Paste
+        self.mainFrame.txtContent.Paste()
         self.file_manager.setModified(self.current_file_index);
         
     def onUndo(self, evt):
