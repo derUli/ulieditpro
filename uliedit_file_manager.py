@@ -3,6 +3,8 @@
 import os
 import wx
 import wx.stc
+import codecs
+
 class UliEditFileManager:
 
     def __init__(self):
@@ -27,7 +29,22 @@ class UliEditFileManager:
         
         # Wenn die Datei schon einen Dateinamen hat
         if file["filename"] != None and not file["filename"].startswith("untitled"):
-            pass
+            try:
+                handle = codecs.open(file["filename"] , "wb", 
+                encoding = file["encoding"])
+                handle.write(file["content"])
+                handle.close()
+            except IOError, e:
+                wx.MessageDialog(None,
+                        str(e),
+                                 os.path.basename(filename),
+                             wx.OK | wx.ERROR).ShowModal()
+                            
+            except OSError, e:
+                wx.MessageDialog(None,
+                        str(e),
+                                 os.path.basename(filename),
+                             wx.OK | wx.ERROR).ShowModal()
         # Ansonsten Save-As Dialog öffnen
         else:
             pass
@@ -109,9 +126,9 @@ class UliEditFileManager:
 
             self.files.append(new_file)
             
-        except IOError:
+        except IOError, e:
             wx.MessageDialog(None,
-                        u"Input/Output Error",
+                        str(e),
                                  os.path.basename(filename),
                              wx.OK | wx.ERROR).ShowModal()
             return None
