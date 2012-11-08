@@ -138,9 +138,9 @@ class Main:
         filename = os.path.abspath(filename)
         encoding = uliedit_charset_helper.detect_encoding(filename)
         if encoding:
-            wx.MessageDialog(None,
+            """ wx.MessageDialog(None,
                         encoding, "Encoding of " + os.path.basename(filename),
-                        wx.OK | wx.ICON_INFORMATION).ShowModal()
+                        wx.OK | wx.ICON_INFORMATION).ShowModal() """
                         
 
             if self.file_manager.isOpen(filename):
