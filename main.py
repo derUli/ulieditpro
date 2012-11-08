@@ -471,8 +471,17 @@ class Main:
     
     
            
+
+
+    def continueSearch(self):
+        searchValue = self.mainFrame.txtSearch.GetValue()
+        print(searchValue)
+        pass
+        
             
-            
+
+    def onSearch(self, evt):
+        self.continueSearch()
 
       
     def onKeyDown(self, evt):
@@ -533,7 +542,8 @@ class Main:
 
         self.mainFrame.btnSave.Bind(wx.EVT_BUTTON, self.onBtnSave)
         self.mainFrame.btnSaveAs.Bind(wx.EVT_BUTTON, self.onBtnSaveAs)
-        
+
+        self.mainFrame.btnFindNext.Bind(wx.EVT_BUTTON, self.onSearch)
 
         
 

@@ -76,8 +76,8 @@ class MainFrame ( wx.Frame ):
 		self.m_staticText2.Wrap( -1 )
 		bSizer3.Add( self.m_staticText2, 0, wx.ALL, 5 )
 		
-		self.m_textCtrl2 = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer3.Add( self.m_textCtrl2, 2, wx.ALL, 5 )
+		self.txtSearch = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer3.Add( self.txtSearch, 2, wx.ALL, 5 )
 		
 		
 		bSizer3.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )

@@ -1102,7 +1102,7 @@
                                                         <property name="maximum_size"></property>
                                                         <property name="maxlength">0</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">m_textCtrl2</property>
+                                                        <property name="name">txtSearch</property>
                                                         <property name="permission">protected</property>
                                                         <property name="pos"></property>
                                                         <property name="size"></property>
