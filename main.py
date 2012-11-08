@@ -195,7 +195,8 @@ class Main:
 
 
     def onchbWrapLines(self, evt):
-        if self.mainFrame.chbDisplayLineEndings.GetValue():
+        if self.mainFrame.chbWrapLines.GetValue():
+
            self.mainFrame.txtContent.SetWrapMode(wx.stc.STC_WRAP_WORD)
            if os.path.exists(self.wrap_words_enabled_file):
               os.unlink(self.wrap_words_enabled_file)
