@@ -40,6 +40,7 @@ class PrintDialog:
 
                 tmp_file = tempfile.NamedTemporaryFile(suffix='.txt')
                 tmp_file.write(self.content)
+                
                 # Per lpr-Befehl $count Kopien drucken
                 for i in range(1, count + 1):
                         real_command = command.replace("%1", tmp_file.name)

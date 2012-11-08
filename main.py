@@ -580,14 +580,32 @@ class Main:
                
          
 
-   
+
+    def FindNext(self, text, flags, ctrl):
+        """Find the next occurance of the text"""
+        #set the search anchor
+        pos = ctrl.GetCurrentPos()
+        if pos==ctrl.GetLength():
+            ctrl.SetCurrentPos(0)
+        else:
+            ctrl.SetCurrentPos(pos+1)
+  
+        ctrl.SearchAnchor()
+        spos = ctrl.SearchNext(flags,text)
+        ctrl.EnsureCaretVisible()
+        if spos==-1:
+            ctrl.SetCurrentPos(pos)
+            return False
+        else:
+            return True 
            
 
 
     def continueSearch(self):
         self.mainFrame.txtContent.SetFocus()
         ctrl = self.mainFrame.txtContent
-        
+        ctrl.SetVisiblePolicy(wx.stc.STC_VISIBLE_SLOP, 7)
+        ctrl.SetCaretLineVisible(False)
         searchValue = self.mainFrame.txtSearch.GetValue()
         flags = wx.stc.STC_FIND_WORDSTART
         case_sensitive = self.mainFrame.chbSearchCaseSensitiv.GetValue()
@@ -601,14 +619,30 @@ class Main:
             flags = flags | wx.stc.STC_FIND_MATCHCASE
 
 
-        oldpos = ctrl.GetCurrentPos()
+        """ oldpos = ctrl.GetCurrentPos()
         b,e = ctrl.GetSelectionStart(),ctrl.GetSelectionEnd()
         ctrl.SearchAnchor()
         self.mainFrame.txtContent.SearchNext(flags, searchValue)
-        ipos = ctrl.SearchNext(flags, searchValue)
+        """
+        #ctrl.SearchAnchor()
+        #ipos = ctrl.SearchNext(flags, searchValue)
+        #ctrl.EnsureCaretVisible()
+        if self.FindNext(searchValue, flags, ctrl):
+            pass
+        else:
+            
+            wx.MessageDialog(self.mainFrame,
+            "You've reached the end of the document",
+            "Search",
+            wx.ICON_WARNING | wx.OK).ShowModal()
+            #ctrl.GotoPos(0)
+        
+        """
         if ipos == -1:
             ctrl.GotoPos(0)
             ctrl.SearchAnchor()
+        else:
+            ctrl.GotoPos(ipos)
         
         if ipos == oldpos:
             i = ctrl.GetCurrentPos() + len(searchValue)
@@ -629,7 +663,8 @@ class Main:
                 i = ctrl.GetCurrentPos() - len(searchValue)
                 ctrl.SetSelection(i,i)
                 ctrl.SearchAnchor()
-                ipos = ctrl.SearchPrev(flags, searchValue)
+                ipos = ctrl.SearchPrev(flags, searchValue)"""
+                
 
     
 
