@@ -68,7 +68,7 @@ class MainFrame ( wx.Frame ):
 		self.m_panel1.SetSizer( bSizer2 )
 		self.m_panel1.Layout()
 		bSizer2.Fit( self.m_panel1 )
-		self.ribbons.AddPage( self.m_panel1, u"START", False )
+		self.ribbons.AddPage( self.m_panel1, u"START", True )
 		self.m_panel2 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer3 = wx.BoxSizer( wx.HORIZONTAL )
 		
@@ -177,7 +177,7 @@ class MainFrame ( wx.Frame ):
 		bSizer1.Add( self.ribbons, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
-		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
+                bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )
 		self.pn_main.Layout()
@@ -226,8 +226,8 @@ class PrintDialog ( wx.Dialog ):
 		self.m_staticText5.Wrap( -1 )
 		bSizer17.Add( self.m_staticText5, 0, wx.ALL, 5 )
 		
-		self.m_textCtrl4 = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer17.Add( self.m_textCtrl4, 1, wx.ALL, 5 )
+		self.txtCommand = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer17.Add( self.txtCommand, 1, wx.ALL, 5 )
 		
 		bSizer15.Add( bSizer17, 1, wx.EXPAND, 5 )
 		
