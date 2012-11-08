@@ -186,7 +186,8 @@ class Main:
         self.save_current_file()
 
 
-
+    def onBtnSaveAs(self, evt):
+        self.openSaveAsDialog()
 
     def openSaveAsDialog(self):
         if not os.path.exists(self.last_path):
@@ -500,6 +501,8 @@ class Main:
 
 
         self.mainFrame.btnSave.Bind(wx.EVT_BUTTON, self.onBtnSave)
+        self.mainFrame.btnSaveAs.Bind(wx.EVT_BUTTON, self.onBtnSaveAs)
+        
 
         
 
