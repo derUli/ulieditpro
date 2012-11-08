@@ -476,7 +476,9 @@ class Main:
     def continueSearch(self):
         searchValue = self.mainFrame.txtSearch.GetValue()
         print(searchValue)
-        pass
+        case_sensitive = self.mainFrame.chbSearchCaseSensitiv.GetValue()
+        as_word = self.mainFrame.chbSearchAsWord.GetValue()
+        
         
             
 
