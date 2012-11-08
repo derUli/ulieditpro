@@ -16,10 +16,13 @@ import re
 class Main:
 
     def __init__(self):
-        self.app = wx.App()
+        self.app = wx.App(redirect = False)
         self.fs_enc = sys.getfilesystemencoding()
         self.pwd = os.getcwd()
-        os.chdir(os.path.dirname(sys.argv[0]))
+        try:
+            os.chdir(os.path.dirname(sys.argv[0]))
+        except OSError:
+            pass
         self.initializeSettings()
         self.mainFrame = uliedit_gui.MainFrame(None)
         self.initFields()
