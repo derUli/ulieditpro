@@ -8,7 +8,6 @@
 ###########################################################################
 
 import wx
-import wx.stc
 
 ###########################################################################
 ## Class MainFrame
@@ -30,38 +29,41 @@ class MainFrame ( wx.Frame ):
 		self.m_panel1 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer2 = wx.BoxSizer( wx.HORIZONTAL )
 		
+		self.btnNewFile = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/newFile.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
+		bSizer2.Add( self.btnNewFile, 0, wx.ALL|wx.EXPAND, 1 )
+		
 		self.btnOpen = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/open.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
-		bSizer2.Add( self.btnOpen, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer2.Add( self.btnOpen, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.btnSave = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/save.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
-		bSizer2.Add( self.btnSave, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer2.Add( self.btnSave, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.btnSaveAs = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/bigfolder.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
-		bSizer2.Add( self.btnSaveAs, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer2.Add( self.btnSaveAs, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_staticline1 = wx.StaticLine( self.m_panel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_VERTICAL )
 		bSizer2.Add( self.m_staticline1, 0, wx.EXPAND |wx.ALL, 5 )
 		
 		self.btnCopy = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/Copy-icon.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
-		bSizer2.Add( self.btnCopy, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer2.Add( self.btnCopy, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.btnPaste = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/paste.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
-		bSizer2.Add( self.btnPaste, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer2.Add( self.btnPaste, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_staticline2 = wx.StaticLine( self.m_panel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_VERTICAL )
 		bSizer2.Add( self.m_staticline2, 0, wx.EXPAND |wx.ALL, 5 )
 		
 		self.btnUndo = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/undo.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
-		bSizer2.Add( self.btnUndo, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer2.Add( self.btnUndo, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.btnRedo = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/redo.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
-		bSizer2.Add( self.btnRedo, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer2.Add( self.btnRedo, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_staticline3 = wx.StaticLine( self.m_panel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_VERTICAL )
 		bSizer2.Add( self.m_staticline3, 0, wx.EXPAND |wx.ALL, 5 )
 		
 		self.btnPrint = wx.BitmapButton( self.m_panel1, wx.ID_ANY, wx.Bitmap( u"images/print.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
-		bSizer2.Add( self.btnPrint, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer2.Add( self.btnPrint, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_panel1.SetSizer( bSizer2 )
 		self.m_panel1.Layout()

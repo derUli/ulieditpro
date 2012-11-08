@@ -72,6 +72,9 @@ class Main:
             
 
 
+    def onNewFile(self, evt):
+        self.openEmptyFile()
+
 
 
     def openEmptyFile(self):
@@ -511,6 +514,10 @@ class Main:
     
         self.mainFrame.txtContent.Bind(wx.stc.EVT_STC_MODIFIED, self.onChangeText)
         self.mainFrame.txtContent.Bind(wx.EVT_KEY_DOWN, self.onKeyDown)
+
+
+
+        self.mainFrame.btnNewFile.Bind(wx.EVT_BUTTON, self.onNewFile)
 
         self.mainFrame.btnCopy.Bind(wx.EVT_BUTTON, self.onCopy)    
         self.mainFrame.btnPaste.Bind(wx.EVT_BUTTON, self.onPaste)
