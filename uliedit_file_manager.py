@@ -95,10 +95,10 @@ class UliEditFileManager:
             # Windows:
             if "\r\n" in content:
                 new_file["line_seperator"] = wx.stc.STC_EOL_CRLF
-            elif "\r" in content:
-                new_file["line_seperator"] = wx.stc.STC_EOL_CR
             elif "\n" in content:
                 new_file["line_seperator"] = wx.stc.STC_EOL_LF
+            elif "\r" in content:
+                new_file["line_seperator"] = wx.stc.STC_EOL_CR
             else:
                 if os.name == 'posix':
                     new_file["line_seperator"] = wx.stc.STC_EOL_LF
