@@ -35,27 +35,32 @@ class Main:
 
     def onOpenFileDialog(self, evt):
         self.openFileDialog()
+        self.mainFrame.txtContent.SetFocus()
 
 
     def onCopy(self, evt):
         self.mainFrame.txtContent.Copy()
         self.file_manager.setModified(self.current_file_index);
+        self.mainFrame.txtContent.SetFocus()
 
 
     def onPaste(self, evt):
         self.mainFrame.txtContent.Paste()
         self.file_manager.setModified(self.current_file_index);
+        self.mainFrame.txtContent.SetFocus()
         
     def onUndo(self, evt):
         if(self.mainFrame.txtContent.CanUndo()):
            self.mainFrame.txtContent.Undo()
            self.file_manager.setModified(self.current_file_index);
+           self.mainFrame.txtContent.SetFocus()
 
 
     def onRedo(self, evt):
         if(self.mainFrame.txtContent.CanRedo()):
            self.mainFrame.txtContent.Redo()
            self.file_manager.setModified(self.current_file_index);
+           self.mainFrame.txtContent.SetFocus()
 
 
     def onChangeText(self ,evt):
@@ -188,6 +193,7 @@ class Main:
 
     def onBtnSave(self, evt):
         self.save_current_file()
+        self.mainFrame.txtContent.SetFocus()
 
 
     def onBtnSaveAs(self, evt):
@@ -478,6 +484,7 @@ class Main:
         print(searchValue)
         case_sensitive = self.mainFrame.chbSearchCaseSensitiv.GetValue()
         as_word = self.mainFrame.chbSearchAsWord.GetValue()
+        self.mainFrame.txtContent.SetFocus()
         
         
             
