@@ -4,7 +4,8 @@ Zeilennummern [x]
 Anzeigen von Steuerzeichen [x]
 Unterstützung von Windows, Unix und Mac-Zeilenumbrüchen [x]
 Automatische Einrückung [x]
-Suchen & Ersetzen
+Suchen [x]
+Ersetzen [ ]
 Beliebig lange Undo-History [x]
-Andere Datei bei der Cursor-Position einfügen
+Andere Datei bei der Cursor-Position einfügen [ ]
 plattformunabhängig (wxPython basiert) [x]

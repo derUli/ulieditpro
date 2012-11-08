@@ -10,6 +10,7 @@ import uliedit_charset_helper
 import uliedit_file_manager
 import copy
 import lexers
+import uliedit_print_dialog
 
 class Main:
 
@@ -292,6 +293,10 @@ class Main:
                 self.mainFrame.ribbons.SetSelection(1)
                 self.mainFrame.txtSearch.SetFocus()
                 return
+            # ctrl +p
+            elif evt.GetKeyCode() == 80:
+                self.openPrintDialog()
+                return
 
         elif evt.GetKeyCode() == wx.WXK_F3:
             if self.mainFrame.txtSearch.GetValue() == "":
@@ -497,6 +502,12 @@ class Main:
                 self.mainFrame.txtContent.SetFocusFromKbd()
             
         
+    def openPrintDialog(self):
+        uliedit_print_dialog.PrintDialog(self.mainFrame,
+        self.file_manager.getContentByIndex(self.current_file_index))
+
+    def onBtnPrint(self, evt):
+        self.openPrintDialog()
 
      
     def autoindent(self):
@@ -649,6 +660,7 @@ class Main:
 
         self.mainFrame.btnSave.Bind(wx.EVT_BUTTON, self.onBtnSave)
         self.mainFrame.btnSaveAs.Bind(wx.EVT_BUTTON, self.onBtnSaveAs)
+        self.mainFrame.btnPrint.Bind(wx.EVT_BUTTON, self.onBtnPrint)
 
         self.mainFrame.btnFindNext.Bind(wx.EVT_BUTTON, self.onSearch)
 
