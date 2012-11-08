@@ -9,13 +9,16 @@ class PrintDialog:
         def __init__(self, parent, content, title):
                 self.parent = parent
                 self.content = content
-		print self.content
                 self.title = os.path.basename(title)
-                """ dialog = wx.MessageDialog(parent, "Printing is not implemented",
+                if os.name != 'posix':
+                        dialog = wx.MessageDialog(parent,
+                                          "The printing function is only available on posix-compatible operating systems.",
                                       "Printing",
                                       wx.ICON_WARNING | wx.OK)
+                        dialog.ShowModal()
+                        return
 
-                dialog.ShowModal() """
+                dialog.ShowModal() 
                 self.form = uliedit_gui.PrintDialog(parent)
                 self.initFields()
                 self.bindEvents()
@@ -42,22 +45,19 @@ class PrintDialog:
                         wx.ICON_ERROR | wx.OK).ShowModal()
                         return
 
-
-		tmp_file = tempfile.NamedTemporaryFile(delete = False)
+                tmp_file = tempfile.NamedTemporaryFile(delete = False)
                 filename = tmp_file.name
                 tmp_file.close()
-		
-		handle = codecs.open(filename, "wb", encoding = 'utf8')
+                handle = codecs.open(filename, "wb", encoding = 'utf8')
                 handle.write(self.content)
-		handle.close()
-		    
+                handle.close()
 
                 # Per lpr-Befehl $count Kopien drucken
                 real_command = command.replace("%1", filename)
-		real_command = real_command.encode("utf8")
+                real_command = real_command.encode("utf8")
                 for i in range(1, count + 1):
                         os.system(real_command)
-		os.unlink(filename)
+                os.unlink(filename)
                 self.form.Close()
 
          
