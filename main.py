@@ -73,7 +73,6 @@ class Main:
             except AttributeError:
                 self.file_manager.files[self.current_file_index]["content"] = self.mainFrame.txtContent.GetText()
                 self.change_lexer(self.current_lexer)
-                self.setTitle
             
             self.file_manager.files[self.current_file_index]["modified"] = True
             
@@ -94,6 +93,7 @@ class Main:
         self.mainFrame.txtContent.SetFocus()
         
         self.mainFrame.txtContent.ClearAll()
+        self.file_manager.getFileAtIndex(self.current_file_index)["modified"] = False
 
     def parseCommandLineArgs(self, args):
         if len(args) > 1:
@@ -175,7 +175,8 @@ class Main:
                         self.mainFrame.txtContent.ConvertEOLs(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
                         self.mainFrame.txtContent.SetEOLMode(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
                         self.mainFrame.txtContent.EmptyUndoBuffer()
-                        self.mainFrame.txtContent.SetFocusFromKbd()
+                        self.mainFrame.txtContent.SetFocus()
+                        self.file_manager.getFileAtIndex(tmp)["modified"] = False
                         return True                                          
                        
                        
@@ -502,7 +503,7 @@ class Main:
                 self.mainFrame.txtContent.EmptyUndoBuffer()
                 self.mainFrame.txtContent.SetEOLMode(line_sep)
                 self.mainFrame.txtContent.ConvertEOLs(line_sep)
-                self.mainFrame.txtContent.SetFocusFromKbd()
+                self.mainFrame.txtContent.SetFocus()
             
         
     def openPrintDialog(self):
