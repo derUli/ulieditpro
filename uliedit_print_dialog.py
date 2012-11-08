@@ -42,7 +42,7 @@ class PrintDialog:
                 tmp_file.write(self.content)
                 # Per lpr-Befehl $count Kopien drucken
                 for i in range(1, count + 1):
-                        real_command = "cat " + tmp_file.name + "|" +command
+                        real_command = command + " " + tmp_file.name
                         os.system(real_command)
                 self.form.Close()
 
