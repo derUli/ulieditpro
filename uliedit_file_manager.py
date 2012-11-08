@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+
 import os
 import wx
 import wx.stc
@@ -14,7 +16,23 @@ class UliEditFileManager:
 
         return False
     
-    
+  
+    def saveFile(self, index):
+        file = self.getFileAtIndex(index)
+        
+        # Der Editor arbeitet intern mit UTF8.
+        # Encoding des Textes im Editor zum Encoding der Datei konvertieren
+        save_file_content = file["content"].encode(file["encoding"])
+        
+        
+        # Wenn die Datei schon einen Dateinamen hat
+        if file["filename"] != None and not file["filename"].startswith("untitled"):
+            pass
+        # Ansonsten Save-As Dialog öffnen
+        else:
+            pass
+
+  
     
     def setModified(self, index, isModified = True):
         self.files[index]["modified"] = isModified

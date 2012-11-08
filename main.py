@@ -186,19 +186,7 @@ class Main:
         
         
     def save_current_file(self):
-        file = self.file_manager.getFileAtIndex(self.current_file_index)
-        
-        # Der Editor arbeitet intern mit UTF8.
-        # Encoding des Textes im Editor zum Encoding der Datei konvertieren
-        save_file_content = file["content"].encode(file["encoding"])
-        
-        
-        # Wenn die Datei schon einen Dateinamen hat
-        if file["filename"] != None and not file["filename"].startswith("untitled"):
-            pass
-        # Ansonsten Save-As Dialog öffnen
-        else:
-            pass
+        self.file_manager.saveFile(self.current_file_index)
 
 
 
