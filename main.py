@@ -179,6 +179,27 @@ class Main:
 
 
 
+    def onBtnSave(self, evt):
+        self.save_current_file()
+
+        
+        
+    def save_current_file(self):
+        file = self.file_manager.getFileAtIndex(self.current_file_index)
+        
+        # Der Editor arbeitet intern mit UTF8.
+        # Encoding des Textes im Editor zum Encoding der Datei konvertieren
+        save_file_content = file["content"].encode(file["encoding"])
+        
+        
+        # Wenn die Datei schon einen Dateinamen hat
+        if file["filename"] != None and not file["filename"].startswith("untitled"):
+            pass
+        # Ansonsten Save-As Dialog öffnen
+        else:
+            pass
+
+
 
     def setTitle(self, filename):
         self.mainFrame.SetTitle("UliEdit Pro - " + filename)
@@ -265,7 +286,8 @@ class Main:
             self.mainFrame.txtContent.SetViewEOL(False)
             self.mainFrame.chbDisplayLineEndings.SetValue(False)
           
-          
+       
+        
 
 
         self.mainFrame.cbOpenFiles.Clear()
@@ -412,6 +434,8 @@ class Main:
         self.mainFrame.chbDisplayLineEndings.Bind(wx.EVT_CHECKBOX,
                                                   self.onchbDisplayLineEndings)
 
+
+        self.mainFrame.btnSave.Bind(wx.EVT_BUTTON, self.onBtnSave)
 
         
 
