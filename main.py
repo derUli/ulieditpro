@@ -108,7 +108,7 @@ class Main:
         dialog = wx.FileDialog(parent = self.mainFrame,
                                message = "Open File",
                                defaultDir = self.last_path,
-                               style = wx.OPEN | wx.wx.FD_FILE_MUST_EXIST )
+                               style = wx.OPEN | wx.FD_FILE_MUST_EXIST )
 
         if dialog.ShowModal() == wx.ID_OK:
             self.last_path = dialog.GetPath()
@@ -185,10 +185,43 @@ class Main:
     def onBtnSave(self, evt):
         self.save_current_file()
 
+
+
+
+    def openSaveAsDialog(self):
+        if not os.path.exists(self.last_path):
+            self.saveLastPath(self.home_dir)
         
+        dialog = wx.FileDialog(parent = self.mainFrame,
+                               message = "Save As",
+                               defaultDir = self.last_path,
+                               style = wx.SAVE | wx.FD_OVERWRITE_PROMPT)
+
+        if dialog.ShowModal() == wx.ID_OK:
+            self.last_path = dialog.GetPath()
+            self.file_manager.getFileAtIndex(self.current_file_index)["filename"] = self.last_path
+            self.save_current_file()
+            self.setTitle(dialog.GetPath())
+            self.last_path = os.path.dirname(self.last_path)
+            self.saveLastPath(self.last_path)
+            
+            
+            return True
+        else:
+            return False
+
+
+            
+
+
+
         
     def save_current_file(self):
-        self.file_manager.saveFile(self.current_file_index)
+        tmp_path = self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
+        if  tmp_path != None and not tmp_path.startswith("untitled "):
+            self.file_manager.saveFile(self.current_file_index)
+        else:
+            self.openSaveAsDialog()
 
 
 

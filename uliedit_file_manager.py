@@ -37,14 +37,14 @@ class UliEditFileManager:
             except IOError, e:
                 wx.MessageDialog(None,
                         str(e),
-                                 os.path.basename(filename),
-                             wx.OK | wx.ERROR).ShowModal()
+                                 os.path.basename(file["filename"]),
+                             wx.OK | wx.ICON_ERROR).ShowModal()
                             
             except OSError, e:
                 wx.MessageDialog(None,
                         str(e),
                                  os.path.basename(filename),
-                             wx.OK | wx.ERROR).ShowModal()
+                             wx.OK | wx.ICON_ERROR).ShowModal()
         # Ansonsten Save-As Dialog öffnen
         else:
             pass
@@ -130,14 +130,14 @@ class UliEditFileManager:
             wx.MessageDialog(None,
                         str(e),
                                  os.path.basename(filename),
-                             wx.OK | wx.ERROR).ShowModal()
+                             wx.OK | wx.ICON_ERROR).ShowModal()
             return None
 
         except OSError:
             wx.MessageDialog(None,
                         u"This file is already opened by another program.",
                                  os.path.basename(filename),
-                             wx.OK | wx.ERROR).ShowModal()
+                             wx.OK | wx.ICON_ERROR).ShowModal()
             return None
         
         return len(self.files) - 1
