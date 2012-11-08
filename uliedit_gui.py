@@ -72,10 +72,39 @@ class MainFrame ( wx.Frame ):
 		self.m_panel2 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer3 = wx.BoxSizer( wx.HORIZONTAL )
 		
+		self.m_staticText2 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"Suchen Nach:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText2.Wrap( -1 )
+		bSizer3.Add( self.m_staticText2, 0, wx.ALL, 5 )
+		
+		self.m_textCtrl2 = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer3.Add( self.m_textCtrl2, 2, wx.ALL, 5 )
+		
+		
+		bSizer3.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+		
+		bSizer91 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.chbSearchAsWord = wx.CheckBox( self.m_panel2, wx.ID_ANY, u"As whole Word", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer91.Add( self.chbSearchAsWord, 0, wx.ALL, 5 )
+		
+		self.chbSearchCaseSensitiv = wx.CheckBox( self.m_panel2, wx.ID_ANY, u"Case Sensitive", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer91.Add( self.chbSearchCaseSensitiv, 0, wx.ALL, 5 )
+		
+		bSizer3.Add( bSizer91, 1, wx.EXPAND, 5 )
+		
+		bSizer10 = wx.BoxSizer( wx.VERTICAL )
+		
+		bSizer3.Add( bSizer10, 1, wx.EXPAND, 5 )
+		
+		self.btnFindNext = wx.Button( self.m_panel2, wx.ID_ANY, u"Find Next", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnFindNext.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
+		bSizer3.Add( self.btnFindNext, 0, wx.ALL, 5 )
+		
 		self.m_panel2.SetSizer( bSizer3 )
 		self.m_panel2.Layout()
 		bSizer3.Fit( self.m_panel2 )
-		self.ribbons.AddPage( self.m_panel2, u"SEARCH && REPLACE", False )
+		self.ribbons.AddPage( self.m_panel2, u"SEARCH", False )
 		self.m_panel3 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer4 = wx.BoxSizer( wx.VERTICAL )
 		

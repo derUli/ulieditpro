@@ -4,3 +4,7 @@ wx.stc.STC_FIND_WHOLEWORD: a match occurs only if the characters before and afte
 wx.stc.STC_FIND_MATCHCASE: a match occurs only if the case of the search string and the candidate string match.
 wx.stc.STC_FIND_WORDSTART: a match occurs if the character before is not a word character.
 wx.stc.STC_FIND_REGEXP: a simple regular-expression search: see Regular Expression Searches for more info.
+
+Code für StyledTextCtrl
+self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
+		
