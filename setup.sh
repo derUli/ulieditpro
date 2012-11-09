@@ -49,8 +49,7 @@ if yes_no == 'yes' or yes_no == "":
 
 
 
-print("")
-print("UliEdit Pro nach /opt/ulieditpro installieren?")
+
 
 try:
    yes_no = raw_input("yes or no? [yes] ").strip()
@@ -77,7 +76,11 @@ if yes_no == 'yes' or yes_no == "":
       print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
       
       if os.path.exists(ICON_PATH):
-              shutil.copyfile(INSTALL_SRC + "/UliEdit Pro.desktop", ICON_PATH + "/UliEdit Pro 1.0.desktop")
+              print("Create starter Icon")
+              shutil.copyfile(INSTALL_SRC + "ulieditpro.desktop", ICON_PATH + "/uliedit-pro.desktop")
+      else:
+            print("")
+            print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
       sys.exit(0)
    except IOError, e:
       print(str(e))
