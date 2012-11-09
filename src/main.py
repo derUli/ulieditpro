@@ -408,7 +408,7 @@ class Main:
             # Enable line numbers.
             self.mainFrame.txtContent.SetMarginType(1, wx.stc.STC_MARGIN_NUMBER)
             self.mainFrame.txtContent.SetMarginMask(1, 0)
-            self.mainFrame.txtContent.SetMarginWidth(1, 25)
+            self.mainFrame.txtContent.SetMarginWidth(1, 70)
             
             # Set Wrap mode default to on
             if not os.path.exists(self.wrap_words_enabled_file):
