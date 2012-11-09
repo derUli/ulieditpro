@@ -1,2 +1,2 @@
 #!/bin/bash
-python main.py $1
+python /opt/ulieditpro/main.py $1
