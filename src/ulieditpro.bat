@@ -1,1 +1,1 @@
-python-runtime\pythonw.exe main.py %1
+start python-runtime\pythonw.exe main.py %1
