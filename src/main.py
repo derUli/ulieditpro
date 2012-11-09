@@ -225,7 +225,7 @@ class Main:
                                defaultDir = self.last_path,
                                style = wx.SAVE | wx.FD_OVERWRITE_PROMPT)
 
-       if dialog.ShowModal() == wx.ID_OK:
+        if dialog.ShowModal() == wx.ID_OK:
             self.last_path = dialog.GetPath()
             self.file_manager.getFileAtIndex(self.current_file_index)["filename"] = self.last_path
             self.setTitle(dialog.GetPath())
@@ -466,29 +466,68 @@ class Main:
 
     def askForSaveOnQuit(self):
         files = self.file_manager.files
-        index = 0
-        for file in files:
-            if file["modified"]:
-                dialog = wx.MessageDialog(self.mainFrame,
-                                 "Save this file before quit?",
-                                 os.path.basename(file["filename"]),
-                                 wx.YES_NO | wx.CANCEL | wx.ICON_WARNING)
-                result = dialog.ShowModal()
-                if result == wx.ID_CANCEL:
-                    return
-                elif result == wx.ID_YES:
-                    if self.save_file_by_index(index):
-                        next
-                    else:
-                        return
-                elif result == wx.ID_NO:
-                    next
-            index += 1
+        index = self.current_file_index
+        file = self.file_manager.getFileAtIndex(index)
+        if file["modified"]:
+            dialog = wx.MessageDialog(self.mainFrame,
+                    "Save this file before quit?",
+                    os.path.basename(file["filename"]),
+                    wx.YES_NO | wx.CANCEL | wx.ICON_WARNING)
+            result = dialog.ShowModal()
+            if result == wx.ID_CANCEL:
+               return
+            elif result == wx.ID_YES:
+                 if self.save_file_by_index(index):
+                    self.file_manager.closeFileByIndex(index)
 
-                            
-        os.chdir(self.pwd)
-        wx.TheClipboard.Flush()
-        sys.exit(0)
+                    if len(self.file_manager.files) == 0:
+                        os.chdir(self.pwd)
+                        wx.TheClipboard.Flush()
+                        sys.exit(0)
+                 else:
+                     return
+
+
+
+            elif result == wx.ID_NO:
+                self.file_manager.closeFileByIndex(index)
+                self.mainFrame.cbOpenFiles.Clear()
+            
+                for file in self.file_manager.files:
+                    self.mainFrame.cbOpenFiles.Append(file["filename"])
+
+
+                if self.current_file_index > 0:
+                    self.current_file_index -= 1
+
+                if len(self.file_manager.files) > 0:
+                    self.mainFrame.cbOpenFiles.SetStringSelection(self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
+                    self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
+                else:
+                    os.chdir(self.pwd)
+                    wx.TheClipboard.Flush()
+                    sys.exit(0)
+                
+
+        else:
+            self.file_manager.closeFileByIndex(index)
+            self.mainFrame.cbOpenFiles.Clear()
+            
+            for file in self.file_manager.files:
+                self.mainFrame.cbOpenFiles.Append(file["filename"])
+
+
+            if len(files) > 0:
+                self.current_file_index -= 1
+                self.mainFrame.cbOpenFiles.SetStringSelection(self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
+                self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
+            else:
+                os.chdir(self.pwd)
+                wx.TheClipboard.Flush()
+                sys.exit(0)
+                
+            
+
         
 
     def onChangecbOpenFiles(self, evt):
