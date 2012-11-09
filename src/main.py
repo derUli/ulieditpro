@@ -330,7 +330,6 @@ class Main:
 
         else:
             evt.Skip()
-            evt.Skip()
         
                    
 
