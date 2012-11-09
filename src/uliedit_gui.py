@@ -174,9 +174,10 @@ class MainFrame ( wx.Frame ):
 		bSizer7.Fit( self.m_panel5 )
 		self.ribbons.AddPage( self.m_panel5, u"VIEW", False )
 		
-		bSizer1.Add( self.ribbons, 1, wx.EXPAND |wx.ALL, 5 )
+		bSizer1.Add( self.ribbons, 0, wx.EXPAND |wx.ALL, 5 )
 		
 		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
+		
 		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )
