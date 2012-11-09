@@ -41,7 +41,7 @@ if yes_no == 'yes' or yes_no == "":
       sys.exit(666)
 
    if pkg_system == '':
-      pkg_system == '1'
+      pkg_system = '1'
    if pkg_system == '1':
       os.system("apt-get install python-wxgtk2.8")
    elif pkg_system == '2':
