@@ -68,9 +68,13 @@ if yes_no == 'yes' or yes_no == "":
       os.symlink(START_SCRIPT, SYMLINK1)
       os.symlink(START_SCRIPT, SYMLINK2)
       print("Finish")
-      print("You can start UliEdit Pro with one of this commands:")
+      print("You can start UliEdit Pro by calling one of this commands on shell:")
       print(SYMLINK1)
       print(SYMLINK2)
+      
+      print("")
+      print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
+      sys.exit(0)
    except IOError, e:
       print(str(e))
       sys.exit(777)
