@@ -225,10 +225,14 @@ class Main:
                                defaultDir = self.last_path,
                                style = wx.SAVE | wx.FD_OVERWRITE_PROMPT)
 
-        if dialog.ShowModal() == wx.ID_OK:
+       if dialog.ShowModal() == wx.ID_OK:
             self.last_path = dialog.GetPath()
             self.file_manager.getFileAtIndex(self.current_file_index)["filename"] = self.last_path
             self.setTitle(dialog.GetPath())
+            self.mainFrame.cbOpenFiles.Clear()
+            for file in self.file_manager.files:
+                self.mainFrame.cbOpenFiles.Append(file["filename"])
+            self.mainFrame.cbOpenFiles.SetStringSelection(self.last_path)
             self.last_path = os.path.dirname(self.last_path)
             self.saveLastPath(self.last_path)
             return self.save_current_file()
