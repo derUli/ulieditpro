@@ -306,11 +306,16 @@ class Main:
                 self.mainFrame.ribbons.SetSelection(1)
                 self.mainFrame.txtSearch.SetFocus()
                 return
-            # ctrl +p
+            # ctrl + p
             elif evt.GetKeyCode() == 80:
                 self.openPrintDialog()
                 return
+            #ctrl + a
+            elif evt.GetKeyCode() == 65:
+                self.mainFrame.txtContent.SelectAll()
+                return
             else:
+                
                 evt.Skip()
 
         elif evt.GetKeyCode() == wx.WXK_F3:
