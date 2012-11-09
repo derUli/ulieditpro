@@ -208,6 +208,16 @@ class MainFrame ( wx.Frame ):
 		self.m_panel7.Layout()
 		bSizer20.Fit( self.m_panel7 )
 		self.ribbons.AddPage( self.m_panel7, u"TOOLS", False )
+		self.m_panel10 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer26 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.btnInsertImage = wx.BitmapButton( self.m_panel10, wx.ID_ANY, wx.Bitmap( u"images/image.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
+		bSizer26.Add( self.btnInsertImage, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_panel10.SetSizer( bSizer26 )
+		self.m_panel10.Layout()
+		bSizer26.Fit( self.m_panel10 )
+		self.ribbons.AddPage( self.m_panel10, u"HTML", False )
 		self.m_panel8 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer19 = wx.BoxSizer( wx.HORIZONTAL )
 		
@@ -222,7 +232,8 @@ class MainFrame ( wx.Frame ):
 		bSizer1.Add( self.ribbons, 0, wx.EXPAND |wx.ALL, 5 )
 		
 		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
-                bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
+		
+		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )
 		self.pn_main.Layout()

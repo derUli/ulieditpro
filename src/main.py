@@ -152,6 +152,13 @@ class Main:
         self.includeFile()
 
 
+    def onBtnInsertImage(self, evt):
+        dialog = wx.TextEntryDialog(None, "Insert Image:", "Insert Image", "", style=wx.OK|wx.CANCEL)
+        if dialog.ShowModal() == wx.ID_OK:
+           htmlCode = '<img src="' + dialog.GetValue() + '" border=0>'
+           self.mainFrame.txtContent.AddText(htmlCode)
+           self.mainFrame.txtContent.SetFocus()
+
 
     def includeFile(self):
         self.mainFrame.txtContent.SetFocus()
@@ -314,6 +321,9 @@ class Main:
 
     def setTitle(self, filename):
         self.mainFrame.SetTitle("UliEdit Pro - " + filename)
+
+
+
 
 
     def onchbWrapLines(self, evt):
@@ -934,6 +944,8 @@ class Main:
         self.mainFrame.btnRunShellCommand.Bind(wx.EVT_BUTTON, self.onbtnRunShellCommand)
         
         self.mainFrame.btnInfo.Bind(wx.EVT_BUTTON, self.onBtnInfo)
+
+        self.mainFrame.btnInsertImage.Bind(wx.EVT_BUTTON, self.onBtnInsertImage)
 
         
 
