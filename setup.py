@@ -81,7 +81,7 @@ if yes_no == 'yes' or yes_no == "":
 
       
       if os.path.exists(ICON_PATH):
-              print("Create starter Icon")
+              print("Create starter Icon...")
               shutil.copyfile(INSTALL_SRC + "ulieditpro.desktop", ICON_PATH + "/uliedit-pro.desktop")
       else:
             print("Warning: Can't find " + ICON_PATH)
