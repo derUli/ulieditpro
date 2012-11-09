@@ -33,7 +33,7 @@ if yes_no == 'yes' or yes_no == "":
    print("Please select your package system")
    print("1 DEB")
    print("2 RPM")
-   print("3 Not Supported")
+   print("3 Other")
    try:
        pkg_system = raw_input("Package System [1] ").strip()
    except KeyBoardInterrupt:
@@ -79,8 +79,7 @@ if yes_no == 'yes' or yes_no == "":
               shutil.copyfile(INSTALL_SRC + "ulieditpro.desktop", ICON_PATH + "/uliedit-pro.desktop")
       else:
             print("")
-            print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
-            print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
+            print("Note: If you want a starter for this application on your desktop, you have to create it by yourself")
       sys.exit(0)
    except IOError, e:
       print(str(e))
