@@ -200,7 +200,7 @@ class MainFrame ( wx.Frame ):
 class PrintDialog ( wx.Dialog ):
 	
 	def __init__( self, parent ):
-		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Print", pos = wx.DefaultPosition, size = wx.Size( 556,308 ), style = wx.DEFAULT_DIALOG_STYLE )
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Print", pos = wx.DefaultPosition, size = wx.Size( 556,208 ), style = wx.DEFAULT_DIALOG_STYLE )
 		
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
