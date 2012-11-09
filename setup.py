@@ -36,7 +36,7 @@ if yes_no == 'yes' or yes_no == "":
    print("3 Other")
    try:
        pkg_system = raw_input("Package System [1] ").strip()
-   except KeyBoardInterrupt:
+   except KeyboardInterrupt:
       print("")
       sys.exit(666)
 
@@ -53,6 +53,9 @@ if yes_no == 'yes' or yes_no == "":
 
 
 
+
+
+print("Install UliEdit Pro to " + INSTALL_TARGET + "yes or no [yes]")
 
 try:
    yes_no = raw_input("yes or no? [yes] ").strip()
