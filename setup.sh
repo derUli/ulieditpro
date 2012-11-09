@@ -43,7 +43,7 @@ if yes_no == 'yes' or yes_no == "":
    elif pkg_system == '2':
       os.system("yum install wxPython")
    else:
-      print("You ha've to install following python-modules manually:")
+      print("You have to install following python-modules manually:")
       print("wxPython")
 
 
