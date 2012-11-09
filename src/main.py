@@ -284,7 +284,7 @@ class Main:
 
 
     def shortcutHandler(self, evt):
-        if evt.CmdDown():
+        if evt.ControlDown():
             # print(evt.GetKeyCode())
             # ctrl + O
             if evt.GetKeyCode() == 79:
