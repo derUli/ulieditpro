@@ -177,7 +177,7 @@ class MainFrame ( wx.Frame ):
 		bSizer1.Add( self.ribbons, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
-                bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
+		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )
 		self.pn_main.Layout()
@@ -200,7 +200,7 @@ class MainFrame ( wx.Frame ):
 class PrintDialog ( wx.Dialog ):
 	
 	def __init__( self, parent ):
-		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 556,308 ), style = wx.DEFAULT_DIALOG_STYLE )
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Print", pos = wx.DefaultPosition, size = wx.Size( 556,308 ), style = wx.DEFAULT_DIALOG_STYLE )
 		
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
