@@ -37,4 +37,27 @@ if yes_no == 'yes' or yes_no == "":
    else:
       print("You ha've to install following python-modules manually:")
       print("wxPython")
-      print("")
+
+
+
+print("")
+print("UliEdit Pro nach /opt/ulieditpro installieren?")
+
+try:
+   yes_no = raw_input("yes or no? [yes] ").strip()
+except KeyboardInterrupt:
+   print("")
+   sys.exit(666)
+
+
+if yes_no == 'yes' or yes_no == "":
+   try:
+      print("copy files...")
+      shutil.copytree("src/", "/opt/ulieditpro")
+      print("Finish")
+   except IOError, e:
+      print(str(e))
+      sys.exit(777)
+   except OSError, e:
+      print(str(e))
+      sys.exit(777) 
