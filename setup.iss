@@ -5,7 +5,7 @@
 #define MyAppVersion "1.0"
 #define MyAppPublisher "Ulrich Schmidt"
 #define MyAppURL "http://www.deruli.de"
-#define MyAppExeName "ulieditpro.bat"
+#define MyAppExeName "uliedit.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -26,24 +26,32 @@ OutputBaseFilename=uliedit-pro-{#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
 
-[Languages]
-Name: "German"; MessagesFile: "compiler:Languages\German.isl"      
+[Languages]  
 Name: "English"; MessagesFile: "compiler:Default.isl"
+Name: "German"; MessagesFile: "compiler:Languages\German.isl"    
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}";
+Name: txtAssociation; Description: "Associate *.txt-Files with UliEdit Pro"; GroupDescription: Dateiendungen:
+
 
 [Files]
-Source: "src\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "windows\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "windows\dist\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\images\icon.ico"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; IconFilename: "{app}\images\icon.ico"
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon;
 
+
+
+[Registry]
+Root: HKCR; Subkey: ".txt"; ValueType: string; ValueName: ""; ValueData: "TextFile"; Flags: uninsdeletevalue; Tasks: txtAssociation
+Root: HKCR; Subkey: "TextFile"; ValueType: string; ValueName: ""; ValueData: "UliZip Archiv"; Flags: uninsdeletekey; Tasks: txtAssociation
+Root: HKCR; Subkey: "TextFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\icon.ico"; Tasks: txtAssociation
+Root: HKCR; Subkey: "TextFile\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\uliedit.exe"" ""%1"""; Tasks: txtAssociation
 
 
 [Run]
