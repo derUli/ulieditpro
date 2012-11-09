@@ -253,7 +253,7 @@
                                                 <property name="permission">none</property>
                                                 <object class="sizeritem" expanded="1">
                                                     <property name="border">1</property>
-                                                    <property name="flag">wxEXPAND</property>
+                                                    <property name="flag">wxALL</property>
                                                     <property name="proportion">0</property>
                                                     <object class="wxBitmapButton" expanded="1">
                                                         <property name="bg"></property>
@@ -314,8 +314,8 @@
                                                     </object>
                                                 </object>
                                                 <object class="sizeritem" expanded="0">
-                                                    <property name="border">5</property>
-                                                    <property name="flag">wxEXPAND</property>
+                                                    <property name="border">1</property>
+                                                    <property name="flag">wxALL</property>
                                                     <property name="proportion">0</property>
                                                     <object class="wxBitmapButton" expanded="0">
                                                         <property name="bg"></property>
@@ -376,8 +376,8 @@
                                                     </object>
                                                 </object>
                                                 <object class="sizeritem" expanded="0">
-                                                    <property name="border">5</property>
-                                                    <property name="flag">wxEXPAND</property>
+                                                    <property name="border">1</property>
+                                                    <property name="flag">wxALL</property>
                                                     <property name="proportion">0</property>
                                                     <object class="wxBitmapButton" expanded="0">
                                                         <property name="bg"></property>
@@ -397,7 +397,7 @@
                                                         <property name="maximum_size"></property>
                                                         <property name="minimum_size"></property>
                                                         <property name="name">btnSave</property>
-                                                        <property name="permission">protected</property>
+                                                        <property name="permission">public</property>
                                                         <property name="pos"></property>
                                                         <property name="selected"></property>
                                                         <property name="size"></property>
@@ -438,8 +438,8 @@
                                                     </object>
                                                 </object>
                                                 <object class="sizeritem" expanded="0">
-                                                    <property name="border">5</property>
-                                                    <property name="flag">wxEXPAND</property>
+                                                    <property name="border">1</property>
+                                                    <property name="flag">wxALL</property>
                                                     <property name="proportion">0</property>
                                                     <object class="wxBitmapButton" expanded="0">
                                                         <property name="bg"></property>
@@ -554,8 +554,8 @@
                                                     </object>
                                                 </object>
                                                 <object class="sizeritem" expanded="0">
-                                                    <property name="border">5</property>
-                                                    <property name="flag">wxEXPAND</property>
+                                                    <property name="border">1</property>
+                                                    <property name="flag">wxALL</property>
                                                     <property name="proportion">0</property>
                                                     <object class="wxBitmapButton" expanded="0">
                                                         <property name="bg"></property>
@@ -616,8 +616,8 @@
                                                     </object>
                                                 </object>
                                                 <object class="sizeritem" expanded="0">
-                                                    <property name="border">5</property>
-                                                    <property name="flag">wxEXPAND</property>
+                                                    <property name="border">1</property>
+                                                    <property name="flag">wxALL</property>
                                                     <property name="proportion">0</property>
                                                     <object class="wxBitmapButton" expanded="0">
                                                         <property name="bg"></property>
@@ -732,8 +732,8 @@
                                                     </object>
                                                 </object>
                                                 <object class="sizeritem" expanded="1">
-                                                    <property name="border">5</property>
-                                                    <property name="flag">wxEXPAND</property>
+                                                    <property name="border">1</property>
+                                                    <property name="flag">wxALL</property>
                                                     <property name="proportion">0</property>
                                                     <object class="wxBitmapButton" expanded="1">
                                                         <property name="bg"></property>
@@ -794,8 +794,8 @@
                                                     </object>
                                                 </object>
                                                 <object class="sizeritem" expanded="1">
-                                                    <property name="border">5</property>
-                                                    <property name="flag">wxEXPAND</property>
+                                                    <property name="border">1</property>
+                                                    <property name="flag">wxALL</property>
                                                     <property name="proportion">0</property>
                                                     <object class="wxBitmapButton" expanded="1">
                                                         <property name="bg"></property>
@@ -910,8 +910,8 @@
                                                     </object>
                                                 </object>
                                                 <object class="sizeritem" expanded="0">
-                                                    <property name="border">5</property>
-                                                    <property name="flag">wxEXPAND</property>
+                                                    <property name="border">1</property>
+                                                    <property name="flag">wxALL</property>
                                                     <property name="proportion">0</property>
                                                     <object class="wxBitmapButton" expanded="0">
                                                         <property name="bg"></property>
