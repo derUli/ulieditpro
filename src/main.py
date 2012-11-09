@@ -287,16 +287,7 @@ class Main:
         if evt.ControlDown() and evt.AltDown():
             evt.Skip()
             return
-        elif evt.GetKeyCode() == wx.WXK_F3:
-            if self.mainFrame.txtSearch.GetValue() == "":
-                self.mainFrame.ribbons.SetSelection(1)
-                self.mainFrame.txtSearch.SetFocus()
-                return
-            else:
-                self.continueSearch()
-                return
-
-        else:
+        elif evt.ControlDown():
             # print(evt.GetKeyCode())
             # ctrl + O
             if evt.GetKeyCode() == 79:
@@ -328,6 +319,12 @@ class Main:
                 return
             else:
                 evt.Skip()
+
+        else:
+            evt.Skip()
+
+
+
             
 
 
