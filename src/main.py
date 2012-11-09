@@ -284,7 +284,7 @@ class Main:
 
 
     def shortcutHandler(self, evt):
-        if evt.ControlDown():
+        if evt.ControlDown() and not evt.AltDown():
             # print(evt.GetKeyCode())
             # ctrl + O
             if evt.GetKeyCode() == 79:
@@ -315,7 +315,6 @@ class Main:
                 self.mainFrame.txtContent.SelectAll()
                 return
             else:
-                
                 evt.Skip()
 
         elif evt.GetKeyCode() == wx.WXK_F3:
