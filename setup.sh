@@ -9,6 +9,14 @@ import shutil
 import sys
 
 
+INSTALL_SRC = "src/"
+INSTALL_TARGET = "/opt/ulieditpro"
+
+SYMLINK1 = "/usr/bin/ulieditpro"
+SYMLINK2 = "/usr/bin/uliedit"
+
+START_SCRIPT = INSTALL_TARGET + "/ulieditpro.sh"
+
 print("UliEdit Pro Setup")
 print("")
 print("Do you wan't do install the dependencies?")
@@ -52,9 +60,17 @@ except KeyboardInterrupt:
 
 if yes_no == 'yes' or yes_no == "":
    try:
+
       print("copy files...")
-      shutil.copytree("src/", "/opt/ulieditpro")
+      shutil.copytree(INSTALL_SRC, INSTALL_TARGET)
       print("Finish")
+      print("Creating Symlinks...")
+      os.symlink(START_SCRIPT, SYMLINK1)
+      os.symlink(START_SCRIPT, SYMLINK2)
+      print("Finish")
+      print("You can start UliEdit Pro with one of this commands:")
+      print(SYMLINK1)
+      print(SYMLINK2)
    except IOError, e:
       print(str(e))
       sys.exit(777)
