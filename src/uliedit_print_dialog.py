@@ -56,6 +56,7 @@ class PrintDialog:
                 real_command = real_command.encode("utf8")
                 for i in range(1, count + 1):
                         os.system(real_command)
+                        
                 os.unlink(filename)
                 self.form.Close()
 
