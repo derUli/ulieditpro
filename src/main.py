@@ -284,9 +284,14 @@ class Main:
 
 
     def shortcutHandler(self, evt):
-        if evt.ControlDown() and evt.AltDown():
+        if evt.GetKeyCode() == wx.WXK_F3:
+            self.continueSearch()
+            return
+        elif evt.ControlDown() and evt.AltDown():
             evt.Skip()
             return
+
+            
         elif evt.ControlDown():
             # print(evt.GetKeyCode())
             # ctrl + O
