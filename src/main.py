@@ -286,6 +286,7 @@ class Main:
     def shortcutHandler(self, evt):
         if evt.ControlDown() and evt.AltDown():
             evt.Skip()
+            return
         elif evt.GetKeyCode() == wx.WXK_F3:
             if self.mainFrame.txtSearch.GetValue() == "":
                 self.mainFrame.ribbons.SetSelection(1)
