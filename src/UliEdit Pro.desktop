@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Categories=Application;Utility;TextEditor;
+Terminal=false
+Icon[de_DE]=/opt/ulieditpro/images/icon.png
+Name[de_DE]=UliEdit Pro
+Exec=ulieditpro
+Name=ulieditpro
+Icon=/opt/ulieditpro/images/icon.png

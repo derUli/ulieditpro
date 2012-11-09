@@ -11,6 +11,7 @@ import sys
 
 INSTALL_SRC = "src/"
 INSTALL_TARGET = "/opt/ulieditpro"
+ICON_PATH = "/usr/local/share/applications"
 
 SYMLINK1 = "/usr/bin/ulieditpro"
 SYMLINK2 = "/usr/bin/uliedit"
@@ -74,6 +75,9 @@ if yes_no == 'yes' or yes_no == "":
       
       print("")
       print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
+      
+      if os.path.exists(ICON_PATH):
+              shutil.copyfile(INSTALL_SRC + "/UliEdit Pro.desktop", ICON_PATH + "/UliEdit Pro 1.0.desktop")
       sys.exit(0)
    except IOError, e:
       print(str(e))
