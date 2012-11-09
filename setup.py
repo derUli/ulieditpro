@@ -87,6 +87,7 @@ if yes_no == 'yes' or yes_no == "":
             print("Warning: Can't find " + ICON_PATH)
             print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
             print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
+      print("Finish")
       sys.exit(0)
    except IOError, e:
       print(str(e))
