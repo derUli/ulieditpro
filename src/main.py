@@ -589,7 +589,7 @@ class Main:
             new_text = new_text.replace(searchValue, replaceValue)
         else:
             pattern = re.compile(re.escape(searchValue), re.IGNORECASE)
-            new_text = pattern.sub(re.escape(replaceValue), new_text)
+            new_text = pattern.sub(replaceValue, new_text)
         ctrl.SetText(new_text)
 
 
