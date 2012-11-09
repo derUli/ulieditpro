@@ -284,7 +284,18 @@ class Main:
 
 
     def shortcutHandler(self, evt):
-        if evt.ControlDown() and not evt.AltDown():
+        if evt.ControlDown() and evt.AltDown():
+            evt.Skip()
+        elif evt.GetKeyCode() == wx.WXK_F3:
+            if self.mainFrame.txtSearch.GetValue() == "":
+                self.mainFrame.ribbons.SetSelection(1)
+                self.mainFrame.txtSearch.SetFocus()
+                return
+            else:
+                self.continueSearch()
+                return
+
+        else:
             # print(evt.GetKeyCode())
             # ctrl + O
             if evt.GetKeyCode() == 79:
@@ -316,19 +327,9 @@ class Main:
                 return
             else:
                 evt.Skip()
-
-        elif evt.GetKeyCode() == wx.WXK_F3:
-            if self.mainFrame.txtSearch.GetValue() == "":
-                self.mainFrame.ribbons.SetSelection(1)
-                self.mainFrame.txtSearch.SetFocus()
-                return
-            else:
-                self.continueSearch()
-                return
             
 
-        else:
-            evt.Skip()
+
         
                    
 
