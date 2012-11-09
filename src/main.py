@@ -625,7 +625,7 @@ class Main:
         ctrl.SetVisiblePolicy(wx.stc.STC_VISIBLE_SLOP, 7)
         ctrl.SetCaretLineVisible(False)
         searchValue = self.mainFrame.txtSearch.GetValue()
-        flags = wx.stc.STC_FIND_WORDSTART
+        flags = 0
         case_sensitive = self.mainFrame.chbSearchCaseSensitiv.GetValue()
         as_word = self.mainFrame.chbSearchAsWord.GetValue()
         self.mainFrame.txtContent.SetFocus()
