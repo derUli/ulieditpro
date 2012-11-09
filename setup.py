@@ -11,7 +11,7 @@ import sys
 
 INSTALL_SRC = "src/"
 INSTALL_TARGET = "/opt/ulieditpro"
-ICON_PATH = "/usr/local/share/applications"
+ICON_PATH = "/usr/share/applications"
 
 SYMLINK1 = "/usr/bin/ulieditpro"
 SYMLINK2 = "/usr/bin/uliedit"
@@ -39,6 +39,9 @@ if yes_no == 'yes' or yes_no == "":
    except KeyBoardInterrupt:
       print("")
       sys.exit(666)
+
+   if pkg_system == '':
+      pkg_system == '1'
    if pkg_system == '1':
       os.system("apt-get install python-wxgtk2.8")
    elif pkg_system == '2':
