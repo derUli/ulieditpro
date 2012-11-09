@@ -107,7 +107,7 @@ class Main:
                     open(filename, "w").close()
                 except OSError:
                     pass
-                except IOerror:
+                except IOError:
                     pass
             self.openFile(filename)
         else:
