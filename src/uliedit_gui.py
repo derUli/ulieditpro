@@ -136,7 +136,7 @@ class MainFrame ( wx.Frame ):
 		bSizer4 = wx.BoxSizer( wx.VERTICAL )
 		
 		cbOpenFilesChoices = [ u"test", u"test 2" ]
-		self.cbOpenFiles = wx.ComboBox( self.m_panel3, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, cbOpenFilesChoices, wx.CB_READONLY|wx.CB_SIMPLE|wx.CB_SORT|wx.TE_PROCESS_ENTER )
+		self.cbOpenFiles = wx.ComboBox( self.m_panel3, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, cbOpenFilesChoices, wx.CB_READONLY|wx.CB_SIMPLE|wx.TE_PROCESS_ENTER )
 		bSizer4.Add( self.cbOpenFiles, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_panel3.SetSizer( bSizer4 )

@@ -494,6 +494,7 @@ class Main:
                     if len(self.file_manager.files) > 0:
                         self.mainFrame.cbOpenFiles.SetStringSelection(self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
                         self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
+                        return
                     else:
                         os.chdir(self.pwd)
                         wx.TheClipboard.Flush()
@@ -517,6 +518,7 @@ class Main:
                 if len(self.file_manager.files) > 0:
                     self.mainFrame.cbOpenFiles.SetStringSelection(self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
                     self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
+                    return
                 else:
                     os.chdir(self.pwd)
                     wx.TheClipboard.Flush()
