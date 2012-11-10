@@ -68,7 +68,7 @@ class MainFrame ( wx.Frame ):
 		self.m_panel1.SetSizer( bSizer2 )
 		self.m_panel1.Layout()
 		bSizer2.Fit( self.m_panel1 )
-		self.ribbons.AddPage( self.m_panel1, u"START", True )
+		self.ribbons.AddPage( self.m_panel1, u"START", False )
 		self.m_panel2 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer3 = wx.BoxSizer( wx.HORIZONTAL )
 		
@@ -173,11 +173,38 @@ class MainFrame ( wx.Frame ):
 		self.m_panel5.Layout()
 		bSizer7.Fit( self.m_panel5 )
 		self.ribbons.AddPage( self.m_panel5, u"VIEW", False )
+		self.m_panel7 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer20 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		bSizer21 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.btnStatistic = wx.Button( self.m_panel7, wx.ID_ANY, u"Statistics", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer21.Add( self.btnStatistic, 1, wx.ALL, 5 )
+		
+		self.btnIncludeFile = wx.Button( self.m_panel7, wx.ID_ANY, u"Include File", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer21.Add( self.btnIncludeFile, 1, wx.ALL, 5 )
+		
+		bSizer20.Add( bSizer21, 1, wx.EXPAND, 5 )
+		
+		self.m_panel7.SetSizer( bSizer20 )
+		self.m_panel7.Layout()
+		bSizer20.Fit( self.m_panel7 )
+		self.ribbons.AddPage( self.m_panel7, u"TOOLS", True )
+		self.m_panel8 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer19 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.btnInfo = wx.BitmapButton( self.m_panel8, wx.ID_ANY, wx.Bitmap( u"images/info.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
+		bSizer19.Add( self.btnInfo, 0, wx.ALL, 5 )
+		
+		self.m_panel8.SetSizer( bSizer19 )
+		self.m_panel8.Layout()
+		bSizer19.Fit( self.m_panel8 )
+		self.ribbons.AddPage( self.m_panel8, u"HELP", False )
 		
 		bSizer1.Add( self.ribbons, 0, wx.EXPAND |wx.ALL, 5 )
 		
-		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
 		
+                self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
 		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )
