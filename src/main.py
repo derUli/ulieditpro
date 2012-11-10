@@ -13,6 +13,8 @@ import lexers
 import uliedit_print_dialog
 import re
 
+ULIEDIT_FILE_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+
 class Main:
 
     def __init__(self):
@@ -29,7 +31,8 @@ class Main:
         self.icon = wx.Icon(U"images/icon.ico", wx.BITMAP_TYPE_ICO)
         self.mainFrame.SetIcon(self.icon)
         
-       
+
+
         self.file_manager = uliedit_file_manager.UliEditFileManager()
         self.current_file_index = -1
         self.change_lexer(self.current_lexer)        
@@ -133,7 +136,7 @@ class Main:
         dialog = wx.FileDialog(parent = self.mainFrame,
                                message = "Open File",
                                defaultDir = self.last_path,
-                               style = wx.OPEN | wx.FD_FILE_MUST_EXIST )
+                               style = wx.OPEN | wx.FD_FILE_MUST_EXIST, wildcard = ULIEDIT_FILE_FILTER)
 
         if dialog.ShowModal() == wx.ID_OK:
             self.last_path = dialog.GetPath()
@@ -160,7 +163,7 @@ class Main:
                 wx.MessageDialog(None,
                         u"This file is already open.",
                                  os.path.basename(filename),
-                        wx.OK | wx.ICON_WARNING).ShowModal()
+                        wx.OK | wx.ICON_WARNING, wildcard = ULIEDIT_FILE_FILTER).ShowModal()
                 return False
 
             else:
@@ -223,7 +226,7 @@ class Main:
         dialog = wx.FileDialog(parent = self.mainFrame,
                                message = "Save As",
                                defaultDir = self.last_path,
-                               style = wx.SAVE | wx.FD_OVERWRITE_PROMPT)
+                               style = wx.SAVE | wx.FD_OVERWRITE_PROMPT, wildcard = ULIEDIT_FILE_FILTER)
 
         if dialog.ShowModal() == wx.ID_OK:
             self.last_path = dialog.GetPath()
