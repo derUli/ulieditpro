@@ -562,9 +562,12 @@ class Main:
 
 
 
-    def changeCurrentFile(self, filename):
+    def changeCurrentFile(self, filename):        
         if self.file_manager.isOpen(filename):
+            old_index = self.current_file_index
+
             index = self.file_manager.getIndexByFilename(filename)
+            modified_before = self.file_manager.files[old_index]["modified"]
             content = self.file_manager.getContentByIndex(index)
             
             line_sep = self.file_manager.getFileAtIndex(index)["line_seperator"]
@@ -579,6 +582,10 @@ class Main:
                 self.mainFrame.txtContent.SetEOLMode(line_sep)
                 self.mainFrame.txtContent.ConvertEOLs(line_sep)
                 self.mainFrame.txtContent.SetFocus()
+
+                if not modified_before:
+                    self.file_manager.files[old_index]["modified"] = False
+                    
             
         
     def openPrintDialog(self):
