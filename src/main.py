@@ -482,8 +482,19 @@ class Main:
             elif result == wx.ID_YES:
                  if self.save_file_by_index(index):
                     self.file_manager.closeFileByIndex(index)
+                    self.mainFrame.cbOpenFiles.Clear()
+            
+                    for file in self.file_manager.files:
+                        self.mainFrame.cbOpenFiles.Append(file["filename"])
 
-                    if len(self.file_manager.files) == 0:
+                    if self.current_file_index > 0:
+                        self.current_file_index -= 1
+
+
+                    if len(self.file_manager.files) > 0:
+                        self.mainFrame.cbOpenFiles.SetStringSelection(self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
+                        self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
+                    else:
                         os.chdir(self.pwd)
                         wx.TheClipboard.Flush()
                         sys.exit(0)
