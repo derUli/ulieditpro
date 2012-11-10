@@ -50,7 +50,6 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 [Registry]
 Root: HKCR; Subkey: ".txt"; ValueType: string; ValueName: ""; ValueData: "TextFile"; Flags: uninsdeletevalue; Tasks: txtAssociation
 Root: HKCR; Subkey: "TextFile"; ValueType: string; ValueName: ""; ValueData: "Text File"; Flags: uninsdeletekey; Tasks: txtAssociation
-Root: HKCR; Subkey: "TextFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\icon.ico"; Tasks: txtAssociation
 Root: HKCR; Subkey: "TextFile\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\uliedit.exe"" ""%1"""; Tasks: txtAssociation
 
 
