@@ -12,6 +12,7 @@ import copy
 import lexers
 import uliedit_print_dialog
 import re
+import uliedit_jump_to_dialog
 
 ULIEDIT_FILE_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
 
@@ -598,6 +599,14 @@ class Main:
     def onBtnPrint(self, evt):
         self.openPrintDialog()
 
+    def onBtnJumpToPosition(self, evt):
+        self.mainFrame.txtContent.SetFocus()
+        self.openJumpToDialog()
+
+
+    def openJumpToDialog(self):
+        uliedit_jump_to_dialog.JumpToDialog(self.mainFrame, self.mainFrame.txtContent)
+
      
     def autoindent(self):
         indent=""
@@ -838,6 +847,8 @@ class Main:
 
         self.mainFrame.btnFindNext.Bind(wx.EVT_BUTTON, self.onSearch)
         self.mainFrame.btnReplace.Bind(wx.EVT_BUTTON, self.onReplace)
+
+        self.mainFrame.btnJumpToPosition.Bind(wx.EVT_BUTTON, self.onBtnJumpToPosition)
 
 
 
