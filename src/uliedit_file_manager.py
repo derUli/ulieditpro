@@ -100,6 +100,32 @@ class UliEditFileManager:
     def getFileAtIndex(self, index):
         return self.files[index]
 
+
+
+    def getContentFromFile(self, filename):
+         try:
+            handle = open(filename, 'rb')
+            content = handle.read()
+            handle.close()
+            
+            return content
+
+         except IOError, e:
+            wx.MessageDialog(None,
+                        str(e),
+                                 os.path.basename(filename),
+                             wx.OK | wx.ICON_ERROR).ShowModal()
+            return None
+
+         except OSError:
+            wx.MessageDialog(None,
+                        u"This file is already opened by another program.",
+                                 os.path.basename(filename),
+                             wx.OK | wx.ICON_ERROR).ShowModal()
+            return None
+
+        
+
     def addFile(self, filename, encoding):
         new_file = {}
         new_file["modified"] = False

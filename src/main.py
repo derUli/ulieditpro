@@ -147,6 +147,41 @@ class Main:
             
 
 
+    def onBtnIncludeFile(self, evt):
+        self.includeFile()
+
+
+
+    def includeFile(self):
+       
+        dialog = wx.FileDialog(parent = self.mainFrame,
+        message = "Include File",
+        defaultDir = self.last_path,
+        style = wx.OPEN | wx.FD_FILE_MUST_EXIST, wildcard = ULIEDIT_FILE_FILTER)
+
+        if dialog.ShowModal() == wx.ID_OK:
+            self.last_path = dialog.GetPath()
+            filename = dialog.GetPath()
+            self.last_path = os.path.dirname(self.last_path)
+            content = self.file_manager.getContentFromFile(filename)
+            encoding = uliedit_charset_helper.detect_encoding(filename)
+            if encoding:
+
+                content = content.decode(encoding)
+                tmp = self.file_manager.getFileAtIndex(self.current_file_index)
+                line_seperator = tmp["line_seperator"]
+                
+                self.mainFrame.txtContent.AddText(content)
+                self.mainFrame.txtContent.ConvertEOLs(line_seperator)
+                self.mainFrame.txtContent.SetFocus()
+                return True
+                
+            else:
+                wx.MessageDialog(None,
+                        u"Kann das Encoding nicht erkennen!",
+                                 os.path.basename(filename),
+                        wx.OK | wx.ICON_WARNING).ShowModal()
+                return False
 
 
 
@@ -849,6 +884,8 @@ class Main:
         self.mainFrame.btnReplace.Bind(wx.EVT_BUTTON, self.onReplace)
 
         self.mainFrame.btnJumpToPosition.Bind(wx.EVT_BUTTON, self.onBtnJumpToPosition)
+
+        self.mainFrame.btnIncludeFile.Bind(wx.EVT_BUTTON, self.onBtnIncludeFile)
 
 
 
