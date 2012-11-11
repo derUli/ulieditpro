@@ -817,6 +817,25 @@ class Main:
             self.continueSearch()
         else:
             evt.Skip()
+
+
+    def onBtnStatistic(self, evt):
+        file_length = self.mainFrame.txtContent.GetTextLength()
+        line_count = self.mainFrame.txtContent.GetLineCount()
+        statistic_string = "Length: " + str(file_length)
+        statistic_string += "\n"
+        statistic_string += "Lines: " + str(line_count)
+
+        filename = self.file_manager.getFileAtIndex(self.current_file_index)
+        filename = filename["filename"]
+        filename = os.path.basename(filename)
+
+        wx.MessageDialog(self.mainFrame, statistic_string, filename,
+                         wx.ICON_INFORMATION | wx.OK).ShowModal()
+
+        self.mainFrame.txtContent.SetFocus()
+
+
         
       
     def onKeyDown(self, evt):
@@ -886,6 +905,7 @@ class Main:
         self.mainFrame.btnJumpToPosition.Bind(wx.EVT_BUTTON, self.onBtnJumpToPosition)
 
         self.mainFrame.btnIncludeFile.Bind(wx.EVT_BUTTON, self.onBtnIncludeFile)
+        self.mainFrame.btnStatistic.Bind(wx.EVT_BUTTON, self.onBtnStatistic)
 
 
 
