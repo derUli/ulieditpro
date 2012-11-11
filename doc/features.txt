@@ -1,11 +1,11 @@
 Features:
-Es können Mehrere Dateien gleichzeitig geöffnet werden [x]
-Zeilennummern [x]
-Anzeigen von Steuerzeichen [x]
-Unterstützung von Windows, Unix und Mac-Zeilenumbrüchen [x]
-Automatische Einrückung [x]
-Suchen [x]
-Ersetzen [x]
-Beliebig lange Undo-History [x]
-Andere Datei bei der Cursor-Position einfügen [ ]
-plattformunabhängig (wxPython basiert) [x]
+Es können Mehrere Dateien gleichzeitig geöffnet werden
+Zeilennummern
+Anzeigen von Steuerzeichen
+Unterstützung von Windows, Unix und Mac-Zeilenumbrüchen
+Automatische Einrückung
+Suchen
+Ersetzen
+Beliebig lange Undo-History
+Andere Datei bei der Cursor-Position einfügen
+plattformunabhängig (wxPython basiert)
