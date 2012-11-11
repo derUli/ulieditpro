@@ -30,7 +30,7 @@ except KeyboardInterrupt:
 
 
 if yes_no == 'yes' or yes_no == "":
-   print("Please select your package system")
+   print("Please select your package system:")
    print("1 DEB")
    print("2 RPM")
    print("3 Other")
