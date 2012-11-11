@@ -288,6 +288,19 @@ class Main:
             return self.openSaveAsDialog()
 
 
+    def onBtnInfo(self, evt):
+        info_string = "UliEdit 1.1\n\n"
+        info_string += "A programmers text editor\n\n"
+        info_string += "Developed by Ulrich Schmidt (admin@deruli.de)\n\n"
+        info_string += "For more software take a look at:\n"
+        info_string += "www.deruli.de\nwww.uligames.de"
+        
+        wx.MessageDialog(self.mainFrame,
+                         info_string, "Info",
+                         wx.ICON_INFORMATION | wx.OK).ShowModal()
+
+        self.mainFrame.txtContent.SetFocus()
+
         
     def save_current_file(self):
         tmp_path = self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
@@ -908,7 +921,7 @@ class Main:
         self.mainFrame.btnStatistic.Bind(wx.EVT_BUTTON, self.onBtnStatistic)
 
 
-
+        self.mainFrame.btnInfo.Bind(wx.EVT_BUTTON, self.onBtnInfo)
 
         
 
