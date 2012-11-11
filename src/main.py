@@ -153,7 +153,7 @@ class Main:
 
 
     def includeFile(self):
-       
+        self.mainFrame.txtContent.SetFocus()
         dialog = wx.FileDialog(parent = self.mainFrame,
         message = "Include File",
         defaultDir = self.last_path,
