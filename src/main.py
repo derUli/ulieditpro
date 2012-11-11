@@ -14,7 +14,7 @@ import uliedit_print_dialog
 import re
 import uliedit_jump_to_dialog
 
-ULIEDIT_FILE_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+ULIEDIT_FILE_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*"
 
 class Main:
 
