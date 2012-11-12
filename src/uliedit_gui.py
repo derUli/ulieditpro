@@ -68,7 +68,7 @@ class MainFrame ( wx.Frame ):
 		self.m_panel1.SetSizer( bSizer2 )
 		self.m_panel1.Layout()
 		bSizer2.Fit( self.m_panel1 )
-		self.ribbons.AddPage( self.m_panel1, u"START", True )
+		self.ribbons.AddPage( self.m_panel1, u"START", False )
 		self.m_panel2 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer3 = wx.BoxSizer( wx.HORIZONTAL )
 		
@@ -179,15 +179,18 @@ class MainFrame ( wx.Frame ):
 		bSizer21 = wx.BoxSizer( wx.HORIZONTAL )
 		
 		self.btnStatistic = wx.Button( self.m_panel7, wx.ID_ANY, u"Statistics", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer21.Add( self.btnStatistic, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer21.Add( self.btnStatistic, 2, wx.ALL|wx.EXPAND, 5 )
 		
 		self.btnIncludeFile = wx.Button( self.m_panel7, wx.ID_ANY, u"Include File", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer21.Add( self.btnIncludeFile, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer21.Add( self.btnIncludeFile, 2, wx.ALL|wx.EXPAND, 5 )
 		
 		self.btnJumpToPosition = wx.Button( self.m_panel7, wx.ID_ANY, u"Jump To Position", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer21.Add( self.btnJumpToPosition, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer21.Add( self.btnJumpToPosition, 2, wx.ALL|wx.EXPAND, 5 )
 		
-		bSizer20.Add( bSizer21, 1, wx.EXPAND, 5 )
+		self.btnRunShellCommand = wx.Button( self.m_panel7, wx.ID_ANY, u"Run Shell Command", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer21.Add( self.btnRunShellCommand, 2, wx.ALL|wx.EXPAND, 5 )
+		
+		bSizer20.Add( bSizer21, 4, wx.EXPAND, 5 )
 		
 		bSizer22 = wx.BoxSizer( wx.VERTICAL )
 		
@@ -196,7 +199,7 @@ class MainFrame ( wx.Frame ):
 		self.m_panel7.SetSizer( bSizer20 )
 		self.m_panel7.Layout()
 		bSizer20.Fit( self.m_panel7 )
-		self.ribbons.AddPage( self.m_panel7, u"TOOLS", False )
+		self.ribbons.AddPage( self.m_panel7, u"TOOLS", True )
 		self.m_panel8 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer19 = wx.BoxSizer( wx.HORIZONTAL )
 		

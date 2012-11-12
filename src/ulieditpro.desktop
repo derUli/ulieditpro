@@ -6,6 +6,6 @@ Type=Application
 Categories=Application;Utility;TextEditor;
 Terminal=false
 Exec=ulieditpro %u
-Name=UliEdit Pro 1.1
+Name=UliEdit Pro 1.2
 Icon=/opt/ulieditpro/images/icon.png
 MimeType=text/comma-separated-values;text/css;text/html;text/javascript;text/plain;text/richtext;text/rtf;text/tab-seperated-values-text/vnd.wap.wml;text/vnd.wap.wmlscript;text/xml;text/text/x-setext;text/x-sgml;text-xspeech;application/x-sh;application/x-csh
