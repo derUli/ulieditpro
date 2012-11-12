@@ -826,6 +826,7 @@ class Main:
         if result.ShowModal():
             self.last_cmd = result.GetValue()
             os.system(self.last_cmd)
+        self.mainFrame.txtContent.SetFocus()
             
 
     def onSearch(self, evt):
