@@ -289,11 +289,11 @@ class Main:
 
 
     def onBtnInfo(self, evt):
-        info_string = "UliEdit 1.1\n\n"
-        info_string += "A programmers text editor\n\n"
-        info_string += "Developed by Ulrich Schmidt (admin@deruli.de)\n\n"
-        info_string += "For more software take a look at:\n"
-        info_string += "www.deruli.de\nwww.uligames.de"
+        info_string = u"UliEdit Pro 1.2\n\n"
+        info_string += u"A programmers text editor\n\n"
+        info_string += u"© 2012 by Ulrich Schmidt (admin@deruli.de)\n\n"
+        info_string += u"For more software take a look at:\n"
+        info_string += u"www.deruli.de\nwww.uligames.de"
         
         wx.MessageDialog(self.mainFrame,
                          info_string, "Info",
