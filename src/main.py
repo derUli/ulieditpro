@@ -290,7 +290,7 @@ class Main:
 
 
     def onBtnInfo(self, evt):
-        info_string = u"UliEdit Pro 1.2\n\n"
+        info_string = u"UliEdit Pro 1.3\n\n"
         info_string += u"A programmers text editor\n\n"
         info_string += u"© 2012 by Ulrich Schmidt (admin@deruli.de)\n\n"
         info_string += u"For more software take a look at:\n"
@@ -823,7 +823,7 @@ class Main:
                                     'Command:',
                                     'Run shell command', 
                                     self.last_cmd, style=wx.OK|wx.CANCEL)
-        if result.ShowModal():
+        if result.ShowModal() == wx.ID_OK:
             self.last_cmd = result.GetValue()
             os.system(self.last_cmd)
         self.mainFrame.txtContent.SetFocus()
