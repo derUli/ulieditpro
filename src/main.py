@@ -21,6 +21,7 @@ class Main:
     def __init__(self):
         self.app = wx.App(redirect = False)
         self.fs_enc = sys.getfilesystemencoding()
+        self.last_cmd = ""
         self.pwd = os.getcwd()
         try:
             os.chdir(os.path.dirname(sys.argv[0]))
@@ -815,7 +816,16 @@ class Main:
 
  
 
+
+    def onbtnRunShellCommand(self, evt):
         
+        result = wx.TextEntryDialog(self.mainFrame, 
+                                    'Command:',
+                                    'Run shell command', 
+                                    self.last_cmd, style=wx.OK|wx.CANCEL)
+        if result.ShowModal():
+            self.last_cmd = result.GetValue()
+            os.system(self.last_cmd)
             
 
     def onSearch(self, evt):
@@ -919,8 +929,8 @@ class Main:
 
         self.mainFrame.btnIncludeFile.Bind(wx.EVT_BUTTON, self.onBtnIncludeFile)
         self.mainFrame.btnStatistic.Bind(wx.EVT_BUTTON, self.onBtnStatistic)
-
-
+        self.mainFrame.btnRunShellCommand.Bind(wx.EVT_BUTTON, self.onbtnRunShellCommand)
+        
         self.mainFrame.btnInfo.Bind(wx.EVT_BUTTON, self.onBtnInfo)
 
         
