@@ -2069,7 +2069,7 @@
                                                                 <property name="default">0</property>
                                                                 <property name="enabled">1</property>
                                                                 <property name="fg"></property>
-                                                                <property name="font"></property>
+                                                                <property name="font">,90,92,-1,70,0</property>
                                                                 <property name="hidden">0</property>
                                                                 <property name="id">wxID_ANY</property>
                                                                 <property name="label">Statistics</property>
@@ -2126,7 +2126,7 @@
                                                                 <property name="default">0</property>
                                                                 <property name="enabled">1</property>
                                                                 <property name="fg"></property>
-                                                                <property name="font"></property>
+                                                                <property name="font">,90,92,-1,70,0</property>
                                                                 <property name="hidden">0</property>
                                                                 <property name="id">wxID_ANY</property>
                                                                 <property name="label">Include File</property>
@@ -2183,7 +2183,7 @@
                                                                 <property name="default">0</property>
                                                                 <property name="enabled">1</property>
                                                                 <property name="fg"></property>
-                                                                <property name="font"></property>
+                                                                <property name="font">,90,92,-1,70,0</property>
                                                                 <property name="hidden">0</property>
                                                                 <property name="id">wxID_ANY</property>
                                                                 <property name="label">Jump To Position</property>
@@ -2240,7 +2240,7 @@
                                                                 <property name="default">0</property>
                                                                 <property name="enabled">1</property>
                                                                 <property name="fg"></property>
-                                                                <property name="font"></property>
+                                                                <property name="font">,90,92,-1,70,0</property>
                                                                 <property name="hidden">0</property>
                                                                 <property name="id">wxID_ANY</property>
                                                                 <property name="label">Run Shell Command</property>

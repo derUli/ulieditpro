@@ -179,15 +179,23 @@ class MainFrame ( wx.Frame ):
 		bSizer21 = wx.BoxSizer( wx.HORIZONTAL )
 		
 		self.btnStatistic = wx.Button( self.m_panel7, wx.ID_ANY, u"Statistics", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnStatistic.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
 		bSizer21.Add( self.btnStatistic, 2, wx.ALL|wx.EXPAND, 5 )
 		
 		self.btnIncludeFile = wx.Button( self.m_panel7, wx.ID_ANY, u"Include File", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnIncludeFile.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
 		bSizer21.Add( self.btnIncludeFile, 2, wx.ALL|wx.EXPAND, 5 )
 		
 		self.btnJumpToPosition = wx.Button( self.m_panel7, wx.ID_ANY, u"Jump To Position", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnJumpToPosition.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
 		bSizer21.Add( self.btnJumpToPosition, 2, wx.ALL|wx.EXPAND, 5 )
 		
 		self.btnRunShellCommand = wx.Button( self.m_panel7, wx.ID_ANY, u"Run Shell Command", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnRunShellCommand.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
 		bSizer21.Add( self.btnRunShellCommand, 2, wx.ALL|wx.EXPAND, 5 )
 		
 		bSizer20.Add( bSizer21, 4, wx.EXPAND, 5 )
@@ -214,7 +222,7 @@ class MainFrame ( wx.Frame ):
 		bSizer1.Add( self.ribbons, 0, wx.EXPAND |wx.ALL, 5 )
 		
 		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
-		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
+                bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )
 		self.pn_main.Layout()
