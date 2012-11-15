@@ -9,6 +9,7 @@ class UliEditFileManager:
 
     def __init__(self):
         self.files = []
+        self.empty_file_inc = 0
 
 
     def isOpen(self, filename):
@@ -59,12 +60,13 @@ class UliEditFileManager:
         self.files[index]["modified"] = isModified
     
     def newFile(self):
-        number = self.getUntitledFilesCount() + 1
+        self.empty_file_inc += 1
+        
         
         new_file = {}
         new_file["modified"] = False
         new_file["encoding"] = "utf8"
-        new_file["filename"] = "untitled " + str(number)
+        new_file["filename"] = "untitled " + str(self.empty_file_inc)
         if os.name == 'posix':
             new_file["line_seperator"] = wx.stc.STC_EOL_LF
         else:
@@ -97,6 +99,32 @@ class UliEditFileManager:
 
     def getFileAtIndex(self, index):
         return self.files[index]
+
+
+
+    def getContentFromFile(self, filename):
+         try:
+            handle = open(filename, 'rb')
+            content = handle.read()
+            handle.close()
+            
+            return content
+
+         except IOError, e:
+            wx.MessageDialog(None,
+                        str(e),
+                                 os.path.basename(filename),
+                             wx.OK | wx.ICON_ERROR).ShowModal()
+            return None
+
+         except OSError:
+            wx.MessageDialog(None,
+                        u"This file is already opened by another program.",
+                                 os.path.basename(filename),
+                             wx.OK | wx.ICON_ERROR).ShowModal()
+            return None
+
+        
 
     def addFile(self, filename, encoding):
         new_file = {}

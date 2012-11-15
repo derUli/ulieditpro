@@ -12,12 +12,16 @@ import copy
 import lexers
 import uliedit_print_dialog
 import re
+import uliedit_jump_to_dialog
+
+ULIEDIT_FILE_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*"
 
 class Main:
 
     def __init__(self):
         self.app = wx.App(redirect = False)
         self.fs_enc = sys.getfilesystemencoding()
+        self.last_cmd = ""
         self.pwd = os.getcwd()
         try:
             os.chdir(os.path.dirname(sys.argv[0]))
@@ -29,7 +33,8 @@ class Main:
         self.icon = wx.Icon(U"images/icon.ico", wx.BITMAP_TYPE_ICO)
         self.mainFrame.SetIcon(self.icon)
         
-       
+
+
         self.file_manager = uliedit_file_manager.UliEditFileManager()
         self.current_file_index = -1
         self.change_lexer(self.current_lexer)        
@@ -133,7 +138,7 @@ class Main:
         dialog = wx.FileDialog(parent = self.mainFrame,
                                message = "Open File",
                                defaultDir = self.last_path,
-                               style = wx.OPEN | wx.FD_FILE_MUST_EXIST )
+                               style = wx.OPEN | wx.FD_FILE_MUST_EXIST, wildcard = ULIEDIT_FILE_FILTER)
 
         if dialog.ShowModal() == wx.ID_OK:
             self.last_path = dialog.GetPath()
@@ -143,6 +148,41 @@ class Main:
             
 
 
+    def onBtnIncludeFile(self, evt):
+        self.includeFile()
+
+
+
+    def includeFile(self):
+        self.mainFrame.txtContent.SetFocus()
+        dialog = wx.FileDialog(parent = self.mainFrame,
+        message = "Include File",
+        defaultDir = self.last_path,
+        style = wx.OPEN | wx.FD_FILE_MUST_EXIST, wildcard = ULIEDIT_FILE_FILTER)
+
+        if dialog.ShowModal() == wx.ID_OK:
+            self.last_path = dialog.GetPath()
+            filename = dialog.GetPath()
+            self.last_path = os.path.dirname(self.last_path)
+            content = self.file_manager.getContentFromFile(filename)
+            encoding = uliedit_charset_helper.detect_encoding(filename)
+            if encoding:
+
+                content = content.decode(encoding)
+                tmp = self.file_manager.getFileAtIndex(self.current_file_index)
+                line_seperator = tmp["line_seperator"]
+                
+                self.mainFrame.txtContent.AddText(content)
+                self.mainFrame.txtContent.ConvertEOLs(line_seperator)
+                self.mainFrame.txtContent.SetFocus()
+                return True
+                
+            else:
+                wx.MessageDialog(None,
+                        u"Kann das Encoding nicht erkennen!",
+                                 os.path.basename(filename),
+                        wx.OK | wx.ICON_WARNING).ShowModal()
+                return False
 
 
 
@@ -160,7 +200,7 @@ class Main:
                 wx.MessageDialog(None,
                         u"This file is already open.",
                                  os.path.basename(filename),
-                        wx.OK | wx.ICON_WARNING).ShowModal()
+                        wx.OK | wx.ICON_WARNING, wildcard = ULIEDIT_FILE_FILTER).ShowModal()
                 return False
 
             else:
@@ -223,12 +263,16 @@ class Main:
         dialog = wx.FileDialog(parent = self.mainFrame,
                                message = "Save As",
                                defaultDir = self.last_path,
-                               style = wx.SAVE | wx.FD_OVERWRITE_PROMPT)
+                               style = wx.SAVE | wx.FD_OVERWRITE_PROMPT, wildcard = ULIEDIT_FILE_FILTER)
 
         if dialog.ShowModal() == wx.ID_OK:
             self.last_path = dialog.GetPath()
             self.file_manager.getFileAtIndex(self.current_file_index)["filename"] = self.last_path
             self.setTitle(dialog.GetPath())
+            self.mainFrame.cbOpenFiles.Clear()
+            for file in self.file_manager.files:
+                self.mainFrame.cbOpenFiles.Append(file["filename"])
+            self.mainFrame.cbOpenFiles.SetStringSelection(self.last_path)
             self.last_path = os.path.dirname(self.last_path)
             self.saveLastPath(self.last_path)
             return self.save_current_file()
@@ -244,6 +288,19 @@ class Main:
         else:
             return self.openSaveAsDialog()
 
+
+    def onBtnInfo(self, evt):
+        info_string = u"UliEdit Pro 1.3\n\n"
+        info_string += u"A programmers text editor\n\n"
+        info_string += u"© 2012 by Ulrich Schmidt (admin@deruli.de)\n\n"
+        info_string += u"For more software take a look at:\n"
+        info_string += u"www.deruli.de\nwww.uligames.de"
+        
+        wx.MessageDialog(self.mainFrame,
+                         info_string, "Info",
+                         wx.ICON_INFORMATION | wx.OK).ShowModal()
+
+        self.mainFrame.txtContent.SetFocus()
 
         
     def save_current_file(self):
@@ -284,7 +341,15 @@ class Main:
 
 
     def shortcutHandler(self, evt):
-        if evt.CmdDown():
+        if evt.GetKeyCode() == wx.WXK_F3:
+            self.continueSearch()
+            return
+        elif evt.ControlDown() and evt.AltDown():
+            evt.Skip()
+            return
+
+            
+        elif evt.ControlDown():
             # print(evt.GetKeyCode())
             # ctrl + O
             if evt.GetKeyCode() == 79:
@@ -315,22 +380,16 @@ class Main:
                 self.mainFrame.txtContent.SelectAll()
                 return
             else:
-                
                 evt.Skip()
-
-        elif evt.GetKeyCode() == wx.WXK_F3:
-            if self.mainFrame.txtSearch.GetValue() == "":
-                self.mainFrame.ribbons.SetSelection(1)
-                self.mainFrame.txtSearch.SetFocus()
-                return
-            else:
-                self.continueSearch()
-                return
-            
 
         else:
             evt.Skip()
-            evt.Skip()
+
+
+
+            
+
+
         
                    
 
@@ -460,29 +519,81 @@ class Main:
 
     def askForSaveOnQuit(self):
         files = self.file_manager.files
-        index = 0
-        for file in files:
-            if file["modified"]:
-                dialog = wx.MessageDialog(self.mainFrame,
-                                 "Save this file before quit?",
-                                 os.path.basename(file["filename"]),
-                                 wx.YES_NO | wx.CANCEL | wx.ICON_WARNING)
-                result = dialog.ShowModal()
-                if result == wx.ID_CANCEL:
-                    return
-                elif result == wx.ID_YES:
-                    if self.save_file_by_index(index):
-                        next
-                    else:
-                        return
-                elif result == wx.ID_NO:
-                    next
-            index += 1
+        index = self.current_file_index
+        file = self.file_manager.getFileAtIndex(index)
+        if file["modified"]:
+            dialog = wx.MessageDialog(self.mainFrame,
+                    "Save this file before quit?",
+                    os.path.basename(file["filename"]),
+                    wx.YES_NO | wx.CANCEL | wx.ICON_WARNING)
+            result = dialog.ShowModal()
+            if result == wx.ID_CANCEL:
+               return
+            elif result == wx.ID_YES:
+                 if self.save_file_by_index(index):
+                    self.file_manager.closeFileByIndex(index)
+                    self.mainFrame.cbOpenFiles.Clear()
+            
+                    for file in self.file_manager.files:
+                        self.mainFrame.cbOpenFiles.Append(file["filename"])
 
-                            
-        os.chdir(self.pwd)
-        wx.TheClipboard.Flush()
-        sys.exit(0)
+                    if self.current_file_index > 0:
+                        self.current_file_index -= 1
+
+
+                    if len(self.file_manager.files) > 0:
+                        self.mainFrame.cbOpenFiles.SetStringSelection(self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
+                        self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
+                        return
+                    else:
+                        os.chdir(self.pwd)
+                        wx.TheClipboard.Flush()
+                        sys.exit(0)
+                 else:
+                     return
+
+
+
+            elif result == wx.ID_NO:
+                self.file_manager.closeFileByIndex(index)
+                self.mainFrame.cbOpenFiles.Clear()
+            
+                for file in self.file_manager.files:
+                    self.mainFrame.cbOpenFiles.Append(file["filename"])
+
+
+                if self.current_file_index > 0:
+                    self.current_file_index -= 1
+
+                if len(self.file_manager.files) > 0:
+                    self.mainFrame.cbOpenFiles.SetStringSelection(self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
+                    self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
+                    return
+                else:
+                    os.chdir(self.pwd)
+                    wx.TheClipboard.Flush()
+                    sys.exit(0)
+                
+
+        else:
+            self.file_manager.closeFileByIndex(index)
+            self.mainFrame.cbOpenFiles.Clear()
+            
+            for file in self.file_manager.files:
+                self.mainFrame.cbOpenFiles.Append(file["filename"])
+
+
+            if len(files) > 0:
+                self.current_file_index -= 1
+                self.mainFrame.cbOpenFiles.SetStringSelection(self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
+                self.changeCurrentFile(self.mainFrame.cbOpenFiles.GetValue())
+            else:
+                os.chdir(self.pwd)
+                wx.TheClipboard.Flush()
+                sys.exit(0)
+                
+            
+
         
 
     def onChangecbOpenFiles(self, evt):
@@ -503,9 +614,12 @@ class Main:
 
 
 
-    def changeCurrentFile(self, filename):
+    def changeCurrentFile(self, filename):        
         if self.file_manager.isOpen(filename):
+            old_index = self.current_file_index
+
             index = self.file_manager.getIndexByFilename(filename)
+            modified_before = self.file_manager.files[old_index]["modified"]
             content = self.file_manager.getContentByIndex(index)
             
             line_sep = self.file_manager.getFileAtIndex(index)["line_seperator"]
@@ -520,6 +634,10 @@ class Main:
                 self.mainFrame.txtContent.SetEOLMode(line_sep)
                 self.mainFrame.txtContent.ConvertEOLs(line_sep)
                 self.mainFrame.txtContent.SetFocus()
+
+                if not modified_before:
+                    self.file_manager.files[old_index]["modified"] = False
+                    
             
         
     def openPrintDialog(self):
@@ -529,6 +647,14 @@ class Main:
 
     def onBtnPrint(self, evt):
         self.openPrintDialog()
+
+    def onBtnJumpToPosition(self, evt):
+        self.mainFrame.txtContent.SetFocus()
+        self.openJumpToDialog()
+
+
+    def openJumpToDialog(self):
+        uliedit_jump_to_dialog.JumpToDialog(self.mainFrame, self.mainFrame.txtContent)
 
      
     def autoindent(self):
@@ -623,7 +749,7 @@ class Main:
         ctrl.SetVisiblePolicy(wx.stc.STC_VISIBLE_SLOP, 7)
         ctrl.SetCaretLineVisible(False)
         searchValue = self.mainFrame.txtSearch.GetValue()
-        flags = wx.stc.STC_FIND_WORDSTART
+        flags = 0
         case_sensitive = self.mainFrame.chbSearchCaseSensitiv.GetValue()
         as_word = self.mainFrame.chbSearchAsWord.GetValue()
         self.mainFrame.txtContent.SetFocus()
@@ -690,7 +816,17 @@ class Main:
 
  
 
+
+    def onbtnRunShellCommand(self, evt):
         
+        result = wx.TextEntryDialog(self.mainFrame, 
+                                    'Command:',
+                                    'Run shell command', 
+                                    self.last_cmd, style=wx.OK|wx.CANCEL)
+        if result.ShowModal() == wx.ID_OK:
+            self.last_cmd = result.GetValue()
+            os.system(self.last_cmd)
+        self.mainFrame.txtContent.SetFocus()
             
 
     def onSearch(self, evt):
@@ -705,6 +841,25 @@ class Main:
             self.continueSearch()
         else:
             evt.Skip()
+
+
+    def onBtnStatistic(self, evt):
+        file_length = self.mainFrame.txtContent.GetTextLength()
+        line_count = self.mainFrame.txtContent.GetLineCount()
+        statistic_string = "Length: " + str(file_length)
+        statistic_string += "\n"
+        statistic_string += "Lines: " + str(line_count)
+
+        filename = self.file_manager.getFileAtIndex(self.current_file_index)
+        filename = filename["filename"]
+        filename = os.path.basename(filename)
+
+        wx.MessageDialog(self.mainFrame, statistic_string, filename,
+                         wx.ICON_INFORMATION | wx.OK).ShowModal()
+
+        self.mainFrame.txtContent.SetFocus()
+
+
         
       
     def onKeyDown(self, evt):
@@ -771,8 +926,13 @@ class Main:
         self.mainFrame.btnFindNext.Bind(wx.EVT_BUTTON, self.onSearch)
         self.mainFrame.btnReplace.Bind(wx.EVT_BUTTON, self.onReplace)
 
+        self.mainFrame.btnJumpToPosition.Bind(wx.EVT_BUTTON, self.onBtnJumpToPosition)
 
-
+        self.mainFrame.btnIncludeFile.Bind(wx.EVT_BUTTON, self.onBtnIncludeFile)
+        self.mainFrame.btnStatistic.Bind(wx.EVT_BUTTON, self.onBtnStatistic)
+        self.mainFrame.btnRunShellCommand.Bind(wx.EVT_BUTTON, self.onbtnRunShellCommand)
+        
+        self.mainFrame.btnInfo.Bind(wx.EVT_BUTTON, self.onBtnInfo)
 
         
 

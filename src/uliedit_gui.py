@@ -136,7 +136,7 @@ class MainFrame ( wx.Frame ):
 		bSizer4 = wx.BoxSizer( wx.VERTICAL )
 		
 		cbOpenFilesChoices = [ u"test", u"test 2" ]
-		self.cbOpenFiles = wx.ComboBox( self.m_panel3, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, cbOpenFilesChoices, wx.CB_READONLY|wx.CB_SIMPLE|wx.CB_SORT|wx.TE_PROCESS_ENTER )
+		self.cbOpenFiles = wx.ComboBox( self.m_panel3, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, cbOpenFilesChoices, wx.CB_READONLY|wx.CB_SIMPLE|wx.TE_PROCESS_ENTER )
 		bSizer4.Add( self.cbOpenFiles, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_panel3.SetSizer( bSizer4 )
@@ -173,12 +173,56 @@ class MainFrame ( wx.Frame ):
 		self.m_panel5.Layout()
 		bSizer7.Fit( self.m_panel5 )
 		self.ribbons.AddPage( self.m_panel5, u"VIEW", False )
+		self.m_panel7 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer20 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		bSizer21 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.btnStatistic = wx.Button( self.m_panel7, wx.ID_ANY, u"Statistics", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnStatistic.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
+		bSizer21.Add( self.btnStatistic, 2, wx.ALL|wx.EXPAND, 5 )
+		
+		self.btnIncludeFile = wx.Button( self.m_panel7, wx.ID_ANY, u"Include File", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnIncludeFile.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
+		bSizer21.Add( self.btnIncludeFile, 2, wx.ALL|wx.EXPAND, 5 )
+		
+		self.btnJumpToPosition = wx.Button( self.m_panel7, wx.ID_ANY, u"Jump To Position", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnJumpToPosition.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
+		bSizer21.Add( self.btnJumpToPosition, 2, wx.ALL|wx.EXPAND, 5 )
+		
+		self.btnRunShellCommand = wx.Button( self.m_panel7, wx.ID_ANY, u"Run Shell Command", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnRunShellCommand.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
+		
+		bSizer21.Add( self.btnRunShellCommand, 2, wx.ALL|wx.EXPAND, 5 )
+		
+		bSizer20.Add( bSizer21, 4, wx.EXPAND, 5 )
+		
+		bSizer22 = wx.BoxSizer( wx.VERTICAL )
+		
+		bSizer20.Add( bSizer22, 1, wx.EXPAND, 5 )
+		
+		self.m_panel7.SetSizer( bSizer20 )
+		self.m_panel7.Layout()
+		bSizer20.Fit( self.m_panel7 )
+		self.ribbons.AddPage( self.m_panel7, u"TOOLS", False )
+		self.m_panel8 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer19 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.btnInfo = wx.BitmapButton( self.m_panel8, wx.ID_ANY, wx.Bitmap( u"images/info.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
+		bSizer19.Add( self.btnInfo, 0, wx.ALL, 5 )
+		
+		self.m_panel8.SetSizer( bSizer19 )
+		self.m_panel8.Layout()
+		bSizer19.Fit( self.m_panel8 )
+		self.ribbons.AddPage( self.m_panel8, u"HELP", False )
 		
 		bSizer1.Add( self.ribbons, 0, wx.EXPAND |wx.ALL, 5 )
 		
 		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
-		
-		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
+                bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )
 		self.pn_main.Layout()
@@ -261,6 +305,59 @@ class PrintDialog ( wx.Dialog ):
 		bSizer14.Add( self.m_panel6, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		self.SetSizer( bSizer14 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+	
+	def __del__( self ):
+		pass
+	
+
+###########################################################################
+## Class JumpToDialog
+###########################################################################
+
+class JumpToDialog ( wx.Dialog ):
+	
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Jump To Position", pos = wx.DefaultPosition, size = wx.Size( 278,194 ), style = wx.DEFAULT_DIALOG_STYLE )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer25 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_panel10 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer26 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		
+		bSizer26.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+		
+		bSizer24 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_staticText6 = wx.StaticText( self.m_panel10, wx.ID_ANY, u"Jump To Position:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText6.Wrap( -1 )
+		bSizer24.Add( self.m_staticText6, 0, wx.ALL, 5 )
+		
+		self.spnPosition = wx.SpinCtrl( self.m_panel10, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS|wx.SP_WRAP, 0, 2147483647, 0 )
+		bSizer24.Add( self.spnPosition, 0, wx.ALL, 5 )
+		
+		
+		bSizer24.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+		
+		self.btnJumpTo = wx.Button( self.m_panel10, wx.ID_ANY, u"OK", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer24.Add( self.btnJumpTo, 0, wx.ALL, 5 )
+		
+		bSizer26.Add( bSizer24, 1, wx.EXPAND, 5 )
+		
+		
+		bSizer26.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+		
+		self.m_panel10.SetSizer( bSizer26 )
+		self.m_panel10.Layout()
+		bSizer26.Fit( self.m_panel10 )
+		bSizer25.Add( self.m_panel10, 1, wx.EXPAND |wx.ALL, 5 )
+		
+		self.SetSizer( bSizer25 )
 		self.Layout()
 		
 		self.Centre( wx.BOTH )
