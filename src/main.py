@@ -370,6 +370,7 @@ class Main:
             elif evt.GetKeyCode() == 70:
                 self.mainFrame.ribbons.SetSelection(1)
                 self.mainFrame.txtSearch.SetFocus()
+                self.mainFrame.txtSearch.SelectAll()
                 return
             # ctrl + p
             elif evt.GetKeyCode() == 80:
