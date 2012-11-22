@@ -84,15 +84,13 @@ if yes_no == 'yes' or yes_no == "":
               print("Create starter Icon...")
               shutil.copyfile(INSTALL_SRC + "ulieditpro.desktop", ICON_PATH + "/uliedit-pro.desktop")
       else:
-<<<<<<< HEAD
+
             print("")
-            print("Note: If you want a starter for this application on your desktop, you have to create it by yourself")
-=======
             print("Warning: Can't find " + ICON_PATH)
             print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
             print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
       print("Finish")
->>>>>>> 965bfc276e8e19cba603521f146368bd2efd1f32
+
       sys.exit(0)
    except IOError, e:
       print(str(e))
