@@ -21,6 +21,7 @@ class PrintDialog:
                 self.form = uliedit_gui.PrintDialog(parent)
                 self.initFields()
                 self.bindEvents()
+                self.form.btnPrint.SetFocus()
                 self.form.ShowModal()
 
 
