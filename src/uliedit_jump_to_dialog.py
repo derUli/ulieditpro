@@ -10,6 +10,7 @@ class JumpToDialog:
                 self.ctrl = ctrl
                 self.form = uliedit_gui.JumpToDialog(parent)
                 self.bindEvents()
+                self.form.spnPosition.SetFocus();
                 self.form.ShowModal()
 
 
