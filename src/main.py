@@ -63,14 +63,14 @@ class Main:
         if(self.mainFrame.txtContent.CanUndo()):
            self.mainFrame.txtContent.Undo()
            self.file_manager.setModified(self.current_file_index);
-           self.mainFrame.txtContent.SetFocus()
+        self.mainFrame.txtContent.SetFocus()
 
 
     def onRedo(self, evt):
         if(self.mainFrame.txtContent.CanRedo()):
            self.mainFrame.txtContent.Redo()
            self.file_manager.setModified(self.current_file_index);
-           self.mainFrame.txtContent.SetFocus()
+        self.mainFrame.txtContent.SetFocus()
 
 
     def onChangeText(self ,evt):
