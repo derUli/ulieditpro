@@ -16,10 +16,10 @@ import uliedit_jump_to_dialog
 from Printer import Printer
 
 
-ULIEDIT_FILE_FILTER = "All Files (*.*)|*|Text Files (*.txt)|*.txt|HTML Documents (*.html)|*.html;*.htm|PHP Script (*.php)|*.php;*.php3;*.phtml"
+ULIEDIT_FILE_FILTER = "All Files (*.*)|*|Text Files (*.txt)|*.txt|HTML Documents (*.html)|*.html;*.htm|XML (*.xml)|*.xml|PHP Script (*.php)|*.php;*.php3;*.phtml|JavaScript (*.js)|*.js|VBScript (*.vbs)|*.vbs;*.vba|C++ Sourcecode (*.cpp)|*.cpp;*.c;*.h;*.o|Python-Skript (*.py)|*.py;*.pyw"
+
 
 class Main:
-
     def __init__(self):
         self.app = wx.App(redirect = False)
         self.fs_enc = sys.getfilesystemencoding()
@@ -301,7 +301,7 @@ class Main:
     def onBtnInfo(self, evt):
         info_string = u"UliEdit Pro 1.5\n\n"
         info_string += u"A programmers text editor\n\n"
-        info_string += u"© 2012 by Ulrich Schmidt (admin@deruli.de)\n\n"
+        info_string += u"© 2012 - 2013 by Ulrich Schmidt (admin@deruli.de)\n\n"
         info_string += u"For more software take a look at:\n"
         info_string += u"www.deruli.de\nwww.uligames.de"
         
