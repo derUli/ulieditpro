@@ -13,6 +13,8 @@ import lexers
 import uliedit_print_dialog
 import re
 import uliedit_jump_to_dialog
+from Printer import Printer
+
 
 ULIEDIT_FILE_FILTER = "Text Files (*.txt)|*.txt|HTML Documents (*.html)|*.html;*.htm|All Files (*.*)|*"
 
@@ -32,7 +34,7 @@ class Main:
         self.initFields()
         self.icon = wx.Icon(U"images/icon.ico", wx.BITMAP_TYPE_ICO)
         self.mainFrame.SetIcon(self.icon)
-        
+        self.printer = Printer(self.mainFrame)
 
 
         self.file_manager = uliedit_file_manager.UliEditFileManager()
@@ -657,7 +659,16 @@ class Main:
         self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
 
     def onBtnPrint(self, evt):
-        self.openPrintDialog()
+        # alter Print-Dialog
+        # self.openPrintDialog()
+        
+        title = self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
+        title = os.path.basename(title)
+        print title
+        self.printer.Print(self.mainFrame.txtContent.GetText,
+                           title)
+        
+        
 
     def onBtnJumpToPosition(self, evt):
         self.mainFrame.txtContent.SetFocus()
