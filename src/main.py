@@ -678,7 +678,7 @@ class Main:
                 print i
                 printedText += c
                 
-                if i >= maxlinelength:
+                if i >= maxlinelength and c!= "\n":
                    i = 0
                    printedText += "\n"
             printedText += "\n"
