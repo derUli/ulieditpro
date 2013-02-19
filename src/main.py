@@ -675,7 +675,6 @@ class Main:
             i = 0 
             for c in line:
                 i+=1
-                print i
                 printedText += c
                 
                 if i >= maxlinelength and c!= "\n":
@@ -683,7 +682,6 @@ class Main:
                    printedText += "\n"
             printedText += "\n"
                 
-       
         
         self.printer.Print(printedText,
                            title)
