@@ -661,11 +661,10 @@ class Main:
     def onBtnPrint(self, evt):
         # alter Print-Dialog
         # self.openPrintDialog()
-        
         title = self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
         title = os.path.basename(title)
         print title
-        self.printer.Print(self.mainFrame.txtContent.GetText,
+        self.printer.Print(self.mainFrame.txtContent.GetText(),
                            title)
         
         

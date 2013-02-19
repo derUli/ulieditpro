@@ -63,7 +63,7 @@ class Printer(Printout):
 
     def PageSetup(self):
         "This function handles displaying the Page Setup window and retrieving the user selected options."
-        config_dialog = wxPrintDialog(self.frame)
+        config_dialog = PrintDialog(self.frame)
         config_dialog.GetPrintDialogData().SetPrintData(self.printer_config)
         config_dialog.GetPrintDialogData().SetSetupDialog(True)
         config_dialog.ShowModal()
