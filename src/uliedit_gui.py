@@ -232,7 +232,6 @@ class MainFrame ( wx.Frame ):
 		bSizer1.Add( self.ribbons, 0, wx.EXPAND |wx.ALL, 5 )
 		
 		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
-		
 		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
 		self.pn_main.SetSizer( bSizer1 )
@@ -242,6 +241,7 @@ class MainFrame ( wx.Frame ):
 		
 		self.SetSizer( bSizer5 )
 		self.Layout()
+		self.statusbar = self.CreateStatusBar( 2, wx.ST_SIZEGRIP, wx.ID_ANY )
 		
 		self.Centre( wx.BOTH )
 	

@@ -32,9 +32,7 @@ class Printer(Printout):
         pdd = PrintDialogData()
         pdd.SetPrintData(self.printer_config)
         printer = wxPrinter(pdd)
-        if not printer.Print(self.frame,self):
-            MessageBox("Unable to print the document.")
-        else:
+        if printer.Print(self.frame,self):
             self.printer_config = PrintData(printer.GetPrintDialogData().GetPrintData())
 
     def PreviewText(self, text, doc_name):

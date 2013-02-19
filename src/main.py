@@ -43,6 +43,7 @@ class Main:
         self.mainFrame.Show(True)
         self.bindEvents()
         self.parseCommandLineArgs(sys.argv)
+        self.updateStatusBar()
         self.app.MainLoop()
 
     def onOpenFileDialog(self, evt):
@@ -85,11 +86,13 @@ class Main:
                 self.change_lexer(self.current_lexer)
             
             self.file_manager.files[self.current_file_index]["modified"] = True
+            self.updateStatusBar()
             
 
 
     def onNewFile(self, evt):
         self.openEmptyFile()
+        
 
 
 
@@ -104,6 +107,7 @@ class Main:
         
         self.mainFrame.txtContent.ClearAll()
         self.file_manager.getFileAtIndex(self.current_file_index)["modified"] = False
+        self.updateStatusBar()
 
     def parseCommandLineArgs(self, args):
         if len(args) > 1:
@@ -184,6 +188,7 @@ class Main:
                 self.mainFrame.txtContent.AddText(content)
                 self.mainFrame.txtContent.ConvertEOLs(line_seperator)
                 self.mainFrame.txtContent.SetFocus()
+                self.updateStatusBar()
                 return True
                 
             else:
@@ -237,6 +242,7 @@ class Main:
                         self.mainFrame.txtContent.EmptyUndoBuffer()
                         self.mainFrame.txtContent.SetFocus()
                         self.file_manager.getFileAtIndex(tmp)["modified"] = False
+                        self.updateStatusBar()
                         return True                                          
                        
                        
@@ -470,9 +476,6 @@ class Main:
             self.mainFrame.chbDisplayLineEndings.SetValue(False)
             
         
-          
-        
-
 
         self.mainFrame.cbOpenFiles.Clear()
         
@@ -640,6 +643,7 @@ class Main:
             self.setTitle(os.path.basename(filename))
             try:
                 self.mainFrame.txtContent.SetValue(content)
+                self.updateStatusBar()
                 
             except AttributeError:
                 self.mainFrame.txtContent.SetText(content)
@@ -647,7 +651,7 @@ class Main:
                 self.mainFrame.txtContent.SetEOLMode(line_sep)
                 self.mainFrame.txtContent.ConvertEOLs(line_sep)
                 self.mainFrame.txtContent.SetFocus()
-
+                self.updateStatusBar()
                 if not modified_before:
                     self.file_manager.files[old_index]["modified"] = False
                     
@@ -712,16 +716,7 @@ class Main:
         self.mainFrame.txtContent.NewLine()
         #self.mainFrame.txtContent.InsertText(self.mainFrame.txtContent.GetCurrentPos(), indent)
         self.mainFrame.txtContent.AddText(indent)
-      #self.mainFrame.txtContent.GotoPos(self.mainFrame.txtContent.GetCurrentPos() + n)    
-
-    
-
-
-
-
-
-
-
+        self.updateStatusBar()
 
 
     def SearchAndReplace(self, count):
@@ -730,6 +725,7 @@ class Main:
         if count == 1:
             ctrl.GotoPos(0)
             ctrl.SearchAnchor()
+            self.updateStatusBar()
             
         searchValue = self.mainFrame.txtSearch.GetValue()
         if searchValue == "":
@@ -769,14 +765,17 @@ class Main:
         pos = ctrl.GetCurrentPos()
         if pos==ctrl.GetLength():
             ctrl.SetCurrentPos(0)
+            self.updateStatusBar()
         else:
             ctrl.SetCurrentPos(pos+1)
+            self.updateStatusBar()
   
         ctrl.SearchAnchor()
         spos = ctrl.SearchNext(flags,text)
         ctrl.EnsureCaretVisible()
         if spos==-1:
             ctrl.SetCurrentPos(pos)
+            self.updateStatusBar()
             return False
         else:
             return True 
@@ -810,6 +809,7 @@ class Main:
         #ipos = ctrl.SearchNext(flags, searchValue)
         #ctrl.EnsureCaretVisible()
         if self.FindNext(searchValue, flags, ctrl):
+            self.updateStatusBar()
             pass
         else:
             
@@ -818,6 +818,7 @@ class Main:
             "Search",
             wx.ICON_WARNING | wx.OK).ShowModal()
             ctrl.GotoPos(0)
+            self.updateStatusBar()
         
         """
         if ipos == -1:
@@ -871,6 +872,7 @@ class Main:
 
     def onSearch(self, evt):
         self.continueSearch()
+        self.updateStatusBar()
 
 
     def onReplace(self, evt):
@@ -900,6 +902,26 @@ class Main:
         self.mainFrame.txtContent.SetFocus()
 
 
+
+    def PositionInLine(self, line):
+        return self.txtContent.GetCurrentPos() - self.txtContent.PositionFromLine(line)
+
+
+    def onKeyUp(self, evt):
+        self.updateStatusBar()
+
+
+    def updateStatusBar(self):
+        statusbar = self.mainFrame.statusbar
+        statusbar.SetStatusWidths([500, -1])
+        self.txtContent = self.mainFrame.txtContent
+        linenumber = self.txtContent.GetCurrentLine()
+        charinline = self.PositionInLine(linenumber)
+        charinline += 1
+        linenumber += 1
+        
+        newStatusString = "[" + str(linenumber) + ", " + str(charinline) + "]"
+        statusbar.SetStatusText(newStatusString, 1)
         
       
     def onKeyDown(self, evt):
@@ -941,6 +963,7 @@ class Main:
     
         self.mainFrame.txtContent.Bind(wx.stc.EVT_STC_MODIFIED, self.onChangeText)
         self.mainFrame.txtContent.Bind(wx.EVT_KEY_DOWN, self.onKeyDown)
+        self.mainFrame.txtContent.Bind(wx.EVT_KEY_UP, self.onKeyUp)
         self.mainFrame.txtSearch.Bind(wx.EVT_KEY_DOWN, self.onTxtSearchKeyDown)
 
 
