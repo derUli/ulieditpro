@@ -16,7 +16,7 @@ import uliedit_jump_to_dialog
 from Printer import Printer
 
 
-ULIEDIT_FILE_FILTER = "Text Files (*.txt)|*.txt|HTML Documents (*.html)|*.html;*.htm|All Files (*.*)|*"
+ULIEDIT_FILE_FILTER = "All Files (*.*)|*|Text Files (*.txt)|*.txt|HTML Documents (*.html)|*.html;*.htm|PHP Script (*.php)|*.php;*.php3;*.phtml"
 
 class Main:
 
@@ -299,7 +299,7 @@ class Main:
 
 
     def onBtnInfo(self, evt):
-        info_string = u"UliEdit Pro 1.4\n\n"
+        info_string = u"UliEdit Pro 1.5\n\n"
         info_string += u"A programmers text editor\n\n"
         info_string += u"© 2012 by Ulrich Schmidt (admin@deruli.de)\n\n"
         info_string += u"For more software take a look at:\n"
