@@ -1,0 +1,3 @@
+Fußzeile mit Anzeige der aktuellen Position vom Cursor:
+Zeile + Zeichen + Offset-Position
+
