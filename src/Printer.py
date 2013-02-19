@@ -34,7 +34,7 @@ class Printer(Printout):
         if not printer.Print(self.frame,self):
             MessageBox("Unable to print the document.")
         else:
-            self.printer_config = wx.PrintData(printer.GetPrintDialogData().GetPrintData())
+            self.printer_config = PrintData(printer.GetPrintDialogData().GetPrintData())
 
     def PreviewText(self, text, doc_name):
         "This function displays the preview window for the text with the given header."
