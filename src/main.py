@@ -910,6 +910,10 @@ class Main:
     def onKeyUp(self, evt):
         self.updateStatusBar()
 
+    def onCursorMove(self, evt):
+        evt.Skip()
+        self.updateStatusBar()
+
 
     def updateStatusBar(self):
         statusbar = self.mainFrame.statusbar
@@ -964,6 +968,8 @@ class Main:
         self.mainFrame.txtContent.Bind(wx.stc.EVT_STC_MODIFIED, self.onChangeText)
         self.mainFrame.txtContent.Bind(wx.EVT_KEY_DOWN, self.onKeyDown)
         self.mainFrame.txtContent.Bind(wx.EVT_KEY_UP, self.onKeyUp)
+        self.mainFrame.txtContent.Bind(wx.EVT_LEFT_DOWN, self.onCursorMove)
+        self.mainFrame.txtContent.Bind(wx.EVT_LEFT_UP, self.onCursorMove)
         self.mainFrame.txtSearch.Bind(wx.EVT_KEY_DOWN, self.onTxtSearchKeyDown)
 
 

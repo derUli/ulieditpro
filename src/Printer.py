@@ -2,6 +2,7 @@
 from wx import Printout, PrintData, PAPER_LETTER, PrintDialogData
 from wx import Printer as wxPrinter, MessageBox, PrintPreview, PrintDialog
 import wx
+import platform
 
 def GetErrorText():
     "Put your error text logic here.  See Python Cookbook for a useful example of error text."
@@ -108,6 +109,13 @@ class Printer(Printout):
     def OnPrintPage(self, page_num):
         "This function / event is executed for each page that needs to be printed."
         dc = self.GetDC()
+
+        
+
+        if platform.system() == "Windows":
+            fontSize = 50
+        else:
+            fontSize = 10
         
         dc.SetFont(wx.Font(10, wx.FONTFAMILY_TELETYPE, wx.NORMAL, wx.NORMAL)) 
         
