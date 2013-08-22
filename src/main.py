@@ -663,32 +663,7 @@ class Main:
         self.file_manager.getFileAtIndex(self.current_file_index)["filename"])
 
     def onBtnPrint(self, evt):
-        # alter Print-Dialog
-        # self.openPrintDialog()
-        title = self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
-        title = os.path.basename(title)
-        
-        linesep = self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
-        
-        printedText = ""
-        autoBreakedText = self.mainFrame.txtContent.GetText()
-        autoBreakedText = autoBreakedText.replace(linesep, "\n")
-        i = 0
-        maxlinelength = 65;
-        for line in autoBreakedText.split("\n"):
-            i = 0 
-            for c in line:
-                i+=1
-                printedText += c
-                
-                if i >= maxlinelength and c!= "\n":
-                   i = 0
-                   printedText += "\n"
-            printedText += "\n"
-                
-        
-        self.printer.Print(printedText,
-                           title)
+        self.openPrintDialog()
         
         
 

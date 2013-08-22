@@ -10,14 +10,6 @@ class PrintDialog:
                 self.parent = parent
                 self.content = content
                 self.title = os.path.basename(title)
-                if os.name != 'posix':
-                        dialog = wx.MessageDialog(parent,
-                                          "The printing function is only available on posix-compatible operating systems.",
-                                      "Printing",
-                                      wx.ICON_WARNING | wx.OK)
-                        dialog.ShowModal()
-                        return
-
                 self.form = uliedit_gui.PrintDialog(parent)
                 self.initFields()
                 self.bindEvents()
@@ -26,7 +18,11 @@ class PrintDialog:
 
 
         def initFields(self):
-                self.form.txtCommand.SetValue("lpr -J \"" + self.title + "\" %1")
+                if sys.platform == 'win32':
+                    self.form.txtCommand.SetValue("PrFile32.exe /q %1")
+                else:
+                    self.form.txtCommand.SetValue("lpr -J \"" + self.title + "\" %1")
+                    
                 self.form.txtNumberOfCopies.SetValue(1)
 
 
