@@ -161,7 +161,7 @@ class Main:
     def onBtnInsertImage(self, evt):
         dialog = wx.TextEntryDialog(None, "Insert Image:", "Insert Image", "", style=wx.OK|wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
-           htmlCode = '<img src="' + dialog.GetValue() + '" border=0/>'
+           htmlCode = '<img src="' + dialog.GetValue() + '" alt="" title="" border=0/>'
            self.mainFrame.txtContent.AddText(htmlCode)
            self.mainFrame.txtContent.SetFocus()
 

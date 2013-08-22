@@ -67,9 +67,9 @@ except KeyboardInterrupt:
 if yes_no == 'yes' or yes_no == "":
    try:
       print("Deleting existing files ...")
-      print(os.system("rm -rf " + SYMLINK1 ))
-      print(os.system("rm -rf " + SYMLINK2 ))
-      print(os.system("rm -rf " + ICON_PATH + "/uliedit-pro.desktop"))
+      os.system("rm -rf " + SYMLINK1 )
+      os.system("rm -rf " + SYMLINK2 )
+      os.system("rm -rf " + ICON_PATH + "/uliedit-pro.desktop")
       print(os.system("rm -rf " + INSTALL_TARGET ))
       print("copy files...")
       shutil.copytree(INSTALL_SRC, INSTALL_TARGET)
