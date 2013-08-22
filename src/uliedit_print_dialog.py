@@ -22,7 +22,7 @@ class PrintDialog:
                 if enviroment_command:
                         self.form.txtCommand.SetValue(enviroment_command)
                 elif sys.platform == 'win32':
-                    self.form.txtCommand.SetValue("PrFile32.exe /q %1")
+                    self.form.txtCommand.SetValue("notepad /P %1")
                 else:
                     self.form.txtCommand.SetValue("lpr -o portrait -J \"$title\" %1")
                     
