@@ -18,10 +18,14 @@ class PrintDialog:
 
 
         def initFields(self):
+                enviroment_command = os.environ.get('PRINT_COMMAND')
+                if enviroment_command:
+                        self.form.txtCommand.SetValue(enviroment_command)
+                
                 if sys.platform == 'win32':
                     self.form.txtCommand.SetValue("PrFile32.exe /q %1")
                 else:
-                    self.form.txtCommand.SetValue("lpr -o portrait -J \"" + self.title + "\" %1")
+                    self.form.txtCommand.SetValue("lpr -o portrait -J \"$title\" %1")
                     
                 self.form.txtNumberOfCopies.SetValue(1)
 
@@ -50,7 +54,9 @@ class PrintDialog:
 
                 # Per lpr-Befehl $count Kopien drucken
                 real_command = command.replace("%1", filename)
+                real_command = real_command.replace("$title", self.title)
                 real_command = real_command.encode("utf8")
+                
                 for i in range(1, count + 1):
                         os.system(real_command)
                         
