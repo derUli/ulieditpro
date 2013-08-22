@@ -21,7 +21,7 @@ class PrintDialog:
                 if sys.platform == 'win32':
                     self.form.txtCommand.SetValue("PrFile32.exe /q %1")
                 else:
-                    self.form.txtCommand.SetValue("lpr -J \"" + self.title + "\" %1")
+                    self.form.txtCommand.SetValue("lpr -o portrait -J \"" + self.title + "\" %1")
                     
                 self.form.txtNumberOfCopies.SetValue(1)
 
