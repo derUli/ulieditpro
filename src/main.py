@@ -842,11 +842,13 @@ class Main:
         if result.ShowModal() == wx.ID_OK:
             self.last_cmd = result.GetValue()
             cmd_output  = os.popen(self.last_cmd).readlines()
+            joined_cmd_output = ""
             for l in cmd_output:
-                tmp = self.file_manager.getFileAtIndex(self.current_file_index)
-                line_seperator = tmp["line_seperator"]
-                self.mainFrame.txtContent.AddText(l)
-                self.mainFrame.txtContent.ConvertEOLs(line_seperator)
+               joined_cmd_output = joined_cmd_output + l
+            tmp = self.file_manager.getFileAtIndex(self.current_file_index)
+            line_seperator = tmp["line_seperator"]
+            self.mainFrame.txtContent.AddText(joined_cmd_output)
+            self.mainFrame.txtContent.ConvertEOLs(line_seperator)
         self.mainFrame.txtContent.SetFocus()
             
 
