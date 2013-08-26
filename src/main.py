@@ -450,8 +450,8 @@ class Main:
         chSyntaxHighlighting.SetSelection(20)
         # Syntax Highlighting voererst deaktiviert,
         # da ich es nicht zum laufen bekomme
-        chSyntaxHighlighting.Show(True)
-        self.mainFrame.m_staticText1.Show(True)
+        chSyntaxHighlighting.Show(False)
+        self.mainFrame.m_staticText1.Show(False)
             
         chbWrapLines = self.mainFrame.chbWrapLines
 
