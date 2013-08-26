@@ -25,3 +25,5 @@ setup(options = {
         }
     ], zipfile=None
 ) 
+
+os.rename("dist/main.exe", "dist/uliedit.exe")

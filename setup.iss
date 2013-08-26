@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "UliEdit Pro"
-#define MyAppVersion "1.5"
+#define MyAppVersion "1.6"
 #define MyAppPublisher "Ulrich Schmidt"
 #define MyAppURL "http://www.deruli.de"
 #define MyAppExeName "uliedit.exe"
