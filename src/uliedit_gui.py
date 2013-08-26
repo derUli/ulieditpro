@@ -188,7 +188,7 @@ class MainFrame ( wx.Frame ):
 		
 		bSizer21.Add( self.btnIncludeFile, 2, wx.ALL|wx.EXPAND, 5 )
 		
-		self.btnJumpToPosition = wx.Button( self.m_panel7, wx.ID_ANY, u"Jump To Position", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnJumpToPosition = wx.Button( self.m_panel7, wx.ID_ANY, u"Goto Line", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.btnJumpToPosition.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
 		
 		bSizer21.Add( self.btnJumpToPosition, 2, wx.ALL|wx.EXPAND, 5 )
@@ -331,7 +331,7 @@ class PrintDialog ( wx.Dialog ):
 class JumpToDialog ( wx.Dialog ):
 	
 	def __init__( self, parent ):
-		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Jump To Position", pos = wx.DefaultPosition, size = wx.Size( 278,194 ), style = wx.DEFAULT_DIALOG_STYLE )
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Goto Line", pos = wx.DefaultPosition, size = wx.Size( 278,194 ), style = wx.DEFAULT_DIALOG_STYLE )
 		
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
@@ -345,7 +345,7 @@ class JumpToDialog ( wx.Dialog ):
 		
 		bSizer24 = wx.BoxSizer( wx.VERTICAL )
 		
-		self.m_staticText6 = wx.StaticText( self.m_panel10, wx.ID_ANY, u"Jump To Position:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText6 = wx.StaticText( self.m_panel10, wx.ID_ANY, u"Goto Line:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText6.Wrap( -1 )
 		bSizer24.Add( self.m_staticText6, 0, wx.ALL, 5 )
 		
