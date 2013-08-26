@@ -35,8 +35,7 @@ class Main:
         self.icon = wx.Icon(U"images/icon.ico", wx.BITMAP_TYPE_ICO)
         self.mainFrame.SetIcon(self.icon)
         self.printer = Printer(self.mainFrame)
-
-
+        
         self.file_manager = uliedit_file_manager.UliEditFileManager()
         self.current_file_index = -1
         self.change_lexer(self.current_lexer)        
@@ -76,6 +75,12 @@ class Main:
         self.mainFrame.txtContent.SetFocus()
 
 
+    def onHelp(self, evt):
+        dlg = uliedit_gui.HelpDialog(self.mainFrame)
+        dlg.SetIcon(self.icon)
+        dlg.htmlPane.LoadFile("manpage.html")
+        dlg.Show(True)
+        
     def onChangeText(self ,evt):
         evt.Skip()
         if self.current_file_index > -1:

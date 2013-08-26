@@ -8,6 +8,7 @@
 ###########################################################################
 
 import wx
+import wx.html
 
 ###########################################################################
 ## Class MainFrame
@@ -369,6 +370,31 @@ class JumpToDialog ( wx.Dialog ):
 		bSizer25.Add( self.m_panel10, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		self.SetSizer( bSizer25 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+	
+	def __del__( self ):
+		pass
+	
+
+###########################################################################
+## Class HelpDialog
+###########################################################################
+
+class HelpDialog ( wx.Frame ):
+	
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"man", pos = wx.DefaultPosition, size = wx.Size( 634,418 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer27 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.htmlPane = wx.html.HtmlWindow( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.html.HW_SCROLLBAR_AUTO )
+		bSizer27.Add( self.htmlPane, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		self.SetSizer( bSizer27 )
 		self.Layout()
 		
 		self.Centre( wx.BOTH )
