@@ -112,7 +112,10 @@ class Main:
     def parseCommandLineArgs(self, args):
         if len(args) > 1:
             filename = args[1].decode(self.fs_enc)
-            filename = os.path.abspath(filename)
+            if not os.path.isabs(filename):
+               filename = os.path.join(self.pwd, filename)
+               filename = os.path.abspath(filename)
+               
             if not os.path.exists(filename):
                 try:
                     open(filename, "w").close()
