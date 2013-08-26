@@ -71,6 +71,8 @@ if yes_no == 'yes' or yes_no == "":
       os.system("rm -rf " + SYMLINK2 )
       os.system("rm -rf " + ICON_PATH + "/uliedit-pro.desktop")
       os.system("rm -rf " + INSTALL_TARGET)
+      os.system("install -g 0 -o 0 -m 0644 " + INSTALL_SRC +"ulieditpro.1 /usr/share/man/de/man1/")
+      os.system("install -g 0 -o 0 -m 0644 " + INSTALL_SRC +"uliedit.1 /usr/share/man/de/man1/")
       print("copy files...")
       shutil.copytree(INSTALL_SRC, INSTALL_TARGET)
       print("Finish")
