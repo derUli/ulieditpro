@@ -100,7 +100,7 @@ class Main:
         self.current_file_index = self.file_manager.newFile()
         title = self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
         self.setTitle(title)
-    
+        self.mainFrame.txtContent.SetReadOnly(False)
         self.mainFrame.cbOpenFiles.Append(title)
         self.mainFrame.cbOpenFiles.SetStringSelection(title)
         self.mainFrame.txtContent.SetFocus()
@@ -110,8 +110,16 @@ class Main:
         self.updateStatusBar()
 
     def parseCommandLineArgs(self, args):
-        if len(args) > 1:
-            filename = args[1].decode(self.fs_enc)
+    
+        if len(args) > 1:           
+            filename = args[len(args) - 1].decode(self.fs_enc)
+           
+            if "-r" in args and filename != "-r":
+                readonly = True
+            else:
+               readonly = False
+                
+      
             if not os.path.isabs(filename):
                filename = os.path.join(self.pwd, filename)
                filename = os.path.abspath(filename)
@@ -119,15 +127,15 @@ class Main:
             if not os.path.exists(filename):
                 try:
                     open(filename, "w").close()
-                    self.openFile(filename)
+                    self.openFile(filename, readonly)
                 except OSError:
-                    self.cantOpenFileError(filename)
+                    self.cantOpenFileError(filename, readonly)
                     self.openEmptyFile()
                 except IOError:
-                    self.cantOpenFileError(filename)
+                    self.cantOpenFileError(filename, readonly)
                     self.openEmptyFile()
             else:
-               self.openFile(filename)
+               self.openFile(filename, readonly)
         else:
            self.openEmptyFile()
             
@@ -163,7 +171,7 @@ class Main:
             self.last_path = dialog.GetPath()
             self.last_path = os.path.dirname(self.last_path)
             self.saveLastPath(self.last_path)
-            self.openFile(dialog.GetPath())
+            self.openFile(dialog.GetPath(), False)
             
 
 
@@ -214,7 +222,7 @@ class Main:
 
 
 
-    def openFile(self, filename):
+    def openFile(self, filename, readonly):
         filename = os.path.abspath(filename)
         encoding = uliedit_charset_helper.detect_encoding(filename)
         if encoding:
@@ -232,9 +240,8 @@ class Main:
 
             else:
                 
-            
                 tmp = self.file_manager.addFile(filename,
-                                                encoding)
+                                                encoding, readonly)
                 line_seperator = self.file_manager.getFileAtIndex(tmp)["line_seperator"]
 
                 self.mainFrame.txtContent.SetEOLMode(line_seperator)
@@ -253,6 +260,8 @@ class Main:
                         self.mainFrame.txtContent.ConvertEOLs(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
                         self.mainFrame.txtContent.SetEOLMode(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
                         self.mainFrame.txtContent.EmptyUndoBuffer()
+                        
+                        self.mainFrame.txtContent.SetReadOnly(readonly)
                         self.mainFrame.txtContent.SetFocus()
                         self.file_manager.getFileAtIndex(tmp)["modified"] = False
                         self.updateStatusBar()
@@ -659,10 +668,12 @@ class Main:
                 self.updateStatusBar()
                 
             except AttributeError:
+                self.mainFrame.txtContent.SetReadOnly(False)
                 self.mainFrame.txtContent.SetText(content)
                 self.mainFrame.txtContent.EmptyUndoBuffer()
                 self.mainFrame.txtContent.SetEOLMode(line_sep)
                 self.mainFrame.txtContent.ConvertEOLs(line_sep)
+                self.mainFrame.txtContent.SetReadOnly(self.file_manager.getFileAtIndex(index)["readonly"])
                 self.mainFrame.txtContent.SetFocus()
                 self.updateStatusBar()
                 if not modified_before:

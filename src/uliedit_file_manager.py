@@ -66,6 +66,7 @@ class UliEditFileManager:
         new_file = {}
         new_file["modified"] = False
         new_file["encoding"] = "utf8"
+        new_file["readonly"] = False
         new_file["filename"] = "untitled " + str(self.empty_file_inc)
         if os.name == 'posix':
             new_file["line_seperator"] = wx.stc.STC_EOL_LF
@@ -126,11 +127,12 @@ class UliEditFileManager:
 
         
 
-    def addFile(self, filename, encoding):
+    def addFile(self, filename, encoding, readonly):
         new_file = {}
         new_file["modified"] = False
         new_file["encoding"] = encoding
         new_file["filename"] = filename
+        new_file["readonly"] = readonly
         
 
         
