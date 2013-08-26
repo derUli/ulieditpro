@@ -520,7 +520,8 @@ class Main:
         except AttributeError:
             pass
             
-
+        dt = FileDrop(self.mainFrame, self)
+        self.mainFrame.txtContent.SetDropTarget(dt)
 
         self.setTitle("untitled")
 
@@ -1016,6 +1017,23 @@ class Main:
         self.mainFrame.btnInsertImage.Bind(wx.EVT_BUTTON, self.onBtnInsertImage)
 
         
+
+
+class FileDrop(wx.FileDropTarget):
+    def __init__(self, window, parent):
+        wx.FileDropTarget.__init__(self)
+        self.window = window
+        self.parent = parent
+
+    def OnDropFiles(self, x, y, filenames):
+
+        for name in filenames:
+            try:
+                if os.path.isfile(name):
+                    self.parent.openFile(name, False)
+            except IOError, error:
+                dlg = wx.MessageDialog(None, 'Error opening file\n' + str(error))
+                dlg.ShowModal()
 
 
 if __name__ == '__main__':
