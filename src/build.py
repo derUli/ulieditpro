@@ -5,7 +5,8 @@ import py2exe
 import shutil
 import os
 
-shutil.rmtree("dist")
+if os.path.exists("dist"):
+    shutil.rmtree("dist")
 
 os.mkdir("dist")
 
