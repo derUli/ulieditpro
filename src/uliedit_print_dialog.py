@@ -16,17 +16,6 @@ class PrintDialog:
                 self.form.btnPrint.SetFocus()
                 self.form.ShowModal()
 
-        def OnShowAvailPrinters(self, evt):
-                cmd = "lpstat -a"
-                txt = os.popen(cmd).readlines()
-                result = ""
-                for line in txt:
-                        result = result + line
-                        
-                dlg = uliedit_gui.availablePrinterDialog(self.form)
-                dlg.txtPrinters.SetText(result)
-                dlg.Show()
-
 
         def initFields(self):
                 enviroment_command = os.environ.get('PRINT_CMD')
@@ -34,7 +23,6 @@ class PrintDialog:
                         self.form.txtCommand.SetValue(enviroment_command)
                 elif sys.platform == 'win32':
                     self.form.txtCommand.SetValue("notepad /P %1")
-                    self.form.btnAvailPrinters.Hide()
                 else:
                     self.form.txtCommand.SetValue("lpr -o portrait -J \"$title\" %1")
                     
@@ -84,5 +72,3 @@ class PrintDialog:
         def bindEvents(self):
                 self.form.btnCancel.Bind(wx.EVT_BUTTON, self.onCancel)
                 self.form.btnPrint.Bind(wx.EVT_BUTTON, self.onPrint)
-                if sys.platform != 'win32':
-                        self.form.btnAvailPrinters.Bind(wx.EVT_BUTTON, self.OnShowAvailPrinters)

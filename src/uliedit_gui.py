@@ -234,7 +234,7 @@ class MainFrame ( wx.Frame ):
 		self.ribbons.AddPage( self.m_panel8, u"HELP", False )
 		
 		bSizer1.Add( self.ribbons, 0, wx.EXPAND |wx.ALL, 5 )
-		
+
 		self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
 		bSizer1.Add( self.txtContent, 3, wx.ALL|wx.EXPAND, 5 )
 		
@@ -287,18 +287,7 @@ class PrintDialog ( wx.Dialog ):
 		bSizer17.Add( self.m_staticText5, 0, wx.ALL, 5 )
 		
 		self.txtCommand = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer17.Add( self.txtCommand, 5, wx.ALL, 5 )
-		
-		
-		bSizer17.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
-		
-		self.btnAvailPrinters = wx.Button( self.m_panel6, wx.ID_ANY, u"Available Printers", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.btnAvailPrinters.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
-		
-		bSizer17.Add( self.btnAvailPrinters, 0, wx.ALL, 5 )
-		
-		
-		bSizer17.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+		bSizer17.Add( self.txtCommand, 1, wx.ALL, 5 )
 		
 		bSizer15.Add( bSizer17, 1, wx.EXPAND, 5 )
 		
@@ -409,31 +398,6 @@ class HelpDialog ( wx.Frame ):
 		bSizer27.Add( self.htmlPane, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		self.SetSizer( bSizer27 )
-		self.Layout()
-		
-		self.Centre( wx.BOTH )
-	
-	def __del__( self ):
-		pass
-	
-
-###########################################################################
-## Class availablePrinterDialog
-###########################################################################
-
-class availablePrinterDialog ( wx.Frame ):
-	
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Available Printers", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-		
-		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
-		
-		bSizer28 = wx.BoxSizer( wx.VERTICAL )
-		
-		self.txtPrinters = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
-		bSizer28.Add( self.txtPrinters, 1, wx.ALL|wx.EXPAND, 5 )
-		
-		self.SetSizer( bSizer28 )
 		self.Layout()
 		
 		self.Centre( wx.BOTH )
