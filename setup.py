@@ -9,6 +9,8 @@ import shutil
 import sys
 
 
+
+
 INSTALL_SRC = "src/"
 INSTALL_TARGET = "/opt/ulieditpro"
 ICON_PATH = "/usr/share/applications"
@@ -18,8 +20,25 @@ SYMLINK2 = "/usr/bin/uliedit"
 
 START_SCRIPT = INSTALL_TARGET + "/ulieditpro.sh"
 
+def deleteExistingFiles():
+      print("Deleting existing files ...")
+      os.system("rm -rf " + SYMLINK1 )
+      os.system("rm -rf " + SYMLINK2 )
+      os.system("rm -rf " + ICON_PATH + "/uliedit-pro.desktop")
+      os.system("rm -rf " + INSTALL_TARGET)
+      os.system("rm -f /usr/share/man/de/man1/ulieditpro.1")
+      os.system("rm -f /usr/share/man/de/man1/uliedit.1")
+      print("Finished...")
+
+
+
+
 print("UliEdit Pro Setup")
 print("")
+if "uninstall" in sys.argv:
+   deleteExistingFiles()
+   sys.exit()
+
 print("Do you wan't do install the dependencies?")
 
 try:
@@ -66,24 +85,7 @@ except KeyboardInterrupt:
 
 if yes_no == 'yes' or yes_no == "":
    try:
-      print("Deleting existing files ...")
-      os.system("rm -rf " + SYMLINK1 )
-      os.system("rm -rf " + SYMLINK2 )
-      os.system("rm -rf " + ICON_PATH + "/uliedit-pro.desktop")
-      os.system("rm -rf " + INSTALL_TARGET)
-      print("copy files...")
-      shutil.copytree(INSTALL_SRC, INSTALL_TARGET)
-      print("Finish")
-      print("Install man pages...")
-      os.system("install -g 0 -o 0 -m 0644 " + INSTALL_SRC +"ulieditpro.1 /usr/share/man/de/man1/")
-      os.system("install -g 0 -o 0 -m 0644 " + INSTALL_SRC +"uliedit.1 /usr/share/man/de/man1/")
-      print("Creating Symlinks...")
-      os.symlink(START_SCRIPT, SYMLINK1)
-      os.symlink(START_SCRIPT, SYMLINK2)
-      print("Finish")
-      print("You can start UliEdit Pro by calling one of this commands on shell:")
-      print(SYMLINK1)
-      print(SYMLINK2)
+      deleteExistingFiles()
       
 
       
