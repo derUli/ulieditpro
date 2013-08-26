@@ -5,9 +5,12 @@ import py2exe
 import shutil
 import os
 
+shutil.rmtree("dist")
+
 os.mkdir("dist")
 
 shutil.copytree("images", "dist/images")
+shutil.copyfile("manpage.html", "dist/manpage.html")
 
 sys.argv.append("py2exe")
 
@@ -27,3 +30,5 @@ setup(options = {
 ) 
 
 os.rename("dist/main.exe", "dist/uliedit.exe")
+
+shutil.move("dist", "../windows/dist")
