@@ -305,7 +305,7 @@ class Main:
 
 
     def onBtnInfo(self, evt):
-        info_string = u"UliEdit Pro 1.5\n\n"
+        info_string = u"UliEdit Pro 1.6\n\n"
         info_string += u"A programmers text editor\n\n"
         info_string += u"© 2012 - 2013 by Ulrich Schmidt (admin@deruli.de)\n\n"
         info_string += u"For more software take a look at:\n"
@@ -450,8 +450,8 @@ class Main:
         chSyntaxHighlighting.SetSelection(20)
         # Syntax Highlighting voererst deaktiviert,
         # da ich es nicht zum laufen bekomme
-        chSyntaxHighlighting.Show(False)
-        self.mainFrame.m_staticText1.Show(False)
+        chSyntaxHighlighting.Show(True)
+        self.mainFrame.m_staticText1.Show(True)
             
         chbWrapLines = self.mainFrame.chbWrapLines
 
@@ -846,7 +846,6 @@ class Main:
             for l in cmd_output:
                joined_cmd_output = joined_cmd_output + l
             tmp = self.file_manager.getFileAtIndex(self.current_file_index)
-            joined_cmd_output = joined_cmd_output.decode(sys.stdout.encoding)
             line_seperator = tmp["line_seperator"]
             self.mainFrame.txtContent.AddText(joined_cmd_output)
             self.mainFrame.txtContent.ConvertEOLs(line_seperator)
