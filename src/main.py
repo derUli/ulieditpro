@@ -426,13 +426,7 @@ class Main:
         else:
             evt.Skip()
 
-
-
-            
-
-
-        
-                   
+                 
 
 
     def initFields(self):
@@ -476,8 +470,18 @@ class Main:
         self.mainFrame.m_staticText1.Show(False)
             
         chbWrapLines = self.mainFrame.chbWrapLines
+        
+        font_size = os.environ.get('FONT_SIZE')
+        if font_size:
+           try:
+              font_size = int(font_size)
+           except ValueError:
+              font_size = 11
+        else:
+              font_size = 11
+           
 
-        font = wx.Font(11, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL)
+        font = wx.Font(font_size, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL)
         face = font.GetFaceName()
         size = font.GetPointSize()
         self.mainFrame.txtContent.StyleSetSpec(wx.stc.STC_STYLE_DEFAULT,"face:%s,size:%d" % (face, size))
