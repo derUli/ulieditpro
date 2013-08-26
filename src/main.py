@@ -75,7 +75,7 @@ class Main:
         self.mainFrame.txtContent.SetFocus()
 
 
-    def onHelp(self, evt):
+    def onBtnHelp(self, evt):
         dlg = uliedit_gui.HelpDialog(self.mainFrame)
         dlg.SetIcon(self.icon)
         dlg.htmlPane.LoadFile("manpage.html")
@@ -1016,7 +1016,7 @@ class Main:
         self.mainFrame.btnIncludeFile.Bind(wx.EVT_BUTTON, self.onBtnIncludeFile)
         self.mainFrame.btnStatistic.Bind(wx.EVT_BUTTON, self.onBtnStatistic)
         self.mainFrame.btnRunShellCommand.Bind(wx.EVT_BUTTON, self.onbtnRunShellCommand)
-        
+        self.mainFrame.btnHelp.Bind(wx.EVT_BUTTON, self.onBtnHelp)
         self.mainFrame.btnInfo.Bind(wx.EVT_BUTTON, self.onBtnInfo)
 
         self.mainFrame.btnInsertImage.Bind(wx.EVT_BUTTON, self.onBtnInsertImage)

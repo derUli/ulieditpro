@@ -7,8 +7,3 @@ wx.stc.STC_FIND_REGEXP: a simple regular-expression search: see Regular Expressi
 
 Code für StyledTextCtrl
 self.txtContent = wx.stc.StyledTextCtrl( self.pn_main, wx.ID_ANY)
-		
-		
-		
-		
-
