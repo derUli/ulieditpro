@@ -35,6 +35,7 @@ def deleteExistingFiles():
 
 print("UliEdit Pro Setup")
 print("")
+
 if "uninstall" in sys.argv:
    deleteExistingFiles()
    sys.exit()
@@ -86,14 +87,20 @@ except KeyboardInterrupt:
 if yes_no == 'yes' or yes_no == "":
    try:
       deleteExistingFiles()
-      
-
-      
+      print("copy files...")
+      shutil.copytree(INSTALL_SRC, INSTALL_TARGET)
+      print("Finish")
+      print("Creating Symlinks...")
+      os.symlink(START_SCRIPT, SYMLINK1)
+      os.symlink(START_SCRIPT, SYMLINK2)
+      print("Finish")
+      print("You can start UliEdit Pro by calling one of this commands on shell:")
+      print(SYMLINK1)
+      print(SYMLINK2)
       if os.path.exists(ICON_PATH):
               print("Create starter Icon...")
               shutil.copyfile(INSTALL_SRC + "ulieditpro.desktop", ICON_PATH + "/uliedit-pro.desktop")
       else:
-
             print("")
             print("Warning: Can't find " + ICON_PATH)
             print("Note: If you want a starter for this Application on your Desktop, you have to create it by yourself")
