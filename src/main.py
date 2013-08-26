@@ -116,15 +116,25 @@ class Main:
             if not os.path.exists(filename):
                 try:
                     open(filename, "w").close()
+                    self.openFile(filename)
                 except OSError:
-                    pass
+                    self.cantOpenFileError(filename)
+                    self.openEmptyFile()
                 except IOError:
-                    pass
-            self.openFile(filename)
+                    self.cantOpenFileError(filename)
+                    self.openEmptyFile()
+            else:
+               self.openFile(filename)
         else:
            self.openEmptyFile()
             
 
+    def cantOpenFileError(self, filename):
+         wx.MessageDialog(None,
+         u"Cant' open " + filename,
+         os.path.basename(filename),
+         wx.OK | wx.ICON_ERROR).ShowModal()
+                        
         
 
     def saveLastPath(self , path):
