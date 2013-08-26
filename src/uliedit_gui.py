@@ -69,7 +69,7 @@ class MainFrame ( wx.Frame ):
 		self.m_panel1.SetSizer( bSizer2 )
 		self.m_panel1.Layout()
 		bSizer2.Fit( self.m_panel1 )
-		self.ribbons.AddPage( self.m_panel1, u"START", False )
+		self.ribbons.AddPage( self.m_panel1, u"START", True )
 		self.m_panel2 = wx.Panel( self.ribbons, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer3 = wx.BoxSizer( wx.HORIZONTAL )
 		
@@ -231,7 +231,7 @@ class MainFrame ( wx.Frame ):
 		self.m_panel8.SetSizer( bSizer19 )
 		self.m_panel8.Layout()
 		bSizer19.Fit( self.m_panel8 )
-		self.ribbons.AddPage( self.m_panel8, u"HELP", True )
+		self.ribbons.AddPage( self.m_panel8, u"HELP", False )
 		
 		bSizer1.Add( self.ribbons, 0, wx.EXPAND |wx.ALL, 5 )
 
