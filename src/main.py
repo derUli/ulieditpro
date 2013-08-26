@@ -846,6 +846,7 @@ class Main:
             for l in cmd_output:
                joined_cmd_output = joined_cmd_output + l
             tmp = self.file_manager.getFileAtIndex(self.current_file_index)
+            joined_cmd_output = joined_cmd_output.decode(sys.stdout.encoding)
             line_seperator = tmp["line_seperator"]
             self.mainFrame.txtContent.AddText(joined_cmd_output)
             self.mainFrame.txtContent.ConvertEOLs(line_seperator)
