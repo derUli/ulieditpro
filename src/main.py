@@ -841,7 +841,12 @@ class Main:
                                     self.last_cmd, style=wx.OK|wx.CANCEL)
         if result.ShowModal() == wx.ID_OK:
             self.last_cmd = result.GetValue()
-            os.system(self.last_cmd)
+            cmd_output  = os.popen(self.last_cmd).readlines()
+            for l in cmd_output:
+                tmp = self.file_manager.getFileAtIndex(self.current_file_index)
+                line_seperator = tmp["line_seperator"]
+                self.mainFrame.txtContent.AddText(l)
+                self.mainFrame.txtContent.ConvertEOLs(line_seperator)
         self.mainFrame.txtContent.SetFocus()
             
 
