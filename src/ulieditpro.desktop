@@ -1,7 +1,7 @@
 #!/usr/bin/env xdg-open
 
 [Desktop Entry]
-Version=1.6
+Version=1.7
 Type=Application
 Categories=Application;Utility;TextEditor;
 Terminal=false
