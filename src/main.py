@@ -423,8 +423,8 @@ class Main:
             elif evt.GetKeyCode() == 78:
                 self.openEmptyFile()
                 return
-            # ctrl + f
-            elif evt.GetKeyCode() == 70:
+            # ctrl + f oder ctr + h
+            elif evt.GetKeyCode() == 70 or evt.GetKeyCode() == 72:
                 self.mainFrame.ribbons.SetSelection(1)
                 self.mainFrame.txtSearch.SetFocus()
                 self.mainFrame.txtSearch.SelectAll()
