@@ -235,6 +235,9 @@ class Main:
                         encoding, "Encoding of " + os.path.basename(filename),
                         wx.OK | wx.ICON_INFORMATION).ShowModal() """
                         
+            if not os.access(filename, os.W_OK):
+               readonly = True
+                        
 
             if self.file_manager.isOpen(filename):
                 wx.MessageDialog(None,
