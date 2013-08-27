@@ -123,21 +123,25 @@ class Main:
                 readonly = True
             else:
                readonly = False
+               
                 
       
             if not os.path.isabs(filename):
                filename = os.path.join(self.pwd, filename)
                filename = os.path.abspath(filename)
                
+            if not os.access(filename, os.W_OK):
+               readonly = True
+               
             if not os.path.exists(filename):
                 try:
                     open(filename, "w").close()
                     self.openFile(filename, readonly)
                 except OSError:
-                    self.cantOpenFileError(filename, readonly)
+                    self.cantOpenFileError(filename)
                     self.openEmptyFile()
                 except IOError:
-                    self.cantOpenFileError(filename, readonly)
+                    self.cantOpenFileError(filename)
                     self.openEmptyFile()
             else:
                self.openFile(filename, readonly)
@@ -176,7 +180,10 @@ class Main:
             self.last_path = dialog.GetPath()
             self.last_path = os.path.dirname(self.last_path)
             self.saveLastPath(self.last_path)
-            self.openFile(dialog.GetPath(), False)
+            readonly = False
+            if not os.access(dialog.GetPath(), os.W_OK):
+               readonly = True
+            self.openFile(dialog.GetPath(), readonly)
             
 
 
@@ -234,9 +241,7 @@ class Main:
             """ wx.MessageDialog(None,
                         encoding, "Encoding of " + os.path.basename(filename),
                         wx.OK | wx.ICON_INFORMATION).ShowModal() """
-                        
-            if not os.access(filename, os.W_OK):
-               readonly = True
+                       
                         
 
             if self.file_manager.isOpen(filename):
@@ -263,6 +268,7 @@ class Main:
                     try:
                         self.mainFrame.txtContent.SetValue(content)
                     except AttributeError:
+                        self.mainFrame.txtContent.SetReadOnly(False)
                         self.mainFrame.txtContent.ClearAll()
                         self.mainFrame.txtContent.SetText(content)
                         self.mainFrame.txtContent.ConvertEOLs(self.file_manager.getFileAtIndex(tmp)["line_seperator"])
