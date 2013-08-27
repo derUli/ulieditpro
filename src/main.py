@@ -259,7 +259,7 @@ class Main:
 
                 self.mainFrame.txtContent.SetEOLMode(line_seperator)
                 self.mainFrame.txtContent.ConvertEOLs(line_seperator)
-                self.setTitle(os.path.basename(filename))
+                self.setTitle(os.path.basename(filename), self.file_manager.getFileAtIndex(tmp)["readonly"] )
                 if tmp != None:
                     self.current_file_index = copy.copy(tmp)
                     content = self.file_manager.getContentByIndex(self.current_file_index)
@@ -363,8 +363,11 @@ class Main:
 
 
 
-    def setTitle(self, filename):
-        self.mainFrame.SetTitle("UliEdit Pro - " + filename)
+    def setTitle(self, filename, readonly = False):
+        if not readonly:
+            self.mainFrame.SetTitle("UliEdit Pro - " + filename)
+        else:
+            self.mainFrame.SetTitle("UliEdit Pro - " + filename + " (read-only)")
 
 
 
@@ -681,7 +684,7 @@ class Main:
             
             line_sep = self.file_manager.getFileAtIndex(index)["line_seperator"]
             self.current_file_index = index
-            self.setTitle(os.path.basename(filename))
+            self.setTitle(os.path.basename(filename), self.file_manager.getFileAtIndex(index)["readonly"] )
             try:
                 self.mainFrame.txtContent.SetValue(content)
                 self.updateStatusBar()
