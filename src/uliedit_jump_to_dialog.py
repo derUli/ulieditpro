@@ -15,7 +15,8 @@ class JumpToDialog:
             self.form.ShowModal()
         
         def onCancel(self, evt):
-            self.form.Close()     
+            self.form.Close()
+            self.ctrl.SetFocus()
         
         def OnKeyUP(self, event): 
             keyCode = event.GetKeyCode() 

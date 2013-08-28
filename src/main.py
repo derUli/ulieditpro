@@ -3,7 +3,6 @@
 import uliedit_gui
 import wx
 import os
-import argparse
 import sys
 import codecs
 import shutil
@@ -709,6 +708,7 @@ class Main:
 
     def onBtnPrint(self, evt):
         self.openPrintDialog()
+        self.mainFrame.txtContent.SetFocus()
         
         
 

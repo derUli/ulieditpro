@@ -32,6 +32,7 @@ class PrintDialog:
 
         def onCancel(self, evt):
                 self.form.Close()
+                self.parent.txtContent.SetFocus()
 
         def onPrint(self, evt):
                 count = self.form.txtNumberOfCopies.GetValue()
