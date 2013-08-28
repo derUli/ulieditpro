@@ -33,3 +33,6 @@ setup(options = {
 os.rename("dist/main.exe", "dist/uliedit.exe")
 
 shutil.move("dist", "../windows/dist")
+
+if os.path.exists("build"):
+    shutil.rmtree("build")

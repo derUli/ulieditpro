@@ -36,5 +36,5 @@ class JumpToDialog:
             self.form.btnJumpTo.Bind(wx.EVT_BUTTON,
                                          self.onOK)
                                         
-            self.form.Bind(wx.EVT_KEY_UP, self.OnKeyUP)
-            self.form.spnPosition.Bind(wx.EVT_KEY_UP, self.OnKeyUP)
+            self.form.Bind(wx.EVT_CHAR_HOOK, self.OnKeyUP)
+

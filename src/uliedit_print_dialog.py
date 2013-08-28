@@ -68,7 +68,7 @@ class PrintDialog:
                 
         def OnKeyUP(self, event): 
             keyCode = event.GetKeyCode() 
-            if keyCode == wx.WXK_ESCAPE: 
+            if keyCode == wx.WXK_ESCAPE:
                self.onCancel(None)
             elif keyCode == wx.WXK_RETURN:
                 self.onPrint(None) 
@@ -77,6 +77,6 @@ class PrintDialog:
         def bindEvents(self):
                 self.form.btnCancel.Bind(wx.EVT_BUTTON, self.onCancel)
                 self.form.btnPrint.Bind(wx.EVT_BUTTON, self.onPrint)
-                self.form.Bind(wx.EVT_KEY_UP, self.OnKeyUP)
-                self.form.txtNumberOfCopies.Bind(wx.EVT_KEY_UP, self.OnKeyUP)
+                self.form.Bind(wx.EVT_CHAR_HOOK, self.OnKeyUP)
+
 
