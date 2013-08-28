@@ -3,6 +3,7 @@
 import uliedit_gui
 import wx
 import os
+import argparse
 import sys
 import codecs
 import shutil
@@ -109,20 +110,18 @@ class Main:
         self.mainFrame.cbOpenFiles.Append(title)
         self.mainFrame.cbOpenFiles.SetStringSelection(title)
         self.mainFrame.txtContent.SetFocus()
-        
         self.mainFrame.txtContent.ClearAll()
         self.file_manager.getFileAtIndex(self.current_file_index)["modified"] = False
         self.updateStatusBar()
 
     def parseCommandLineArgs(self, args):
-    
         if len(args) > 1:           
-            filename = args[-1].decode(self.fs_enc)
+            filename = args[len(args) - 1].decode(self.fs_enc)
            
             if "-r" in args and filename != "-r":
                 readonly = True
             else:
-               readonly = False
+                readonly = False
                
                 
       
