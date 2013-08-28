@@ -117,7 +117,7 @@ class Main:
     def parseCommandLineArgs(self, args):
     
         if len(args) > 1:           
-            filename = args[len(args) - 1].decode(self.fs_enc)
+            filename = args[-1].decode(self.fs_enc)
            
             if "-r" in args and filename != "-r":
                 readonly = True
