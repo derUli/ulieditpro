@@ -15,8 +15,19 @@ import re
 import uliedit_jump_to_dialog
 from Printer import Printer
 
-
 ULIEDIT_FILE_FILTER = "All Files (*.*)|*|Text Files (*.txt)|*.txt|HTML Documents (*.html)|*.html;*.htm|XML (*.xml)|*.xml|PHP Script (*.php)|*.php;*.php3;*.phtml|JavaScript (*.js)|*.js|VBScript (*.vbs)|*.vbs;*.vba|C++ Sourcecode (*.cpp)|*.cpp;*.c;*.h;*.o|Python-Skript (*.py)|*.py;*.pyw"
+
+stdinData = None
+
+if not sys.stdin.isatty():
+    #we have data in stdin
+    try:
+        stdinData = sys.stdin.read()
+    except KeyboardInterrupt:
+        sys.exit()
+
+
+
 
 
 class Main:
@@ -102,6 +113,7 @@ class Main:
 
 
     def openEmptyFile(self):
+        global stdinData
         self.current_file_index = self.file_manager.newFile()
         title = self.file_manager.getFileAtIndex(self.current_file_index)["filename"]
         self.setTitle(title)
@@ -111,7 +123,13 @@ class Main:
         self.mainFrame.txtContent.SetFocus()
         self.mainFrame.txtContent.ClearAll()
         self.file_manager.getFileAtIndex(self.current_file_index)["modified"] = False
+        if stdinData:
+            self.mainFrame.txtContent.SetText(stdinData)
+            stdinData = None
+            self.file_manager.getFileAtIndex(self.current_file_index)["modified"] = True
+
         self.updateStatusBar()
+        
 
     def parseCommandLineArgs(self, args):
         if len(args) > 1:           
